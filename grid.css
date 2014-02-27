@@ -1,0 +1,63 @@
+.clf:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+section, figure, figcaption, img {
+  padding: 0;
+  margin: 0;
+  border: 0;
+}
+
+img, figure {
+  display: block;
+}
+
+#grid-container {
+  box-sizing:border-box;
+  -moz-box-sizing:border-box;
+  -webkit-box-sizing:border-box;
+  width: 900px;
+  padding: 5px;
+  background-color: #eee;
+}
+
+.cell {
+  box-sizing:border-box;
+  -moz-box-sizing:border-box;
+  -webkit-box-sizing:border-box;
+  float: left;
+  margin-right: 5px;
+  margin-bottom: 5px;
+  overflow: hidden;
+}
+
+.tile {
+  position: relative;
+  background-color: #fff;
+  clear: both;
+  width: 215px;
+  height: 215px;
+  margin-bottom: 5px;
+}
+
+.tile.big {
+  width: 435px;
+  height: 435px;
+}
+
+.tile:last-child {
+  margin: 0;
+}
+
+.tile figcaption {
+  display: none;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+}
+
+.tile:hover figcaption {
+  display: block;
+}
