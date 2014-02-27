@@ -4,14 +4,20 @@
   clear: both;
 }
 
-section, figure, figcaption, img {
+#grid-container,
+.tile,
+.tile figcaption,
+.tile img {
   padding: 0;
   margin: 0;
   border: 0;
 }
 
-img, figure {
+img {
+  position: absolute;
   display: block;
+  top: 0;
+  left: 0;
 }
 
 #grid-container {
@@ -51,11 +57,23 @@ img, figure {
   margin: 0;
 }
 
+.tile:hover img {
+  clip: rect(10px, 205px, 205px, 10px);
+}
+
+.tile.big:hover img {
+  clip: rect(10px, 425px, 425px, 10px);
+}
+
 .tile figcaption {
   display: none;
   position: absolute;
   bottom: 0;
   left: 0;
+  color: white;
+  font-size: 24px;
+  text-align: center;
+  width: 100%;
 }
 
 .tile:hover figcaption {
