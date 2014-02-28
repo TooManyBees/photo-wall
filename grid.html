@@ -18,99 +18,82 @@
       {
         "src": "http://placekitten.com/g/435/435",
         "url": "http://www.huffingtonpost.com",
-        "caption": "The Cutest Kitten EVAR!",
+        "caption": "Kitties everywhere!",
         "importance": 90
       },
       {
         "src": "http://placekitten.com/g/435/435",
         "url": "http://www.huffingtonpost.com",
-        "caption": "The Cutest Kitten EVAR!",
+        "caption": "KITTEH!",
         "importance": 100
       },
       {
         "src": "http://placekitten.com/g/435/435",
         "url": "http://www.huffingtonpost.com",
-        "caption": "The Cutest Kitten EVAR!",
         "importance": 60
       },
       {
         "src": "http://placekitten.com/g/215/215",
-        "url": "http://www.huffingtonpost.com",
         "caption": "It's a kitty"
       },
       {
         "src": "http://placekitten.com/g/215/215",
-        "url": "http://www.huffingtonpost.com",
         "caption": "It's a kitty"
       },
       {
         "src": "http://placekitten.com/g/215/215",
-        "url": "http://www.huffingtonpost.com",
         "caption": "It's a kitty"
       },
       {
         "src": "http://placekitten.com/g/215/215",
-        "url": "http://www.huffingtonpost.com",
         "caption": "It's a kitty"
       },
       {
         "src": "http://placekitten.com/g/215/215",
-        "url": "http://www.huffingtonpost.com",
         "caption": "It's a kitty"
       },
       {
         "src": "http://placekitten.com/g/215/215",
-        "url": "http://www.huffingtonpost.com",
         "caption": "It's a kitty"
       },
       {
         "src": "http://placekitten.com/g/215/215",
-        "url": "http://www.huffingtonpost.com",
         "caption": "It's a kitty"
       },
       {
         "src": "http://placekitten.com/g/215/215",
-        "url": "http://www.huffingtonpost.com",
         "caption": "It's a kitty"
       },
       {
         "src": "http://placekitten.com/g/215/215",
-        "url": "http://www.huffingtonpost.com",
         "caption": "It's a kitty"
       },
       {
         "src": "http://placekitten.com/g/215/215",
-        "url": "http://www.huffingtonpost.com",
         "caption": "It's a kitty"
       },
       {
         "src": "http://placekitten.com/g/215/215",
-        "url": "http://www.huffingtonpost.com",
         "caption": "It's a kitty"
       },
       {
         "src": "http://placekitten.com/g/215/215",
-        "url": "http://www.huffingtonpost.com",
         "caption": "It's a kitty"
       },
       {
         "src": "http://placekitten.com/g/215/215",
-        "url": "http://www.huffingtonpost.com",
         "caption": "It's a kitty"
       },
       {
         "src": "http://placekitten.com/g/215/215",
-        "url": "http://www.huffingtonpost.com",
         "caption": "It's a kitty"
       },
       {
         "src": "http://placekitten.com/g/215/215",
-        "url": "http://www.huffingtonpost.com",
         "caption": "It's a kitty"
       },
       {
         "src": "http://placekitten.com/g/215/215",
-        "url": "http://www.huffingtonpost.com",
         "caption": "It's a kitty"
       }
     ]
@@ -119,8 +102,11 @@
   <script type="text/template" id="photowall-template-tile">
     <figure class="tile{{#if importance}} big{{/if}}">
       <img src="{{ src }}">
-      <!-- <div class="frame {{ color }}"></div> -->
+      {{#if url}}
       <a href="{{ url }}" class="frame {{ color }}"></a>
+      {{else}}
+      <div class="frame {{ color }} half"></div>
+      {{/if}}
       {{#if caption}}<figcaption>{{ caption }}</figcaption>{{/if}}
     </figure>
   </script>
