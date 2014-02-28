@@ -2,6 +2,12 @@ $border-width: 25px
 $large-tile-width: 435px
 $small-tile-width: 215px
 
+$color1: #FFBE59
+$color2: #E88751
+$color3: #FF7466
+$color4: #E855AA
+$color5: #D55EFF
+
 @mixin box-sizzle
   box-sizing: border-box
   -moz-box-sizing: border-box
@@ -52,7 +58,18 @@ $small-tile-width: 215px
   top: 0
   left: 0
   opacity: 0
-  @include transition(opacity 1s ease)
+  @include transition(opacity 0.5s ease)
+
+.c1
+  border-color: $color1
+.c2
+  border-color: $color2
+.c3
+  border-color: $color3
+.c4
+  border-color: $color4
+.c5
+  border-color: $color5
 
 .cell
   @include box-sizzle

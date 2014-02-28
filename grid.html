@@ -119,7 +119,7 @@
   <script type="text/template" id="template-tile">
     <figure class="tile{{#if importance}} big{{/if}}">
       <img src="{{ src }}">
-      <div class="frame"></div>
+      <div class="frame {{ color }}"></div>
       {{#if caption}}<figcaption>{{ caption }}</figcaption>{{/if}}
     </figure>
   </script>
@@ -128,7 +128,7 @@
   </section>
 
   <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.0/jquery.js"></script>
-  <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.5.2/underscore-min.js"></script>
+  <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.6.0/underscore-min.js"></script>
   <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/handlebars.js/1.3.0/handlebars.min.js"></script>
   <script type="text/javascript" src="grid.js"></script>
 

@@ -2,36 +2,73 @@ var tileTemplate = Handlebars.compile($('#template-tile').html());
 
 var kittehs = $.parseJSON($('#pictures').text());
 
-var important = _.filter(kittehs, function(kitteh) {
+var _arrays = _.partition(kittehs, function(kitteh) {
   return kitteh.importance > 0;
-}).sort(function(firstKitteh, secondKitteh) {
-  return firstKitteh.importance < secondKitteh.importance;
-})
+});
 
-var filler = _.filter(kittehs, function(kitteh) {
-  return kitteh.importance === undefined;
-})
+var important = _arrays[0], filler = _arrays[1];
+important.sort(function(firstKitteh, secondKitteh) {
+  return firstKitteh.importance < secondKitteh.importance;
+});
 
 var fillerRatio = function() {
   return  filler.length / important.length;
 }
 
-var rand = function() {
-  return Math.ceil(Math.random() * 3);
+var rand = (function() {
+  // Random function remembers previous returned value
+  // so it won't return the same value twice.
+  var lastValue = {};
+  var memoRand = function(n) {
+    return Math.ceil(Math.random() * n);
+  }
+  return function(n) {
+    if (n < 1) return undefined;
+    else if (n === 1) return 1;
+
+    var newValue = memoRand(n);
+    while (lastValue[n] == newValue) {
+      newValue = memoRand(n);
+    }
+    lastValue[n] = newValue;
+    return newValue;
+  }
+})();
+
+var randomColor = function() {
+  switch (rand(5)) {
+  case 1:
+    return "c1";
+  case 2:
+    return "c2";
+  case 3:
+    return "c3";
+  case 4:
+    return "c4";
+  case 5:
+    return "c5";
+  }
 }
 
 var renderSingleCell = function(arr) {
   var el = arr.splice(0,1);
   var $cell = $('<div class="cell">');
-  $cell.append(tileTemplate(el[0]));
+  if (el[0] !== undefined) {
+    var e = el[0];
+    e.color = randomColor();
+    $cell.append(tileTemplate(e));
+  }
   return $cell;
 }
 
 var renderDoubleCell = function(arr) {
   var els = arr.splice(0,2);
   var $cell = $('<div class="cell">');
-  $cell.append(tileTemplate(els[0]))
-  $cell.append(tileTemplate(els[1]))
+  while (els.length > 0) {
+    var e = els.splice(0,1)[0];
+    e.color = randomColor();
+    $cell.append(tileTemplate(e));
+  }
   return $cell;
 }
 
@@ -56,7 +93,7 @@ var placeOnlySmallPhotos = function() {
 }
 var placeMixOfPhotos = function() {
   var $ss = $('#grid-container');
-  switch (rand()) {
+  switch (rand(3)) {
     case 1:
       $ss.append(renderSingleCell(important));
       $ss.append(renderDoubleCell(filler));
@@ -72,7 +109,11 @@ var placeMixOfPhotos = function() {
       $ss.append(renderDoubleCell(filler));
       $ss.append(renderSingleCell(important));
       break;
-    default:
-      console.log("ffffuuuuuuuuu!!")
   }
+}
+
+var populateGrid = function() {
+  while (fillerRatio() > 4) placeOnlyLargePhotos();
+  while (important.length > 0) placeMixOfPhotos();
+  while (filler.length > 0) placeOnlySmallPhotos();
 }
