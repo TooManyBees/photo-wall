@@ -2,12 +2,130 @@
 <html>
 <head>
   <title>Photo grid</title>
+  <meta charset="utf-8">
   <link rel="stylesheet" type="text/css" href="grid.css">
 </head>
 <body>
 
+  <script type="application/json" id="pictures">
+    [
+      {
+        "src": "http://placekitten.com/g/435/435",
+        "url": "http://www.huffingtonpost.com",
+        "caption": "The Cutest Kitten EVAR!",
+        "importance": 80
+      },
+      {
+        "src": "http://placekitten.com/g/435/435",
+        "url": "http://www.huffingtonpost.com",
+        "caption": "The Cutest Kitten EVAR!",
+        "importance": 90
+      },
+      {
+        "src": "http://placekitten.com/g/435/435",
+        "url": "http://www.huffingtonpost.com",
+        "caption": "The Cutest Kitten EVAR!",
+        "importance": 100
+      },
+      {
+        "src": "http://placekitten.com/g/435/435",
+        "url": "http://www.huffingtonpost.com",
+        "caption": "The Cutest Kitten EVAR!",
+        "importance": 60
+      },
+      {
+        "src": "http://placekitten.com/g/215/215",
+        "url": "http://www.huffingtonpost.com",
+        "caption": "It's a kitty"
+      },
+      {
+        "src": "http://placekitten.com/g/215/215",
+        "url": "http://www.huffingtonpost.com",
+        "caption": "It's a kitty"
+      },
+      {
+        "src": "http://placekitten.com/g/215/215",
+        "url": "http://www.huffingtonpost.com",
+        "caption": "It's a kitty"
+      },
+      {
+        "src": "http://placekitten.com/g/215/215",
+        "url": "http://www.huffingtonpost.com",
+        "caption": "It's a kitty"
+      },
+      {
+        "src": "http://placekitten.com/g/215/215",
+        "url": "http://www.huffingtonpost.com",
+        "caption": "It's a kitty"
+      },
+      {
+        "src": "http://placekitten.com/g/215/215",
+        "url": "http://www.huffingtonpost.com",
+        "caption": "It's a kitty"
+      },
+      {
+        "src": "http://placekitten.com/g/215/215",
+        "url": "http://www.huffingtonpost.com",
+        "caption": "It's a kitty"
+      },
+      {
+        "src": "http://placekitten.com/g/215/215",
+        "url": "http://www.huffingtonpost.com",
+        "caption": "It's a kitty"
+      },
+      {
+        "src": "http://placekitten.com/g/215/215",
+        "url": "http://www.huffingtonpost.com",
+        "caption": "It's a kitty"
+      },
+      {
+        "src": "http://placekitten.com/g/215/215",
+        "url": "http://www.huffingtonpost.com",
+        "caption": "It's a kitty"
+      },
+      {
+        "src": "http://placekitten.com/g/215/215",
+        "url": "http://www.huffingtonpost.com",
+        "caption": "It's a kitty"
+      },
+      {
+        "src": "http://placekitten.com/g/215/215",
+        "url": "http://www.huffingtonpost.com",
+        "caption": "It's a kitty"
+      },
+      {
+        "src": "http://placekitten.com/g/215/215",
+        "url": "http://www.huffingtonpost.com",
+        "caption": "It's a kitty"
+      },
+      {
+        "src": "http://placekitten.com/g/215/215",
+        "url": "http://www.huffingtonpost.com",
+        "caption": "It's a kitty"
+      },
+      {
+        "src": "http://placekitten.com/g/215/215",
+        "url": "http://www.huffingtonpost.com",
+        "caption": "It's a kitty"
+      },
+      {
+        "src": "http://placekitten.com/g/215/215",
+        "url": "http://www.huffingtonpost.com",
+        "caption": "It's a kitty"
+      }
+    ]
+  </script>
+
+  <script type="text/template" id="template-tile">
+    <figure class="tile{{#if importance}} big{{/if}}">
+      <img src="{{ src }}">
+      <div class="frame"></div>
+      {{#if caption}}<figcaption>{{ caption }}</figcaption>{{/if}}
+    </figure>
+  </script>
+
   <section id="grid-container" class="clf">
-    <div class='cell'>
+    <!-- <div class='cell'>
       <figure class='tile big'>
         <img src="http://placekitten.com/g/435/435">
         <div class="frame"></div>
@@ -77,9 +195,14 @@
         <div class="frame"></div>
         <figcaption>Tiny pix</figcaption>
       </figure>
-    </div>
+    </div> -->
 
   </section>
+
+  <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.0/jquery.js"></script>
+  <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.5.2/underscore-min.js"></script>
+  <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/handlebars.js/1.3.0/handlebars.min.js"></script>
+  <script type="text/javascript" src="grid.js"></script>
 
 </body>
 </html>

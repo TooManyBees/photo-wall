@@ -20,10 +20,7 @@
     padding: 0;
     margin: 0;
     border: 0;
-    position: absolute;
-    display: block;
-    top: 0;
-    left: 0; }
+    display: block; }
 
 #grid-container {
   box-sizing: border-box;
@@ -40,10 +37,14 @@
   border: 25px solid black;
   width: inherit;
   height: inherit;
-  display: none;
   position: absolute;
   top: 0;
-  left: 0; }
+  left: 0;
+  opacity: 0;
+  transition: opacity 1s ease;
+  -o-transition: opacity 1s ease;
+  -moz-transition: opacity 1s ease;
+  -webkit-transition: opacity 1s ease; }
 
 .cell {
   box-sizing: border-box;
@@ -78,4 +79,4 @@
   .tile:hover figcaption {
     display: block; }
   .tile:hover .frame {
-    display: block; }
+    opacity: 1; }

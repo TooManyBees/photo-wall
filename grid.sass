@@ -7,6 +7,12 @@ $small-tile-width: 215px
   -moz-box-sizing: border-box
   -webkit-box-sizing: border-box
 
+@mixin transition($t)
+  transition: $t
+  -o-transition: $t
+  -moz-transition: $t
+  -webkit-transition: $t
+
 .clf:after
   content: ""
   display: table
@@ -29,10 +35,7 @@ $small-tile-width: 215px
     padding: 0
     margin: 0
     border: 0
-    position: absolute
     display: block
-    top: 0
-    left: 0
 
 #grid-container
   @include box-sizzle
@@ -45,10 +48,11 @@ $small-tile-width: 215px
   border: $border-width solid black
   width: inherit
   height: inherit
-  display: none
   position: absolute
   top: 0
   left: 0
+  opacity: 0
+  @include transition(opacity 1s ease)
 
 .cell
   @include box-sizzle
@@ -81,4 +85,4 @@ $small-tile-width: 215px
   &:hover figcaption
     display: block
   &:hover .frame
-    display: block
+    opacity: 1
