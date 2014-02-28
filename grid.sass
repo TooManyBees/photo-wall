@@ -1,0 +1,76 @@
+$border-width: 25px
+$large-tile-width: 435px
+$small-tile-width: 215px
+
+@mixin box-sizzle
+  box-sizing: border-box
+  -moz-box-sizing: border-box
+  -webkit-box-sizing: border-box
+
+.clf:after
+  content: ""
+  display: table
+  clear: both
+
+#grid-container
+  padding: 0
+  margin: 0
+  border: 0
+
+.tile
+  padding: 0
+  margin: 0
+  border: 0
+  figcaption
+    padding: 0
+    margin: 0
+    border: 0
+  img
+    padding: 0
+    margin: 0
+    border: 0
+    position: absolute
+    display: block
+    top: 0
+    left: 0
+
+#grid-container
+  @include box-sizzle
+  width: 900px
+  padding: 5px
+  background-color: #eee
+
+.cell
+  @include box-sizzle
+  float: left
+  margin-right: 5px
+  margin-bottom: 5px
+  overflow: hidden
+
+.tile
+  position: relative
+  background-color: #fff
+  clear: both
+  width: $small-tile-width
+  height: $small-tile-width
+  margin-bottom: 5px
+  &.big
+    width: $large-tile-width
+    height: $large-tile-width
+  &:last-child
+    margin: 0
+  &:hover img
+    clip: rect($border-width, $small-tile-width - $border-width, $small-tile-width - $border-width, $border-width)
+  &.big:hover img
+    clip: rect($border-width, $large-tile-width - $border-width, $large-tile-width - $border-width, $border-width)
+  figcaption
+    display: none
+    position: absolute
+    bottom: 0
+    left: 0
+    color: white
+    font-size: 24px
+    text-align: center
+    width: 100%
+  &:hover figcaption
+    display: block

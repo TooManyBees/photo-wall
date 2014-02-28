@@ -1,81 +1,71 @@
 .clf:after {
   content: "";
   display: table;
-  clear: both;
-}
-
-#grid-container,
-.tile,
-.tile figcaption,
-.tile img {
-  padding: 0;
-  margin: 0;
-  border: 0;
-}
-
-img {
-  position: absolute;
-  display: block;
-  top: 0;
-  left: 0;
-}
+  clear: both; }
 
 #grid-container {
-  box-sizing:border-box;
-  -moz-box-sizing:border-box;
-  -webkit-box-sizing:border-box;
+  padding: 0;
+  margin: 0;
+  border: 0; }
+
+.tile {
+  padding: 0;
+  margin: 0;
+  border: 0; }
+  .tile figcaption {
+    padding: 0;
+    margin: 0;
+    border: 0; }
+  .tile img {
+    padding: 0;
+    margin: 0;
+    border: 0;
+    position: absolute;
+    display: block;
+    top: 0;
+    left: 0; }
+
+#grid-container {
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
   width: 900px;
   padding: 5px;
-  background-color: #eee;
-}
+  background-color: #eeeeee; }
 
 .cell {
-  box-sizing:border-box;
-  -moz-box-sizing:border-box;
-  -webkit-box-sizing:border-box;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
   float: left;
   margin-right: 5px;
   margin-bottom: 5px;
-  overflow: hidden;
-}
+  overflow: hidden; }
 
 .tile {
   position: relative;
-  background-color: #fff;
+  background-color: white;
   clear: both;
   width: 215px;
   height: 215px;
-  margin-bottom: 5px;
-}
-
-.tile.big {
-  width: 435px;
-  height: 435px;
-}
-
-.tile:last-child {
-  margin: 0;
-}
-
-.tile:hover img {
-  clip: rect(10px, 205px, 205px, 10px);
-}
-
-.tile.big:hover img {
-  clip: rect(10px, 425px, 425px, 10px);
-}
-
-.tile figcaption {
-  display: none;
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  color: white;
-  font-size: 24px;
-  text-align: center;
-  width: 100%;
-}
-
-.tile:hover figcaption {
-  display: block;
-}
+  margin-bottom: 5px; }
+  .tile.big {
+    width: 435px;
+    height: 435px; }
+  .tile:last-child {
+    margin: 0; }
+  .tile:hover img {
+    clip: rect(25px, 190px, 190px, 25px); }
+  .tile.big:hover img {
+    clip: rect(25px, 410px, 410px, 25px); }
+  .tile figcaption {
+    display: none;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    color: white;
+    font-size: 24px;
+    text-align: center;
+    width: 100%; }
+  .tile:hover figcaption {
+    display: block; }
