@@ -33,17 +33,17 @@
   box-sizing: border-box;
   -moz-box-sizing: border-box;
   -webkit-box-sizing: border-box;
-  border: 25px solid black;
+  border: 0 solid black;
   width: inherit;
   height: inherit;
   position: absolute;
   top: 0;
   left: 0;
   opacity: 0;
-  transition: opacity 0.5s ease;
-  -o-transition: opacity 0.5s ease;
-  -moz-transition: opacity 0.5s ease;
-  -webkit-transition: opacity 0.5s ease; }
+  transition: opacity 0.3s ease-in-out, border-width 0.3s ease-in-out;
+  -o-transition: opacity 0.3s ease-in-out, border-width 0.3s ease-in-out;
+  -moz-transition: opacity 0.3s ease-in-out, border-width 0.3s ease-in-out;
+  -webkit-transition: opacity 0.3s ease-in-out, border-width 0.3s ease-in-out; }
 
 .c1 {
   border-color: #ffbe59; }
@@ -92,4 +92,7 @@
   .tile:hover figcaption {
     display: block; }
   .tile:hover .frame {
-    opacity: 1; }
+    opacity: 1;
+    border-width: 25px; }
+    .tile:hover .frame.half {
+      opacity: 0.5; }

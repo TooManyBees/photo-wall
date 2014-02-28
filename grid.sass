@@ -1,6 +1,7 @@
 $border-width: 25px
 $large-tile-width: 435px
 $small-tile-width: 215px
+$border-transition: 0.3s ease-in-out
 
 $color1: #FFBE59
 $color2: #E88751
@@ -13,7 +14,7 @@ $color5: #D55EFF
   -moz-box-sizing: border-box
   -webkit-box-sizing: border-box
 
-@mixin transition($t)
+@mixin transition($t...)
   transition: $t
   -o-transition: $t
   -moz-transition: $t
@@ -47,18 +48,17 @@ $color5: #D55EFF
   @include box-sizzle
   width: 900px
   padding: 5px
-  // background-color: #eee
 
 .frame
   @include box-sizzle
-  border: $border-width solid black
+  border: 0 solid black
   width: inherit
   height: inherit
   position: absolute
   top: 0
   left: 0
   opacity: 0
-  @include transition(opacity 0.5s ease)
+  @include transition(opacity $border-transition, border-width $border-transition)
 
 .c1
   border-color: $color1
@@ -80,7 +80,6 @@ $color5: #D55EFF
 
 .tile
   position: relative
-  // background-color: #fff
   clear: both
   width: $small-tile-width
   height: $small-tile-width
@@ -103,3 +102,6 @@ $color5: #D55EFF
     display: block
   &:hover .frame
     opacity: 1
+    border-width: $border-width
+    &.half
+      opacity: 0.5
