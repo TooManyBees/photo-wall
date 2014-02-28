@@ -12,50 +12,65 @@ var filler = _.filter(kittehs, function(kitteh) {
   return kitteh.importance === undefined;
 })
 
-var i = 0; // Index of Important pictures
-var lenImportant = important.length;
-var j = 0; // Index of Filler pictures
-var lenFiller = filler.length;
-
 var fillerRatio = function() {
-  return  (lenFiller - j) / (lenImportant - i);
+  return  filler.length / important.length;
 }
 
 var rand = function() {
   return Math.ceil(Math.random() * 3);
 }
 
-var renderSingleCell = function(pic) {
+var renderSingleCell = function(arr) {
+  var el = arr.splice(0,1);
   var $cell = $('<div class="cell">');
-  $cell.append(tileTemplate(pic));
+  $cell.append(tileTemplate(el[0]));
   return $cell;
 }
 
-var renderDoubleCell = function(pic1, pic2) {
+var renderDoubleCell = function(arr) {
+  var els = arr.splice(0,2);
   var $cell = $('<div class="cell">');
-  $cell.append(tileTemplate(pic1));
-  $cell.append(tileTemplate(pic2));
+  $cell.append(tileTemplate(els[0]))
+  $cell.append(tileTemplate(els[1]))
   return $cell;
 }
 
-// while (fillerRatio() > 4) {
-var testItOut = function() {
+var placeOnlyLargePhotos = function() {
+  var $ss = $('#grid-container');
+  $ss.append(renderSingleCell(important));
+  $ss.append(renderSingleCell(important));
+}
+
+var placeOnlySmallPhotos = function() {
+  var $ss = $('#grid-container');
+  if (filler.length >= 8) {
+    var i = 0;
+    for (i=0; i < 4; i++) {
+      $ss.append(renderDoubleCell(filler));
+    }
+  } else {
+    while (filler.length > 0) {
+      $ss.append(renderSingleCell(filler));
+    }
+  }
+}
+var placeMixOfPhotos = function() {
   var $ss = $('#grid-container');
   switch (rand()) {
     case 1:
-      $ss.append(renderSingleCell(important[0]));
-      $ss.append(renderDoubleCell(filler[0], filler[1]));
-      $ss.append(renderDoubleCell(filler[0], filler[1]));
+      $ss.append(renderSingleCell(important));
+      $ss.append(renderDoubleCell(filler));
+      $ss.append(renderDoubleCell(filler));
       break;
     case 2:
-      $ss.append(renderDoubleCell(filler[0], filler[1]));
-      $ss.append(renderSingleCell(important[0]));
-      $ss.append(renderDoubleCell(filler[0], filler[1]));
+      $ss.append(renderDoubleCell(filler));
+      $ss.append(renderSingleCell(important));
+      $ss.append(renderDoubleCell(filler));
       break;
     case 3:
-      $ss.append(renderDoubleCell(filler[0], filler[1]));
-      $ss.append(renderDoubleCell(filler[0], filler[1]));
-      $ss.append(renderSingleCell(important[0]));
+      $ss.append(renderDoubleCell(filler));
+      $ss.append(renderDoubleCell(filler));
+      $ss.append(renderSingleCell(important));
       break;
     default:
       console.log("ffffuuuuuuuuu!!")
