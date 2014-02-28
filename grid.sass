@@ -40,6 +40,16 @@ $small-tile-width: 215px
   padding: 5px
   background-color: #eee
 
+.frame
+  @include box-sizzle
+  border: $border-width solid black
+  width: inherit
+  height: inherit
+  display: none
+  position: absolute
+  top: 0
+  left: 0
+
 .cell
   @include box-sizzle
   float: left
@@ -59,10 +69,6 @@ $small-tile-width: 215px
     height: $large-tile-width
   &:last-child
     margin: 0
-  &:hover img
-    clip: rect($border-width, $small-tile-width - $border-width, $small-tile-width - $border-width, $border-width)
-  &.big:hover img
-    clip: rect($border-width, $large-tile-width - $border-width, $large-tile-width - $border-width, $border-width)
   figcaption
     display: none
     position: absolute
@@ -73,4 +79,6 @@ $small-tile-width: 215px
     text-align: center
     width: 100%
   &:hover figcaption
+    display: block
+  &:hover .frame
     display: block

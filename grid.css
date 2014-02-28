@@ -33,6 +33,18 @@
   padding: 5px;
   background-color: #eeeeee; }
 
+.frame {
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  border: 25px solid black;
+  width: inherit;
+  height: inherit;
+  display: none;
+  position: absolute;
+  top: 0;
+  left: 0; }
+
 .cell {
   box-sizing: border-box;
   -moz-box-sizing: border-box;
@@ -54,10 +66,6 @@
     height: 435px; }
   .tile:last-child {
     margin: 0; }
-  .tile:hover img {
-    clip: rect(25px, 190px, 190px, 25px); }
-  .tile.big:hover img {
-    clip: rect(25px, 410px, 410px, 25px); }
   .tile figcaption {
     display: none;
     position: absolute;
@@ -68,4 +76,6 @@
     text-align: center;
     width: 100%; }
   .tile:hover figcaption {
+    display: block; }
+  .tile:hover .frame {
     display: block; }
