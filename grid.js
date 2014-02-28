@@ -110,14 +110,14 @@
     PW.$ss = options.$section;
     PW.tileTemplate = Handlebars.compile(options.$template.html());
     var kittehs = $.parseJSON(options.$source.text());
-    var _arrays = _.partition(kittehs, function(kitteh) {
-      return kitteh.importance > 0;
+    var _pictures = _.groupBy(kittehs, function(kitteh) {
+      return (kitteh.importance > 0) ? 'large' : 'small';
     });
 
-    PW.important = _arrays[0].sort(function(firstKitteh, secondKitteh) {
+    PW.important = _pictures.large.sort(function(firstKitteh, secondKitteh) {
       return firstKitteh.importance < secondKitteh.importance;
     });
-    PW.filler = _arrays[1];
+    PW.filler = _pictures.small;
   }
 
 }(this));
