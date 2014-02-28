@@ -109,13 +109,13 @@
   PW.initialize = function(options) {
     PW.$ss = options.$section;
     PW.tileTemplate = Handlebars.compile(options.$template.html());
-    var kittehs = $.parseJSON(options.$source.text());
-    var _pictures = _.groupBy(kittehs, function(kitteh) {
-      return (kitteh.importance > 0) ? 'large' : 'small';
+    var json = $.parseJSON(options.$source.text());
+    var _pictures = _.groupBy(json, function(el) {
+      return (el.importance > 0) ? 'large' : 'small';
     });
 
-    PW.important = _pictures.large.sort(function(firstKitteh, secondKitteh) {
-      return firstKitteh.importance < secondKitteh.importance;
+    PW.important = _pictures.large.sort(function(first, second) {
+      return first.importance < second.importance;
     });
     PW.filler = _pictures.small;
   }
