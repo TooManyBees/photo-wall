@@ -1,0 +1,75 @@
+- content_for(:css) do
+  %link{ rel: 'stylesheet', type: 'text/css', href: 'photowall.css' }
+
+%script{ type: 'application/json', id: 'photowall-pictures'}
+  [{
+  "src": "http://placekitten.com/g/435/435",
+  "url": "/upload/",
+  "caption": "Upload images",
+  "importance": 100
+  },
+  {
+  "src": "http://placekitten.com/g/435/435",
+  "url": "/buildjson/",
+  "caption": "Build JSON",
+  "importance": 90
+  },
+  {
+  "src": "http://placekitten.com/g/215/215",
+  "caption": "Kitties!"
+  },
+  {
+  "src": "http://placekitten.com/g/215/215",
+  "caption": "Look, it's a kitty"
+  },
+  {
+  "src": "http://placekitten.com/g/215/215",
+  "caption": "So many kitties..."
+  },
+  {
+  "src": "http://placekitten.com/g/215/215",
+  "caption": "KITTEH!"
+  },
+  {
+  "src": "http://placekitten.com/g/215/215",
+  "caption": "Hello, Kitty."
+  },
+  {
+  "src": "http://placekitten.com/g/215/215",
+  "caption": "kittykittykittykitty"
+  },
+  {
+  "src": "http://placekitten.com/g/215/215",
+  "caption": "Kittyyyyyyyyyyyyyy!"
+  },
+  {
+  "src": "http://placekitten.com/g/215/215",
+  "caption": "Mah kitteh"
+  }]
+
+%script{ type: 'text/template', id: 'photowall-template-tile' }
+  <figure class="tile{{#if importance}} big{{/if}}">
+  <img src="{{ src }}">
+  {{#if url}}
+  <a href="{{ url }}" class="frame {{ color }}"></a>
+  {{else}}
+  <div class="frame {{ color }} half"></div>
+  {{/if}}
+  {{#if caption}}<figcaption>{{ caption }}</figcaption>{{/if}}
+  </figure>
+
+%section{ id: 'photowall-container', class: 'clf' }
+
+%script{ type: 'text/javascript', src: 'http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.0/jquery.js'}
+%script{ type: 'text/javascript', src: 'http://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.5.2/underscore-min.js'}
+%script{ type: 'text/javascript', src: 'http://cdnjs.cloudflare.com/ajax/libs/handlebars.js/1.3.0/handlebars.min.js'}
+%script{ type: 'text/javascript', src: '/photowall.js'}
+%script{ type: 'text/javascript'}
+  $(document).ready(function() {
+  LabsPhotoWall.initialize({
+  $section: $('#photowall-container'),
+  $template: $('#photowall-template-tile'),
+  $source: $('#photowall-pictures')
+  })
+  LabsPhotoWall.populateGrid();
+  });
