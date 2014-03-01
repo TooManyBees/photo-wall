@@ -1,14 +1,29 @@
 require 'sinatra'
 require 'sinatra/content_for'
 require 'haml'
+require 'json'
 require 'aws-sdk-core'
+require './aws.rb'
+
+get '/api/bucket/?' do
+  JSON.dump(AwsConnection.get_buckets)
+end
+
+get '/api/bucket/:bucket/?' do
+  JSON.dump(AwsConnection.get_images(params[:bucket]))
+end
+
+post '/api/upload/?' do
+
+end
 
 get '/buildjson/?' do
-  render :build
+  buckets = settings.s3.list_buckets.buckets
+  haml :build, locals: {buckets: buckets}
 end
 
 get '/upload/?' do
-  render :upload
+  haml :upload
 end
 
 get '/*.*' do
@@ -17,13 +32,4 @@ end
 
 get '/' do
   haml :index
-end
-
-configure do
-  Aws.config = {
-    access_key_id: ENV['AWS_ACCESS_KEY'],
-    secret_access_key: ENV['AWS_SECRET_KEY'],
-    region: "us-east-1"
-  }
-  set s3: Aws.s3
 end

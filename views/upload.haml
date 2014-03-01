@@ -1,0 +1,13 @@
+-content_for :css do
+  %link{ rel: 'stylesheet', type: 'text/css', href: '/upload.css' }
+
+#drop-target
+  %h1 Drag to upload
+
+#upload-progress
+  %p#counter ...
+  #meter
+
+%script{ type: 'text/javascript', src: 'http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.0/jquery.js'}
+%script{ type: 'text/javascript', src: '/ajaxupload.js' }
+%script{ type: 'text/javascript', src: '/upload.js'}

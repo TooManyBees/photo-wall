@@ -1,0 +1,38 @@
+$drop-size: 512px
+
+h1, div, p
+  font-family: sans-serif
+  border: 0
+  margin: 0
+  padding: 0
+
+@mixin box-sizzle
+  box-sizing: border-box
+  -moz-box-sizing: border-box
+  -webkit-box-sizing: border-box
+
+h1
+  text-align: center
+
+#drop-target
+  @include box-sizzle
+  width: $drop-size
+  height: $drop-size
+  margin: 15px auto
+  background-color: gray
+  border-radius: 20px
+  border: 4px dashed gray
+  &:hover
+    border-color: black
+
+#upload-progress
+  width: $drop-size
+  margin: auto
+  #counter
+    width: 50px
+    float: left
+  #meter
+    width: $drop-size - 50px
+    height: 30px
+    background-color: blue
+    float: left

@@ -1,0 +1,33 @@
+h1, div, p {
+  font-family: sans-serif;
+  border: 0;
+  margin: 0;
+  padding: 0; }
+
+h1 {
+  text-align: center; }
+
+#drop-target {
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  width: 512px;
+  height: 512px;
+  margin: 15px auto;
+  background-color: gray;
+  border-radius: 20px;
+  border: 4px dashed gray; }
+  #drop-target:hover {
+    border-color: black; }
+
+#upload-progress {
+  width: 512px;
+  margin: auto; }
+  #upload-progress #counter {
+    width: 50px;
+    float: left; }
+  #upload-progress #meter {
+    width: 462px;
+    height: 30px;
+    background-color: blue;
+    float: left; }
