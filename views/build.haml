@@ -1,3 +1,40 @@
-%ul
--buckets.each do |bucket|
-  %li=bucket.name
+-content_for :css do
+  %link{ rel: 'stylesheet', type: 'text/css', href: '/uploader.css' }
+
+%section#main
+  %h1 Labs Photo Wall Builder
+
+  %dl#instructions
+    %dt Importance
+    %dd If 0 or blank, this image will be small. If greater |
+        than 0, this image will be large. Large images appear |
+        in descending order of importance. |
+    %dt Caption
+    %dd A caption on hover over the image. (Optional)
+    %dt Url
+    %dd The image will link to this URL. (This is not the path |
+        to the image itself.) |
+
+  %h2
+    Select a bucket:
+    %select#bucket-selector
+      %option{ value: "", selected: true } ...
+      -buckets.each do |bucket|
+        %option{ value: bucket.name }=bucket.name
+
+  %ul#image-list
+
+  %script#list-template{ type: "text/template" }
+    %li
+      %img{ src: "{{path}}" }
+      %label
+        Importance:
+        %input{ name: "importance", type: "text", placeholder: "(Optional)" }
+      %label
+        Caption:
+        %input.caption{ name: "caption", type: "text", placeholder: "(Optional)" }
+
+  %script{ type: 'text/javascript', src: 'http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.0/jquery.js'}
+  %script{ type: 'text/javascript', src: 'http://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.5.2/underscore-min.js'}
+  %script{ type: 'text/javascript', src: 'http://cdnjs.cloudflare.com/ajax/libs/handlebars.js/1.3.0/handlebars.min.js'}
+  %script{ type: "text/javascript", src: "/build.js" }

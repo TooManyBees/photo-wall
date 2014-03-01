@@ -1,10 +1,17 @@
 $drop-size: 512px
+$main-size: 900px
 
-h1, div, p
+h1, div, p, ul, li, dl, dt, dd
   font-family: sans-serif
   border: 0
   margin: 0
   padding: 0
+  list-style: none
+  font-size: inherit
+  font-weight: inherit
+
+img
+  display: block
 
 @mixin box-sizzle
   box-sizing: border-box
@@ -12,7 +19,25 @@ h1, div, p
   -webkit-box-sizing: border-box
 
 h1
+  font-size: 150%
   text-align: center
+
+h2
+  font-size: 125%
+  text-align: center
+  select
+    font-size: 125%
+    vertical-align: middle
+
+#instructions
+  width: $drop-size
+  font-size: 125%
+  margin: 15px auto
+  font-weight: lighter
+  dt
+    font-weight: bold
+  dd
+    margin: 10px 20px
 
 #drop-target
   @include box-sizzle
@@ -36,3 +61,18 @@ h1
     height: 30px
     background-color: blue
     float: left
+
+#main
+  width: $main-size
+  margin: auto
+
+#image-list
+  margin: 20px auto
+  img
+    max-width: $main-size
+  label
+    display: block
+  input.caption
+    width: $drop-size
+  li
+    margin-bottom: 10px
