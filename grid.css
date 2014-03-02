@@ -66,20 +66,22 @@
   -webkit-box-sizing: border-box;
   float: left;
   margin-right: 5px;
-  margin-bottom: 5px;
-  overflow: hidden; }
+  margin-bottom: 5px; }
 
 .tile {
   position: relative;
   clear: both;
   width: 215px;
   height: 215px;
-  margin-bottom: 5px; }
+  margin-bottom: 5px;
+  overflow: hidden; }
   .tile.big {
     width: 435px;
     height: 435px; }
   .tile:last-child {
     margin: 0; }
+  .tile img {
+    position: relative; }
   .tile figcaption {
     display: none;
     position: absolute;
