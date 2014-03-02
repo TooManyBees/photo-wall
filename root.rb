@@ -5,26 +5,39 @@ require 'json'
 require 'aws-sdk-core'
 require './aws.rb'
 
+helpers do
+  def four_oh_four bucket
+    halt 404, {"Content-Type" => "text/json"}, <<-JSON
+    {
+      "status": 404,
+      "error": "Bucket #{bucket} not found."
+    }
+    JSON
+  end
+end
+
 get '/api/bucket/?' do
   JSON.dump(AwsConnection.get_buckets)
 end
 
 get '/api/bucket/:bucket' do
+  bucket = params[:bucket]
+  four_oh_four(bucket) unless bucket.start_with? "pw-"
   begin
-    JSON.dump(AwsConnection.get_images(params[:bucket]))
+    JSON.dump(AwsConnection.get_images(bucket))
   rescue Aws::S3::Errors::NoSuchBucket
-    halt 404, "Bucket #{params[:bucket]} not found."
+    four_oh_four(bucket)
   rescue Aws::S3::Errors::AccessDenied
-    halt 404, "Bucket #{params[:bucket]} not found."
+    four_oh_four(bucket)
   end
 end
 
 post '/api/upload/?' do
-
+  halt 400
 end
 
 get '/buildjson/?' do
-  buckets = settings.s3.list_buckets.buckets
+  buckets = AwsConnection.get_buckets
   haml :build, locals: {buckets: buckets}
 end
 

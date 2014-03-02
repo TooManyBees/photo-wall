@@ -4,14 +4,28 @@ require 'JSON'
 module AwsConnection
 
   S3 = Aws.s3
+  PIC_EXTENSIONS = %w[
+    bm bmp pbm
+    gif
+    ico
+    jfif jpe jpeg jpg pjpeg
+    pcx
+    pct pic pict
+    png x-png
+    tif tiff
+  ]
 
   def self.get_buckets
-    S3.list_buckets.buckets.map(&:name)
+    S3.list_buckets.buckets
+      .map(&:name)
+      .select{ |name| name.start_with? "pw-" }
   end
 
   def self.get_images bucket
-    images = S3.list_objects(bucket: bucket).contents.map(&:key)
-    images.map { |i| url_for(bucket, i) }
+    S3.list_objects(bucket: bucket).contents
+      .map(&:key)
+      .select { |key| PIC_EXTENSIONS.include? key.split('.').last }
+      .map { |i| url_for(bucket, i) }
   end
 
   def self.upload_image bucket, image
