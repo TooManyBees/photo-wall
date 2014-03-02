@@ -19,7 +19,7 @@ module AwsConnection
   def self.get_buckets
     S3.list_buckets.buckets
       .map(&:name)
-      # .select{ |name| name.start_with? "pw-" }
+      .select{ |name| name.start_with? "pw-" }
   end
 
   def self.get_images bucket

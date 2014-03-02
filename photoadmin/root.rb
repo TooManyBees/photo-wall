@@ -22,7 +22,7 @@ end
 
 get '/api/bucket/:bucket' do
   bucket = params[:bucket]
-  # four_oh_four(bucket) unless bucket.start_with? "pw-"
+  four_oh_four(bucket) unless bucket.start_with? "pw-"
   begin
     JSON.dump(AwsConnection.get_images(bucket))
   rescue Aws::S3::Errors::NoSuchBucket
@@ -30,6 +30,15 @@ get '/api/bucket/:bucket' do
   rescue Aws::S3::Errors::AccessDenied
     four_oh_four(bucket)
   end
+end
+
+get '/api/saved/?' do
+  JSON.dump(AwsConnection.get_saved_walls)
+end
+
+post '/api/save/?' do
+  # save json blob to s3 bucket 'photo-wall-static'
+  halt 400
 end
 
 post '/api/upload/?' do
