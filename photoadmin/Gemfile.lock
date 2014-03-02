@@ -6,7 +6,7 @@ GEM
       jamespath
       multi_json (~> 1.0)
       multi_xml (~> 0.5)
-    backports (3.4.0)
+    backports (3.6.0)
     builder (3.2.2)
     coderay (1.1.0)
     daemons (1.1.9)

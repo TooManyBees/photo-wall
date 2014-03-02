@@ -1,6 +1,6 @@
 require 'aws-sdk-core'
 require 'mime/types'
-require 'JSON'
+require 'json'
 
 module AwsConnection
 
