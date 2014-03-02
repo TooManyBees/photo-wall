@@ -49,7 +49,7 @@
 
 %script{ type: 'text/template', id: 'photowall-template-tile' }
   <figure class="tile{{#if importance}} big{{/if}}">
-  <img src="{{ src }}">
+  <img{{#if dim}} class="{{dim}}"{{/if}} src="{{ src }}"{{#if dim}} style="left:{{dimX}};top:{{dimY}};"{{/if}}>
   {{#if url}}
   <a href="{{ url }}" class="frame {{ color }}"></a>
   {{else}}

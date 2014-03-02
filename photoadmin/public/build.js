@@ -15,8 +15,10 @@ $(document).ready(function() {
         var width = $img.width();
         if (height / width > 1) {
           $img.addClass('tall')
+          $img.parent().find('input[name=dim]').val('tall');
         } else {
           $img.addClass('wide')
+          $img.parent().find('input[name=dim]').val('wide');
         }
       });
     });
@@ -74,11 +76,10 @@ $(document).ready(function() {
       $images.empty();
       $build.removeClass('show');
     }
-  }); // end $bucket-selector.on
+  });
 
   $button.on("click", function() {
     $(this).prop('disabled', true).text("Building...");
-    $
     var $pre = $('<pre>').text(
       JSON.stringify(
         serializeImages($images),
@@ -90,5 +91,23 @@ $(document).ready(function() {
     $output.append($pre);
     $(this).prop('disabled', false).text("Build JSON!");
   }); // end $button.on
+
+  $images.on('click', '.controls', function() {
+    var $control = $(this);
+    var $border = $(this).parent();
+    shiftBorder($border, {x: $control.data('x'), y: $control.data('y')})
+  });
+
+  var shiftBorder = function($border, offset) {
+    var $inputX = $border.parent().find('input[name=dimX]');
+    var $inputY = $border.parent().find('input[name=dimY]');
+    var offsetX = (offset.x || 0);
+    var offsetY = (offset.y || 0);
+
+    $border.css('left', offsetX + parseInt($border.css('left')));
+    $border.css('top', offsetY + parseInt($border.css('top')));
+    $inputX.val(offsetX + parseInt($inputX.val()));
+    $inputY.val(offsetY + parseInt($inputY.val()));
+  }
 
 });

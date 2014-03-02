@@ -62,14 +62,21 @@ h2 {
 
 #image-list {
   margin: 20px auto; }
+  #image-list img {
+    margin-bottom: 10px; }
   #image-list img.tall {
     width: 400px; }
   #image-list img.wide {
     height: 400px; }
-  #image-list label {
-    display: block; }
+  #image-list label.disabled {
+    color: #aaaaaa; }
+    #image-list label.disabled input {
+      background-color: #eeeeee;
+      border: 1px solid #eeeeee; }
   #image-list input.long {
     width: 512px; }
+  #image-list input.short {
+    width: 50px; }
   #image-list li {
     margin-bottom: 10px;
     position: relative; }
@@ -99,3 +106,22 @@ h2 {
 
 .working .spinner {
   display: block; }
+
+.controls {
+  background-color: #aaaaaa;
+  position: absolute;
+  padding: 2px; }
+  .controls:hover {
+    background-color: #dddddd; }
+  .controls.up {
+    top: 0;
+    left: 175px; }
+  .controls.left {
+    left: 0;
+    top: 200px; }
+  .controls.right {
+    right: 0;
+    top: 200px; }
+  .controls.down {
+    bottom: 0;
+    left: 175px; }

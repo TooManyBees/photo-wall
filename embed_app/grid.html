@@ -14,10 +14,8 @@
         "url": "http://www.huffingtonpost.com",
         "caption": "The Cutest Kitten EVAR!",
         "importance": 80,
-        "dim": {
-          "type": "wide",
-          "x": "-100px"
-        }
+        "dim": "wide",
+        "dimX": "-100px"
       },
       {
         "src": "http://placekitten.com/g/435/435",
@@ -105,7 +103,7 @@
 
   <script type="text/template" id="photowall-template-tile">
     <figure class="tile{{#if importance}} big{{/if}}">
-      <img{{#if dim}} class="{{dim.type}}"{{/if}} src="{{ src }}"{{#if dim}} style="left:{{dim.x}};top:{{dim.y}};"{{/if}}>
+      <img{{#if dim}} class="{{dim}}"{{/if}} src="{{ src }}"{{#if dim}} style="left:{{dimX}};top:{{dimY}};"{{/if}}>
       {{#if url}}
       <a href="{{ url }}" class="frame {{ color }}"></a>
       {{else}}

@@ -70,14 +70,21 @@ h2
 
 #image-list
   margin: 20px auto
+  img
+    margin-bottom: 10px
   img.tall
     width: $big-pic-size
   img.wide
     height: $big-pic-size
-  label
-    display: block
+  label.disabled
+    color: #aaa
+    input
+      background-color: #eee
+      border: 1px solid #eee
   input.long
     width: $drop-size
+  input.short
+    width: 50px
   li
     margin-bottom: 10px
     position: relative
@@ -109,3 +116,22 @@ h2
 .working
   .spinner
     display: block
+
+.controls
+  background-color: #aaa
+  position: absolute
+  padding: 2px
+  &:hover
+    background-color: #ddd
+  &.up
+    top: 0
+    left: $big-pic-size / 2 - 25px
+  &.left
+    left: 0
+    top: $big-pic-size / 2
+  &.right
+    right: 0
+    top: $big-pic-size / 2
+  &.down
+    bottom: 0
+    left: $big-pic-size / 2 - 25px
