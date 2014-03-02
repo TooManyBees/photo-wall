@@ -22,7 +22,7 @@ end
 
 get '/api/bucket/:bucket' do
   bucket = params[:bucket]
-  four_oh_four(bucket) unless bucket.start_with? "pw-"
+  # four_oh_four(bucket) unless bucket.start_with? "pw-"
   begin
     JSON.dump(AwsConnection.get_images(bucket))
   rescue Aws::S3::Errors::NoSuchBucket
