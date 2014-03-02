@@ -10,13 +10,15 @@ $(document).ready(function() {
   var sizeImages = function(images) {
     $(images).each(function() {
       var $img = $(this);
-      var height = $img.height();
-      var width = $img.width();
-      if (height / width > 1) {
-        $img.addClass('tall')
-      } else {
-        $img.addClass('wide')
-      }
+      $img.on('load', function() {
+        var height = $img.height();
+        var width = $img.width();
+        if (height / width > 1) {
+          $img.addClass('tall')
+        } else {
+          $img.addClass('wide')
+        }
+      });
     });
   }
 
@@ -46,7 +48,7 @@ $(document).ready(function() {
       $images.append(listTemplate({"path": image}));
     });
     // This has issues if it executes before the images are loaded
-    // sizeImages($images.find('img'));
+    sizeImages($images.find('img'));
   }
 
   var serializeImages = function($ul) {

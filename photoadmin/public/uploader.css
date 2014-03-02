@@ -62,9 +62,6 @@ h2 {
 
 #image-list {
   margin: 20px auto; }
-  #image-list img {
-    max-width: 800px;
-    max-height: 400px; }
   #image-list img.tall {
     width: 400px; }
   #image-list img.wide {
