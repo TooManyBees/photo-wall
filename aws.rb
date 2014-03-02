@@ -1,4 +1,5 @@
 require 'aws-sdk-core'
+require 'mime/types'
 require 'JSON'
 
 module AwsConnection
@@ -30,6 +31,7 @@ module AwsConnection
 
   def self.upload_image bucket, image
     key = File.basename(image)
+    mime = MIME::Types.of(key).first.simplified
     ext = image.split('.').last
     File.open(image) do |img|
       obj = S3.put_object(
@@ -37,7 +39,7 @@ module AwsConnection
         body: img,
         bucket: bucket,
         key: key,
-        content_type: "image/#{ext}"
+        content_type: mime
       )
       url_for(bucket, key)
     end
