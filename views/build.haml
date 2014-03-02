@@ -20,19 +20,31 @@
     %select#bucket-selector
       %option{ value: "", selected: true } ...
       -buckets.each do |bucket|
-        %option{ value: bucket.name }=bucket.name
+        %option{ value: bucket }=bucket
 
-  %ul#image-list
+  #image-list
+    .spinner
+    %ul
+
+  #builder
+    %button#build-button Build JSON!
+    #build-output.off
+      %h2 Copy the following JSON, including the square brackets
+      %iframe
 
   %script#list-template{ type: "text/template" }
     %li
       %img{ src: "{{path}}" }
+      %input{ name: "src", type: "hidden", value: "{{path}}" }
       %label
         Importance:
-        %input{ name: "importance", type: "text", placeholder: "(Optional)" }
+        %input{ name: "importance", type: "text", placeholder: "(Numeric, optional)" }
       %label
         Caption:
-        %input.caption{ name: "caption", type: "text", placeholder: "(Optional)" }
+        %input.long{ name: "caption", type: "text", placeholder: "(Optional)" }
+      %label
+        Url:
+        %input.long{ name: "url", type: "text", placeholder: "(Clickthrough URL, optional)"}
 
   %script{ type: 'text/javascript', src: 'http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.0/jquery.js'}
   %script{ type: 'text/javascript', src: 'http://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.5.2/underscore-min.js'}

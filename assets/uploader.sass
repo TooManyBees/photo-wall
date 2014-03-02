@@ -1,7 +1,7 @@
 $drop-size: 512px
-$main-size: 900px
+$main-size: 800px
 
-h1, div, p, ul, li, dl, dt, dd
+h1, h2, div, p, ul, li, dl, dt, dd, iframe
   font-family: sans-serif
   border: 0
   margin: 0
@@ -64,15 +64,36 @@ h2
 
 #main
   width: $main-size
-  margin: auto
+  margin: 40px auto
 
 #image-list
   margin: 20px auto
   img
     max-width: $main-size
+    max-height: $drop-size
   label
     display: block
-  input.caption
+  input.long
     width: $drop-size
   li
     margin-bottom: 10px
+
+#builder
+  display: none
+  &.show
+    display: block
+
+#build-output
+  iframe
+    width: $main-size
+
+.spinner
+  height: 128px
+  width: 128px
+  background-image: url("/spinner.gif")
+  display: none
+  margin: 50px auto
+
+.working
+  .spinner
+    display: block

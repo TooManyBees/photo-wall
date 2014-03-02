@@ -1,4 +1,4 @@
-h1, div, p, ul, li, dl, dt, dd {
+h1, h2, div, p, ul, li, dl, dt, dd, iframe {
   font-family: sans-serif;
   border: 0;
   margin: 0;
@@ -57,16 +57,35 @@ h2 {
     float: left; }
 
 #main {
-  width: 900px;
-  margin: auto; }
+  width: 800px;
+  margin: 40px auto; }
 
 #image-list {
   margin: 20px auto; }
   #image-list img {
-    max-width: 900px; }
+    max-width: 800px;
+    max-height: 512px; }
   #image-list label {
     display: block; }
-  #image-list input.caption {
+  #image-list input.long {
     width: 512px; }
   #image-list li {
     margin-bottom: 10px; }
+
+#builder {
+  display: none; }
+  #builder.show {
+    display: block; }
+
+#build-output iframe {
+  width: 800px; }
+
+.spinner {
+  height: 128px;
+  width: 128px;
+  background-image: url("/spinner.gif");
+  display: none;
+  margin: 50px auto; }
+
+.working .spinner {
+  display: block; }
