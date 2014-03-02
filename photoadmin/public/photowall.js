@@ -107,17 +107,20 @@
   }
 
   PW.initialize = function(options) {
-    PW.$ss = options.$section;
-    PW.tileTemplate = Handlebars.compile(options.$template.html());
-    var json = $.parseJSON(options.$source.text());
-    var _pictures = _.groupBy(json, function(el) {
-      return (el.importance > 0) ? 'large' : 'small';
-    });
+    $.getJSON(options.json, function(json) {
+      PW.$ss = options.$section;
+      PW.tileTemplate = Handlebars.compile(options.$template.html());
+      var _pictures = _.groupBy(json, function(el) {
+        return (el.importance > 0) ? 'large' : 'small';
+      });
 
-    PW.important = _pictures.large.sort(function(first, second) {
-      return first.importance < second.importance;
+      PW.important = _pictures.large.sort(function(first, second) {
+        return first.importance < second.importance;
+      });
+      PW.filler = _pictures.small;
+
+      PW.populateGrid();
     });
-    PW.filler = _pictures.small;
   }
 
 }(this));

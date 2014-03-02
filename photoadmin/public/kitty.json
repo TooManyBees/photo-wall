@@ -1,0 +1,46 @@
+[
+  {
+   "src": "http://placekitten.com/g/435/435",
+   "url": "/upload/",
+   "caption": "Upload images",
+   "importance": 100
+ },
+ {
+   "src": "http://placekitten.com/g/435/435",
+   "url": "/buildjson/",
+   "caption": "Build JSON",
+   "importance": 90
+ },
+ {
+   "src": "http://placekitten.com/g/215/215",
+   "caption": "Kitties!"
+ },
+ {
+   "src": "http://placekitten.com/g/215/215",
+   "caption": "Look, it's a kitty"
+ },
+ {
+   "src": "http://placekitten.com/g/215/215",
+   "caption": "So many kitties..."
+ },
+ {
+   "src": "http://placekitten.com/g/215/215",
+   "caption": "KITTEH!"
+ },
+ {
+   "src": "http://placekitten.com/g/215/215",
+   "caption": "Hello, Kitty."
+ },
+ {
+   "src": "http://placekitten.com/g/215/215",
+   "caption": "kittykittykittykitty"
+ },
+ {
+   "src": "http://placekitten.com/g/215/215",
+   "caption": "Kittyyyyyyyyyyyyyy!"
+ },
+ {
+   "src": "http://placekitten.com/g/215/215",
+   "caption": "Mah kitteh"
+ }
+]
