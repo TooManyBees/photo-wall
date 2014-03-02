@@ -7,6 +7,19 @@ $(document).ready(function() {
   var $button = $('#build-button');
   var $output = $('#build-output iframe').contents().find('body');
 
+  var sizeImages = function(images) {
+    $(images).each(function() {
+      var $img = $(this);
+      var height = $img.height();
+      var width = $img.width();
+      if (height / width > 1) {
+        $img.addClass('tall')
+      } else {
+        $img.addClass('wide')
+      }
+    });
+  }
+
   var getImagesFromBucket = function(bucket) {
     var $imgLi = $('#image-list');
     $.ajax({
@@ -32,6 +45,8 @@ $(document).ready(function() {
     _.each(images, function(image) {
       $images.append(listTemplate({"path": image}));
     });
+    // This has issues if it executes before the images are loaded
+    // sizeImages($images.find('img'));
   }
 
   var serializeImages = function($ul) {
