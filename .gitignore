@@ -1,3 +1,4 @@
+.dotcloud/
 .sass-cache/
 *.bak
 aws.yml

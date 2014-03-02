@@ -1,0 +1,7 @@
+www:
+  type: ruby
+  approot: photoadmin
+  exclude_bundler_groups:
+    - development
+  config:
+    ruby-version: 1.9.3
