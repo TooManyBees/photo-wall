@@ -10,10 +10,14 @@
   <script type="application/json" id="photowall-pictures">
     [
       {
-        "src": "http://placekitten.com/g/435/435",
+        "src": "http://placekitten.com/g/800/500",
         "url": "http://www.huffingtonpost.com",
         "caption": "The Cutest Kitten EVAR!",
-        "importance": 80
+        "importance": 80,
+        "dim": {
+          "type": "wide",
+          "x": "-100px"
+        }
       },
       {
         "src": "http://placekitten.com/g/435/435",
@@ -101,7 +105,7 @@
 
   <script type="text/template" id="photowall-template-tile">
     <figure class="tile{{#if importance}} big{{/if}}">
-      <img src="{{ src }}">
+      <img{{#if dim}} class="{{dim.type}}"{{/if}} src="{{ src }}"{{#if dim}} style="left:{{dim.x}};top:{{dim.y}};"{{/if}}>
       {{#if url}}
       <a href="{{ url }}" class="frame {{ color }}"></a>
       {{else}}
