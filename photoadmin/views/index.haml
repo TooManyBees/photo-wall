@@ -3,7 +3,7 @@
 
 %script{ type: 'text/template', id: 'photowall-template-tile' }<
   %figure{ class: "tile {{#if importance}}big{{/if}}"}<
-    %img{ class: '{{ dim }}', src: '{{ src }}', style: 'left:{{dimX}};top:{{dimY}}'}
+    %img{ class: '{{ dim }}', src: '{{ src }}', style: 'left:{{dimX}}px;top:{{dimY}}px'}
     {{#if url}}
     %a{ href: '{{url}}', class: 'frame {{color}}'}
     {{else}}
@@ -24,6 +24,6 @@
     LabsPhotoWall.initialize({
       $section: $('#photowall-container'),
       $template: $('#photowall-template-tile'),
-      json: '/kitty.json'
+      json: "#{remote_json}"
     })
   });

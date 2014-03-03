@@ -54,10 +54,14 @@ get '/upload/?' do
   haml :upload
 end
 
+get '/test/?' do
+  haml :index, locals: {remote_json: params[:src]}
+end
+
 get '/*.*' do
   send_file File.join(settings.public_folder, params[:splat].join("."))
 end
 
 get '/' do
-  haml :index
+  haml :index, locals: {remote_json: 'kitty.json'}
 end

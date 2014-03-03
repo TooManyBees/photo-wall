@@ -37,10 +37,10 @@
       %img{ src: "{{path}}" }
       .border
         / Controls for shifting
-        .controls.up{ data: {y: -5} } Shift Up
-        .controls.left{ data: {x: -5} } Shift<br>Left
-        .controls.right{ data: {x: 5} } Shift<br>Right
-        .controls.down{ data: {y: 5} } Shift Down
+        .controls.up{ data: {y: 5} } Shift Up
+        .controls.left{ data: {x: 5} } Shift<br>Left
+        .controls.right{ data: {x: -5} } Shift<br>Right
+        .controls.down{ data: {y: -5} } Shift Down
       %label.disabled
         Image source:
         %input.long{ name: "src", type: "text", value: "{{path}}" }(disabled)

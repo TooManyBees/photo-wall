@@ -82,6 +82,10 @@
     margin: 0; }
   .tile img {
     position: relative; }
+    .tile img.tall {
+      width: 100%; }
+    .tile img.wide {
+      height: 100%; }
   .tile figcaption {
     display: none;
     position: absolute;
