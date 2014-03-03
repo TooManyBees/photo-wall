@@ -31,6 +31,7 @@ $(document).ready(function() {
       dataType: 'json',
       beforeSend: function() {
         $images.empty();
+        $('#build-output').addClass('off');
         $imgLi.addClass('working');
         $selector.prop('disabled', true);
         window.currentBucket = undefined
@@ -93,6 +94,7 @@ $(document).ready(function() {
     var $pre = $('<pre>').text(generatedJSON);
     $output.empty();
     $output.append($pre);
+    $('#build-output').removeClass('off');
     $(this).prop('disabled', false).text("Build JSON!");
 
     $.ajax({
@@ -103,7 +105,7 @@ $(document).ready(function() {
         json: generatedJSON
       },
       success: function(data) {
-        $('#saved-url').text(data.url)
+        $('#saved-url').text(data.url).attr('href', "/test/?src="+data.url);
       }
     })
   }); // end $button.on

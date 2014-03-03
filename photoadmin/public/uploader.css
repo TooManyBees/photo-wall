@@ -1,4 +1,4 @@
-h1, h2, div, p, ul, li, dl, dt, dd, iframe {
+h1, h2, h3, div, p, ul, li, dl, dt, dd, iframe {
   font-family: sans-serif;
   border: 0;
   margin: 0;
@@ -20,6 +20,10 @@ h2 {
   h2 select {
     font-size: 125%;
     vertical-align: middle; }
+
+h3 {
+  margin: 10px auto;
+  text-align: center; }
 
 #instructions {
   width: 512px;
@@ -94,6 +98,8 @@ h2 {
   #builder.show {
     display: block; }
 
+#build-output.off {
+  display: none; }
 #build-output iframe {
   width: 800px; }
 

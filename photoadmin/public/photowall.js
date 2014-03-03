@@ -3,6 +3,7 @@
   var PW = root.LabsPhotoWall = (root.LabsPhotoWall || {});
 
   var fillerRatio = function() {
+    if (PW.important.length === 0) return 0;
     return  PW.filler.length / PW.important.length;
   }
 
@@ -114,7 +115,7 @@
       var _pictures = _.groupBy(json, function(el) {
         return (el.importance > 0) ? 'large' : 'small';
       });
-
+      _pictures.large || (_pictures.large = [])
       PW.important = _pictures.large.sort(function(first, second) {
         return parseInt(first.importance) < parseInt(second.importance);
       });
