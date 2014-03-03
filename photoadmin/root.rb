@@ -19,10 +19,10 @@ get '/api/buckets/:bucket/saved' do
   try_s3 { JSON.dump(AwsConnection.get_saved_walls(bucket)) }
 end
 
-post '/api/buckets/:bucket' do
+post '/api/buckets/?' do
   begin
     bucket = params[:bucket]
-    AwsConnection.create_bucket(bucket)
+    JSON.dump(AwsConnection.create_bucket(bucket))
   rescue Aws::S3::Errors::BucketAlreadyExists
     four_twenty_two bucket
   end
@@ -97,7 +97,7 @@ helpers do
     JSON
   end
 
-  def four_twenty_two bucket
+  def four_twenty_two bucket, message=""
     halt 422, {'Content-Type' => 'text/json'}, <<-JSON
 {
   "status": 422,

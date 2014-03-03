@@ -34,7 +34,7 @@ module AwsConnection
 
   def self.create_bucket bucket
     bucket = prefixed(bucket)
-    location = S3.create_bucket(
+    response = S3.create_bucket(
       acl: 'public-read',
       bucket: bucket
     )
@@ -51,7 +51,8 @@ module AwsConnection
         ]
       }
     )
-    location
+    location = response[:location][/(?<=\A\/#{BUCKET_PREFIX}).+$/]
+    {name: location}
   end
 
   def self.get_images bucket
