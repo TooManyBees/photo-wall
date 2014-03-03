@@ -1,0 +1,15 @@
+- content_for :css do
+  %link{ rel: 'stylesheet', type: 'text/css', href: '/walls.css' }
+
+%h1 Existing Photo Buckets
+
+%ul
+- buckets.each do |bucket|
+  %li
+    = bucket[:name]
+    %a.toggle-layouts{ href: '#'} Show layouts
+    %a{ href: '' } New layout
+    %ol
+      - bucket[:walls].each do |wall|
+        %li
+          %a{ href: "/test?src=#{wall}" }= wall

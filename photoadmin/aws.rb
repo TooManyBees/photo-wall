@@ -15,14 +15,39 @@ module AwsConnection
     png x-png
     tif tiff
   ]
+  BUCKET_PREFIX = 'pw-'
 
   def self.get_buckets
     S3.list_buckets.buckets
       .map(&:name)
-      .select{ |name| name.start_with? "pw-" }
+      .select{ |name| name.start_with? BUCKET_PREFIX }
+      .map{ |name| name[/(?<=\A#{BUCKET_PREFIX}).+$/] }
+  end
+
+  def self.create_bucket bucket
+    bucket = prefixed(bucket)
+    location = S3.create_bucket(
+      acl: 'public-read',
+      bucket: bucket
+    )
+    S3.put_bucket_cors(
+      bucket: bucket,
+      cors_configuration: {
+        cors_rules: [
+          {
+            allowed_headers: ["Authorization"],
+            allowed_methods: ["GET"],
+            allowed_origins: ["*"],
+            max_age_seconds: 3000
+          }
+        ]
+      }
+    )
+    location
   end
 
   def self.get_images bucket
+    bucket = prefixed(bucket)
     S3.list_objects(bucket: bucket).contents
       .map(&:key)
       .select { |key| PIC_EXTENSIONS.include? key.split('.').last }
@@ -30,6 +55,7 @@ module AwsConnection
   end
 
   def self.get_saved_walls bucket
+    bucket = prefixed(bucket)
     S3.list_objects(bucket: bucket).contents
       .map(&:key)
       .select { |key| key.end_with? '.json' }
@@ -37,6 +63,7 @@ module AwsConnection
   end
 
   def self.save_json bucket, json
+    bucket = prefixed(bucket)
     key = "#{bucket}-#{Time.now.to_i}.json"
     S3.put_object(
       acl: 'public-read',
@@ -49,6 +76,7 @@ module AwsConnection
   end
 
   def self.upload_image bucket, image
+    bucket = prefixed(bucket)
     key = File.basename(image)
     mime = MIME::Types.of(key).first.simplified
     ext = image.split('.').last
@@ -67,5 +95,9 @@ module AwsConnection
   private
   def self.url_for(bucket, key)
     "https://#{bucket}.s3.amazonaws.com/#{key}"
+  end
+
+  def self.prefixed(bucket)
+    BUCKET_PREFIX+bucket
   end
 end

@@ -27,7 +27,7 @@ $(document).ready(function() {
   var getImagesFromBucket = function(bucket) {
     var $imgLi = $('#image-list');
     $.ajax({
-      url: '/api/bucket/'+bucket,
+      url: '/api/buckets/'+bucket,
       dataType: 'json',
       beforeSend: function() {
         $images.empty();

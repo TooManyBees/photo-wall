@@ -3,6 +3,11 @@
   %head
     %meta{ charset: 'utf-8'}
       = yield_content :css if content_for? :css
+    %title
+      - if content_for? :title
+        yield_content(:title)
+      - else
+      HuffPost Labs Photo Grid
 
   %body
     = yield
