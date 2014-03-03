@@ -11,9 +11,12 @@
         in descending order of importance. |
     %dt Caption
     %dd A caption on hover over the image. (Optional)
-    %dt Url
+    %dt URL
     %dd The image will link to this URL. (This is not the path |
         to the image itself.) |
+    %dt Offsets
+    %dd Click the shift controls to offset the portion of the image |
+        that will be visible in the layout. |
 
   %h2
     Select a bucket:
@@ -27,10 +30,11 @@
     %ul
 
   #builder
-    %button#build-button Build JSON!
+    %button#build-button Build and save JSON to AWS!
     #build-output.off
-      %h2 The following JSON is saved to AWS
+      %h2 Layout saved!
       %h3
+        Click to preview:
         %a#saved-url
       %iframe
 
