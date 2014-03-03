@@ -8,7 +8,7 @@
   %li
     = bucket[:name]
     %a.toggle-layouts{ href: '#'} Show layouts
-    %a{ href: '' } New layout
+    %a{ href: "/walls/#{bucket[:name]}/build" } New layout
     %ol
       - bucket[:walls].each do |wall|
         %li

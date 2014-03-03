@@ -17,6 +17,14 @@ module AwsConnection
   ]
   BUCKET_PREFIX = 'pw-'
 
+  def self.exists? bucket
+    S3.head_bucket(bucket: prefixed(bucket))
+  rescue Aws::Errors::ServiceError
+    false
+  else
+    true
+  end
+
   def self.get_buckets
     S3.list_buckets.buckets
       .map(&:name)

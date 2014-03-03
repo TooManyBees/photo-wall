@@ -47,6 +47,23 @@ get '/walls/?' do
   haml :walls, locals: {buckets: buckets}
 end
 
+get '/walls/:bucket/' do
+  halt 404 unless AwsConnection.exist? bucket
+  halt 420 # This will list thumbs of all photos in the bucket
+end
+
+get '/walls/:bucket/build/?' do
+  bucket = params[:bucket]
+  halt 404 unless AwsConnection.exist? bucket
+  haml :build_bucket, locals: {bucket: bucket}
+end
+
+get '/walls/:bucket/upload/?' do
+  bucket = params[:bucket]
+  halt 404 unless AwsConnection.exist? bucket
+  haml :upload, locals: {bucket: bucket}
+end
+
 get '/buildjson/?' do
   buckets = AwsConnection.get_buckets
   haml :build, locals: {buckets: buckets}
