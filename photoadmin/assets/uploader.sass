@@ -1,6 +1,8 @@
+@import resets
+@import constants
+
 $drop-size: 512px
 $main-size: 800px
-$big-pic-size: 415px
 $guide-width: 4px
 $control-radius: 5px
 $control-padding: 50px
@@ -13,29 +15,8 @@ $control-padding: 50px
   -moz-user-select: none
   -webkit-user-select: none
 
-
-h1, h2, h3, div, p, ul, li, dl, dt, dd, iframe
-  font-family: sans-serif
-  border: 0
-  margin: 0
-  padding: 0
-  list-style: none
-  font-size: inherit
-  font-weight: inherit
-
 img
   display: block
-
-@mixin box-sizzle
-  box-sizing: border-box
-  -moz-box-sizing: border-box
-  -webkit-box-sizing: border-box
-
-@mixin transition($t...)
-  transition: $t
-  -o-transition: $t
-  -moz-transition: $t
-  -webkit-transition: $t
 
 h1
   font-size: 150%
@@ -94,9 +75,9 @@ h3
   img
     margin-bottom: 10px
   img.tall
-    width: $big-pic-size
+    width: $large-tile-width
   img.wide
-    height: $big-pic-size
+    height: $large-tile-width
   label.disabled
     color: #aaa
     input
@@ -115,8 +96,8 @@ h3
   top: -$guide-width
   left: -$guide-width
   border: $guide-width solid rgba(255, 0, 0, 0.4)
-  width: $big-pic-size
-  height: $big-pic-size
+  width: $large-tile-width
+  height: $large-tile-width
 
 #builder
   display: none
@@ -153,24 +134,24 @@ h3
   &.up
     border-radius: 0 0 $control-radius $control-radius
     top: 0
-    left: $big-pic-size / 2 - 25px
+    left: $large-tile-width / 2 - 25px
     &:hover
       padding-bottom: $control-padding
   &.left
     border-radius: 0 $control-radius $control-radius 0
     left: 0
-    top: $big-pic-size / 2
+    top: $large-tile-width / 2
     &:hover
       padding-right: $control-padding
   &.right
     border-radius: $control-radius 0 0 $control-radius
     right: 0
-    top: $big-pic-size / 2
+    top: $large-tile-width / 2
     &:hover
       padding-left: $control-padding
   &.down
     border-radius: $control-radius $control-radius 0 0
     bottom: 0
-    left: $big-pic-size / 2 - 25px
+    left: $large-tile-width / 2 - 25px
     &:hover
       padding-top: $control-padding

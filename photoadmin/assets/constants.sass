@@ -1,0 +1,20 @@
+$border-width: 25px
+$large-tile-width: 435px
+$small-tile-width: 215px
+
+$color1: #FFBE59
+$color2: #E88751
+$color3: #FF7466
+$color4: #E855AA
+$color5: #D55EFF
+
+@mixin box-sizzle
+  box-sizing: border-box
+  -moz-box-sizing: border-box
+  -webkit-box-sizing: border-box
+
+@mixin transition($t...)
+  transition: $t
+  -o-transition: $t
+  -moz-transition: $t
+  -webkit-transition: $t
