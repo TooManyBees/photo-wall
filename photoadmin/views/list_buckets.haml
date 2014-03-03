@@ -1,0 +1,22 @@
+- content_for :css do
+  %link{ rel: 'stylesheet', type: 'text/css', href: '/walls.css' }
+
+%h1 Existing Photo Buckets
+
+%ul#bucket-list
+- buckets.each do |bucket|
+  %li.collapsed
+    = bucket[:name]
+    %a{ href: "/walls/#{bucket[:name]}/upload" } Upload Images
+    %a{ href: "/walls/#{bucket[:name]}/build" } New layout
+    %ol
+      = "#{buckets.length} saved layout#{'s' if buckets.length != 1}"
+      - if buckets.length > 0
+        %a.show-layouts{ href: '#'} (Show)
+        %a.hide-layouts{ href: '#'} (Hide)
+        - bucket[:walls].each do |wall|
+          %li
+            %a{ href: "/test?src=#{wall}" }= wall
+
+%script{ type: 'text/javascript', src: 'http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.0/jquery.js'}
+%script{ type: 'text/javascript', src: '/walls.js'}
