@@ -82,7 +82,7 @@ h3 {
   #image-list input.short {
     width: 50px; }
   #image-list li {
-    margin-bottom: 10px;
+    margin-bottom: 50px;
     position: relative; }
 
 .border {
@@ -127,7 +127,7 @@ h3 {
   opacity: 0.4;
   background-color: #aaaaaa;
   position: absolute;
-  padding: 2px; }
+  padding: 4px; }
   .controls:hover {
     opacity: 0.8;
     background-color: #dddddd; }
