@@ -107,6 +107,7 @@
   }
 
   PW.initialize = function(options) {
+    console.log('Fetching wall from '+ options.json);
     $.getJSON(options.json, function(json) {
       PW.$ss = options.$section;
       PW.tileTemplate = Handlebars.compile(options.$template.html());
@@ -115,7 +116,7 @@
       });
 
       PW.important = _pictures.large.sort(function(first, second) {
-        return first.importance < second.importance;
+        return parseInt(first.importance) < parseInt(second.importance);
       });
       PW.filler = _pictures.small;
 
