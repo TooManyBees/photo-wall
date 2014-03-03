@@ -1,7 +1,24 @@
 @import resets
+@import constants
 
-.collapsed ol
+.show-layouts
   display: none
 
-.opened ol
-  display: block
+.collapsed
+  li
+    display: none
+  .show-layouts
+    display: inline
+  .hide-layouts
+    display: none
+
+.tile-thumb
+  width: $small-tile-width
+  margin: 10px
+  img
+    max-width: $small-tile-width
+    max-height: $small-tile-width
+    display: block
+    margin: auto
+  figcaption
+    font-weight: lighter

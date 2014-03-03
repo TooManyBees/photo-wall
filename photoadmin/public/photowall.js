@@ -43,6 +43,8 @@
   }
 
   PW.renderSingleCell = function(arr) {
+    if (arr.length === 0)
+      return null;
     var el = arr.splice(0,1);
     var $cell = $('<div class="cell">');
     if (el[0] !== undefined) {
@@ -54,6 +56,8 @@
   }
 
   PW.renderDoubleCell = function(arr) {
+    if (arr.length === 0)
+      return null;
     var els = arr.splice(0,2);
     var $cell = $('<div class="cell">');
     while (els.length > 0) {

@@ -1,4 +1,4 @@
-h1, h2, h3, div, p, ul, ol, li, dl, dt, dd, iframe {
+h1, h2, h3, div, p, ul, ol, li, dl, dt, dd, iframe, figure {
   font-family: sans-serif;
   border: 0;
   margin: 0;
@@ -7,8 +7,37 @@ h1, h2, h3, div, p, ul, ol, li, dl, dt, dd, iframe {
   font-size: inherit;
   font-weight: inherit; }
 
-.collapsed ol {
+a {
+  text-decoration: none; }
+
+h1 {
+  font-size: 150%;
+  text-align: center; }
+
+h2 {
+  font-size: 125%;
+  text-align: center; }
+
+h3 {
+  text-align: center; }
+
+.show-layouts {
   display: none; }
 
-.opened ol {
-  display: block; }
+.collapsed li {
+  display: none; }
+.collapsed .show-layouts {
+  display: inline; }
+.collapsed .hide-layouts {
+  display: none; }
+
+.tile-thumb {
+  width: 215px;
+  margin: 10px; }
+  .tile-thumb img {
+    max-width: 215px;
+    max-height: 215px;
+    display: block;
+    margin: auto; }
+  .tile-thumb figcaption {
+    font-weight: lighter; }
