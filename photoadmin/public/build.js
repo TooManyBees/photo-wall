@@ -33,10 +33,12 @@ $(document).ready(function() {
         $images.empty();
         $imgLi.addClass('working');
         $selector.prop('disabled', true);
+        window.currentBucket = undefined
       },
       success: function(data) {
         populateImageList(data);
         $build.addClass('show');
+        window.currentBucket = bucket;
       },
       complete: function() {
         $imgLi.removeClass('working');
@@ -80,16 +82,30 @@ $(document).ready(function() {
 
   $button.on("click", function() {
     $(this).prop('disabled', true).text("Building...");
-    var $pre = $('<pre>').text(
-      JSON.stringify(
-        serializeImages($images),
-        null,
-        "  "
-      )
-    );
+    var serialized = serializeImages($images);
+    _.each(serialized, function(img) {
+      if (img.importance === undefined) {
+        img.dimX = img.dimX / 2;
+        img.dimY = img.dimY / 2;
+      }
+    });
+    var generatedJSON = JSON.stringify(serialized, null, "  ");
+    var $pre = $('<pre>').text(generatedJSON);
     $output.empty();
     $output.append($pre);
     $(this).prop('disabled', false).text("Build JSON!");
+
+    $.ajax({
+      url: "/api/save/"+window.currentBucket,
+      dataType: 'json',
+      type: 'POST',
+      data: {
+        json: generatedJSON
+      },
+      success: function(data) {
+        $('#saved-url').text(data.url)
+      }
+    })
   }); // end $button.on
 
   $images.on('click', '.controls', function() {
@@ -104,10 +120,10 @@ $(document).ready(function() {
     var offsetX = (offset.x || 0);
     var offsetY = (offset.y || 0);
 
-    $border.css('left', offsetX + parseInt($border.css('left')));
-    $border.css('top', offsetY + parseInt($border.css('top')));
-    $inputX.val(offsetX + parseInt($inputX.val()));
-    $inputY.val(offsetY + parseInt($inputY.val()));
+    $border.css('left', parseInt($border.css('left')) + offsetX);
+    $border.css('top', parseInt($border.css('top')) + offsetY);
+    $inputX.val(parseInt($inputX.val()) - offsetX);
+    $inputY.val(parseInt($inputY.val()) - offsetY);
   }
 
 });

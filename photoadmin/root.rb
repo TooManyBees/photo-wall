@@ -14,6 +14,20 @@ helpers do
     }
     JSON
   end
+
+  def try_s3 &blk
+    begin
+      yield blk
+    rescue Aws::S3::Errors::NoSuchBucket
+      four_oh_four bucket
+    rescue Aws::S3::Errors::AccessDenied
+      four_oh_four bucket
+    end
+  end
+end
+
+before '/api/' do
+  four_oh_four unless bucket.start_with? "pw-"
 end
 
 get '/api/bucket/?' do
@@ -22,26 +36,22 @@ end
 
 get '/api/bucket/:bucket' do
   bucket = params[:bucket]
-  four_oh_four(bucket) unless bucket.start_with? "pw-"
-  begin
-    JSON.dump(AwsConnection.get_images(bucket))
-  rescue Aws::S3::Errors::NoSuchBucket
-    four_oh_four(bucket)
-  rescue Aws::S3::Errors::AccessDenied
-    four_oh_four(bucket)
-  end
+  try_s3 { JSON.dump(AwsConnection.get_images(bucket)) }
 end
 
-get '/api/saved/?' do
-  JSON.dump(AwsConnection.get_saved_walls)
+get '/api/saved/:bucket?' do
+  bucket = params[:bucket]
+  resp = try_s3 { JSON.dump(AwsConnection.get_saved_walls(bucket)) }
+  status 201
+  resp
 end
 
-post '/api/save/?' do
-  # save json blob to s3 bucket 'photo-wall-static'
-  halt 400
+post '/api/save/:bucket/?' do
+  bucket = params[:bucket]
+  try_s3 { JSON.dump(AwsConnection.save_json(bucket, params[:json])) }
 end
 
-post '/api/upload/?' do
+post '/api/upload/:bucket/?' do
   halt 400
 end
 

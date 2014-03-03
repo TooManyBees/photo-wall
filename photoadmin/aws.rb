@@ -29,6 +29,25 @@ module AwsConnection
       .map { |i| url_for(bucket, i) }
   end
 
+  def self.get_saved_walls bucket
+    S3.list_objects(bucket: bucket).contents
+      .map(&:key)
+      .select { |key| key.end_with? '.json' }
+      .map { |i| url_for(bucket, i) }
+  end
+
+  def self.save_json bucket, json
+    key = "#{bucket}-#{Time.now.to_i}.json"
+    S3.put_object(
+      acl: 'public-read',
+      body: json,
+      bucket: bucket,
+      key: key,
+      content_type: "text/json"
+    )
+    {url: url_for(bucket, key)}
+  end
+
   def self.upload_image bucket, image
     key = File.basename(image)
     mime = MIME::Types.of(key).first.simplified
