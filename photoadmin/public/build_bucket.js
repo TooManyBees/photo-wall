@@ -6,18 +6,15 @@ $(document).ready(function() {
 
   $images.find('img').each(function() {
     var $img = $(this);
-    $img.on('load', function() {
-      var height = $img.height();
-      var width = $img.width();
-      if (height / width > 1) {
-        $img.addClass('tall')
-        $img.parent().find('input[name=dim]').val('tall');
-      } else {
-        $img.addClass('wide')
-        $img.parent().find('input[name=dim]').val('wide');
-      }
-    });
-    $img.attr('src', $(this).data('src'));
+    var height = $img.height();
+    var width = $img.width();
+    if (height / width > 1) {
+      $img.addClass('tall')
+      $img.parent().find('input[name=dim]').val('tall');
+    } else {
+      $img.addClass('wide')
+      $img.parent().find('input[name=dim]').val('wide');
+    }
   });
 
   var serializeImages = function($ul) {
