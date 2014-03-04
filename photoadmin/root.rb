@@ -22,9 +22,12 @@ end
 post '/api/buckets/?' do
   begin
     bucket = params[:bucket]
+    validate_bucket_name! bucket # Potentially throws a 422 itself
     JSON.dump(AwsConnection.create_bucket(bucket))
+  rescue Aws::S3::Errors::InvalidBucketName
+    four_twenty_two "Bucket name \"#{bucket}\" is not valid"
   rescue Aws::S3::Errors::BucketAlreadyExists
-    four_twenty_two bucket
+    four_twenty_two "Bucket #{bucket} already exists."
   end
 end
 
@@ -88,31 +91,38 @@ get '/' do
 end
 
 helpers do
-  def four_oh_four bucket
-    halt 404, {"Content-Type" => "text/json"}, <<-JSON
-{
-  "status": 404,
-  "error": "Bucket #{bucket} not found."
-}
-    JSON
+  def four_oh_four bucket=nil
+    halt 404, {"Content-Type" => "application/json"}, JSON.dump(error: "Bucket not found")
   end
 
-  def four_twenty_two bucket, message=""
-    halt 422, {'Content-Type' => 'text/json'}, <<-JSON
-{
-  "status": 422,
-  "error": "The bucket #{bucket} already exists."
-}
-    JSON
+  def four_twenty_two message
+    halt 422, {'Content-Type' => 'application/json'}, JSON.dump(error: message)
   end
 
   def try_s3 &blk
     begin
       yield blk
     rescue Aws::S3::Errors::NoSuchBucket
-      four_oh_four bucket
+      four_oh_four
     rescue Aws::S3::Errors::AccessDenied
-      four_oh_four bucket
+      four_oh_four
     end
+  end
+
+  def validate_bucket_name! bucket
+    invalid = invalid_bucket_name? bucket
+    if invalid
+      four_twenty_two invalid
+    end
+  end
+
+  def invalid_bucket_name? bucket
+    return "Bucket name can not be empty" if bucket.empty?
+    # return "Bucket name can not end in a dot" if bucket.end_with? "."
+    # return "Bucket name can not have 2 dots in a row" if bucket.include? ".."
+    bucket.each_char do |c|
+      return "Bucket name contains invalid character \"#{c}\"" unless c =~ /[a-z0-9_\-]/i
+    end
+    return false
   end
 end

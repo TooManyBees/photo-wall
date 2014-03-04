@@ -23,17 +23,15 @@ $(document).ready(function() {
       data: {
         bucket: $input.val()
       },
-      before: function(data) {
-        $status.empty();
+      beforeSend: function(data) {
+        $status.text("");
       },
       success: function(data) {
-        console.log(data);
-        console.log(data.name)
         $('#bucket-list').prepend(_liTemplate(data));
         $input.val("");
       },
       error: function(data) {
-        $status.text();
+        $status.text(data.responseJSON.error);
       }
     })
   })

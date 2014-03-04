@@ -48,3 +48,7 @@ h3 {
 
 #bucket-list ol {
   margin-left: 25px; }
+
+.main {
+  width: 800px;
+  margin: 40px auto; }

@@ -1,36 +1,37 @@
 - content_for :css do
   %link{ rel: 'stylesheet', type: 'text/css', href: '/walls.css' }
 
-%h1 Existing Photo Buckets
+%section.main
+  %h1 Existing Photo Buckets
 
-%form#new-bucket{ action: '/api/buckets/', method: 'POST' }
-  %label
-    Create new image bucket:
-    %input{ type: "text", name: "bucket"}
-    %button{ type: "submit" } Create!
-    %span#status
+  %form#new-bucket{ action: '/api/buckets/', method: 'POST' }
+    %label
+      Create new image bucket:
+      %input{ type: "text", name: "bucket"}
+      %button{ type: "submit" } Create!
+      %span.status
 
-%ul#bucket-list
-  - buckets.each do |bucket|
+  %ul#bucket-list
+    - buckets.each do |bucket|
+      %li.collapsed
+        %a{ href: "/walls/#{bucket[:name]}"}= bucket[:name]
+        %a{ href: "/walls/#{bucket[:name]}/upload" } Upload images
+        %a{ href: "/walls/#{bucket[:name]}/build" } New layout
+        %ol
+          - if bucket[:walls].length > 0
+            = "#{bucket[:walls].length} saved layout#{'s' if bucket[:walls].length != 1}"
+            %a.show-layouts{ href: '#'} (Show)
+            %a.hide-layouts{ href: '#'} (Hide)
+            - bucket[:walls].each do |wall|
+              %li
+                %a{ href: "/test?src=#{wall}" }= wall
+
+  %script#list-template{ type: 'text/template' }
     %li.collapsed
-      %a{ href: "/walls/#{bucket[:name]}"}= bucket[:name]
-      %a{ href: "/walls/#{bucket[:name]}/upload" } Upload images
-      %a{ href: "/walls/#{bucket[:name]}/build" } New layout
-      %ol
-        - if bucket[:walls].length > 0
-          = "#{bucket[:walls].length} saved layout#{'s' if bucket[:walls].length != 1}"
-          %a.show-layouts{ href: '#'} (Show)
-          %a.hide-layouts{ href: '#'} (Hide)
-          - bucket[:walls].each do |wall|
-            %li
-              %a{ href: "/test?src=#{wall}" }= wall
-
-%script#list-template{ type: 'text/template' }
-  %li.collapsed
-    %a{ href: "/walls/{{name}}" } {{name}}
-    %a{ href: "/walls/{{name}}/upload" } Upload images
-    %a{ href: "/walls/{{name}}/build" } New layout
-    %ol 0 saved layouts
+      %a{ href: "/walls/{{name}}" } {{name}}
+      %a{ href: "/walls/{{name}}/upload" } Upload images
+      %a{ href: "/walls/{{name}}/build" } New layout
+      %ol 0 saved layouts
 
 %script{ type: 'text/javascript', src: 'http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.0/jquery.js'}
 %script{ type: 'text/javascript', src: 'http://cdnjs.cloudflare.com/ajax/libs/handlebars.js/1.3.0/handlebars.min.js'}
