@@ -47,21 +47,21 @@ get '/walls/?' do
     walls = AwsConnection.get_saved_walls(bucket)
     {name: bucket, walls: walls}
   end
-  haml :list_buckets, locals: {buckets: buckets}
+  haml :buckets_list, locals: {buckets: buckets}
 end
 
 get '/walls/:bucket/?' do
   bucket = params[:bucket]
   halt 404 unless AwsConnection.exists? bucket
   photos = AwsConnection.get_images(bucket)
-  haml :show_bucket, locals: {bucket: bucket, images: photos}
+  haml :bucket_show, locals: {bucket: bucket, images: photos}
 end
 
 get '/walls/:bucket/build/?' do
   bucket = params[:bucket]
   halt 404 unless AwsConnection.exists? bucket
   images = AwsConnection.get_images(bucket)
-  haml :build_bucket, locals: {bucket: bucket, images: images}
+  haml :bucket_build, locals: {bucket: bucket, images: images}
 end
 
 get '/walls/:bucket/upload/?' do
