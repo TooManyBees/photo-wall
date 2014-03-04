@@ -36,13 +36,17 @@ h3 {
   display: none; }
 
 .tile-thumb {
+  float: left;
   width: 215px;
-  margin: 10px; }
+  height: 265px;
+  padding: 5px;
+  margin: 5px;
+  background-color: #eeeeee; }
   .tile-thumb img {
     max-width: 215px;
     max-height: 215px;
     display: block;
-    margin: auto; }
+    margin: 0 auto 5px auto; }
   .tile-thumb figcaption {
     font-weight: lighter; }
 
