@@ -1,0 +1,67 @@
+-content_for :css do
+  %link{ rel: 'stylesheet', type: 'text/css', href: '/uploader.css' }
+
+%section#main
+  %h1 Labs Photo Wall Builder
+
+  %dl#instructions
+    %dt Importance
+    %dd If 0 or blank, this image will be small. If greater |
+        than 0, this image will be large. Large images appear |
+        in descending order of importance. |
+    %dt Caption
+    %dd A caption on hover over the image. (Optional)
+    %dt URL
+    %dd The image will link to this URL. (This is not the path |
+        to the image itself.) |
+    %dt Offsets
+    %dd Click the shift controls to offset the portion of the image |
+        that will be visible in the layout. |
+
+  #image-list
+    .spinner
+    %ul
+      - images.each do |image|
+        %li
+          %img{ data: { src: image }, src: "/spinner.gif" }
+          .border
+            / Controls for shifting
+            .controls.up{ data: {y: -5} } Shift Up
+            .controls.left{ data: {x: -5} } Shift<br>Left
+            .controls.right{ data: {x: 5} } Shift<br>Right
+            .controls.down{ data: {y: 5} } Shift Down
+          %label.disabled
+            Image source:
+            %input.long{ name: "src", type: "text", value: image }(disabled)
+            %br
+          %label
+            Importance:
+            %input{ name: "importance", type: "text", placeholder: "(Numeric, optional)" }
+          %label.short.disabled
+            Offset X:
+            %input{ name: "dimX", type: "text", value: 0}(disabled)
+          %label.short.disabled
+            Offset Y:
+            %input{ name: "dimY", type: "text", value: 0}(disabled)
+            %br
+          %input{ name: "dim", type: "hidden", value: ''}
+          %label
+            Caption:
+            %input.long{ name: "caption", type: "text", placeholder: "(Optional)" }
+            %br
+          %label
+            Url:
+            %input.long{ name: "url", type: "text", placeholder: "(Clickthrough URL, optional)"}
+
+  %form#build-form{ action: "/api/save/#{bucket}", method: 'POST' }
+    %input#build-button{ type: 'submit', value: "Build and save JSON to AWS!" }
+  #build-output.off
+    %h2 Layout saved!
+    %h3
+      Click to preview:
+      %a#saved-url
+    %iframe
+
+  %script{ type: 'text/javascript', src: 'http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.0/jquery.js'}
+  %script{ type: 'text/javascript', src: 'http://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.5.2/underscore-min.js'}
+  %script{ type: "text/javascript", src: "/build_bucket.js" }

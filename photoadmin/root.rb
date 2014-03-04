@@ -60,7 +60,8 @@ end
 get '/walls/:bucket/build/?' do
   bucket = params[:bucket]
   halt 404 unless AwsConnection.exists? bucket
-  haml :build_bucket, locals: {bucket: bucket}
+  images = AwsConnection.get_images(bucket)
+  haml :build_bucket, locals: {bucket: bucket, images: images}
 end
 
 get '/walls/:bucket/upload/?' do
