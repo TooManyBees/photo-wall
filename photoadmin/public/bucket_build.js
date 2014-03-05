@@ -8,12 +8,16 @@ $(document).ready(function() {
     var $img = $(this);
     var height = $img.height();
     var width = $img.width();
-    if (height / width > 1) {
-      $img.addClass('tall')
+    if (height / width === 1) {
+      $img.addClass('tall');
+      $img.parent().find('.controls').hide();
+      $img.parent().find('input[name=dim]').val('tall');
+    } else if (height / width > 1) {
+      $img.addClass('tall');
       $img.parent().find('.horizontal').hide();
       $img.parent().find('input[name=dim]').val('tall');
     } else {
-      $img.addClass('wide')
+      $img.addClass('wide');
       $img.parent().find('.vertical').hide();
       $img.parent().find('input[name=dim]').val('wide');
     }

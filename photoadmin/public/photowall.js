@@ -107,8 +107,10 @@
 
   PW.populateGrid = function() {
     while (fillerRatio() > 4) placeOnlyLargePhotos();
-    while (PW.important.length > 0) placeMixOfPhotos();
-    while (PW.filler.length > 0) placeOnlySmallPhotos();
+    if (PW.important)
+      while (PW.important.length > 0) placeMixOfPhotos();
+    if (PW.filler)
+      while (PW.filler.length > 0) placeOnlySmallPhotos();
   }
 
   PW.initialize = function(options) {
