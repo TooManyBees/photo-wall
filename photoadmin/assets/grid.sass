@@ -1,95 +1,91 @@
+@import gridresets
 @import constants
 
 $border-transition: 0.3s ease-in-out
-
-.clf:after
-  content: ""
-  display: table
-  clear: both
-
-#photowall-container
-  padding: 0
-  margin: 0
-  border: 0
-
-.tile
-  padding: 0
-  margin: 0
-  border: 0
-  figcaption
-    padding: 0
-    margin: 0
-    border: 0
-  img
-    padding: 0
-    margin: 0
-    border: 0
-    display: block
 
 #photowall-container
   @include box-sizzle
   width: 900px
   padding: 5px
-
-.frame
-  @include box-sizzle
-  border: 0 solid black
-  width: inherit
-  height: inherit
-  position: absolute
-  top: 0
-  left: 0
-  opacity: 0
-  @include transition(opacity $border-transition, border-width $border-transition)
-
-.c1
-  border-color: $color1
-.c2
-  border-color: $color2
-.c3
-  border-color: $color3
-.c4
-  border-color: $color4
-.c5
-  border-color: $color5
-
-.cell
-  @include box-sizzle
-  float: left
-  margin-right: 5px
-  margin-bottom: 5px
-
-.tile
-  position: relative
-  clear: both
-  width: $small-tile-width
-  height: $small-tile-width
-  margin-bottom: 5px
-  overflow: hidden
-  &.big
-    width: $large-tile-width
-    height: $large-tile-width
-  &:last-child
+  margin: 0
+  border: 0
+  .clf:after
+    content: ""
+    display: table
+    clear: both
+  .tile
+    padding: 0
     margin: 0
-  img
-    position: relative
-    &.tall
-      width: 100%
-    &.wide
-      height: 100%
-  figcaption
-    display: none
+    border: 0
+    figcaption
+      padding: 0
+      margin: 0
+      border: 0
+    img
+      padding: 0
+      margin: 0
+      border: 0
+      display: block
+
+  .frame
+    @include box-sizzle
+    border: 0 solid black
+    width: inherit
+    height: inherit
     position: absolute
-    bottom: 0
+    top: 0
     left: 0
-    color: white
-    font-size: 24px
-    text-align: center
-    width: 100%
-  &:hover figcaption
-    display: block
-  &:hover .frame
-    opacity: 1
-    border-width: $border-width
-    &.half
-      opacity: 0.5
+    opacity: 0
+    @include transition(opacity $border-transition, border-width $border-transition)
+
+  .c1
+    border-color: $color1
+  .c2
+    border-color: $color2
+  .c3
+    border-color: $color3
+  .c4
+    border-color: $color4
+  .c5
+    border-color: $color5
+
+  .cell
+    @include box-sizzle
+    float: left
+    margin-right: 5px
+    margin-bottom: 5px
+
+  .tile
+    position: relative
+    clear: both
+    width: $small-tile-width
+    height: $small-tile-width
+    margin-bottom: 5px
+    overflow: hidden
+    &.big
+      width: $large-tile-width
+      height: $large-tile-width
+    &:last-child
+      margin: 0
+    img
+      position: relative
+      &.tall
+        width: 100%
+      &.wide
+        height: 100%
+    figcaption
+      display: none
+      position: absolute
+      bottom: 0
+      left: 0
+      color: white
+      font-size: 24px
+      text-align: center
+      width: 100%
+    &:hover figcaption
+      display: block
+    &:hover .frame
+      opacity: 1
+      border-width: $border-width
+      &.half
+        opacity: 0.5
