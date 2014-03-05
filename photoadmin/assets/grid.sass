@@ -15,6 +15,19 @@ $border-transition: 0.3s ease-in-out
   -moz-transform-origin: $o
   -webkit-transform-origin: $o
 
+#lightbox-image
+  p
+    @include box-sizzle
+    width: 100%
+    font-size: 20px
+    color: #eee
+    padding: 5px
+    position: absolute
+    bottom: 5px
+    text-align: center
+  small
+    font-size: 80%
+
 #photowall-container
   @include box-sizzle
   width: 900px
@@ -53,7 +66,6 @@ $border-transition: 0.3s ease-in-out
       margin: 0
       border: 0
       display: block
-
   .frame
     @include box-sizzle
     border: 0 solid black
@@ -125,5 +137,3 @@ $border-transition: 0.3s ease-in-out
       .frame
         opacity: 1
         border-width: $border-width
-        &.half
-          border-width: $border-width / 2

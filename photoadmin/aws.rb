@@ -15,7 +15,7 @@ module AwsConnection
     png x-png
     tif tiff
   ]
-  BUCKET_PREFIX = 'pw-'
+  BUCKET_PREFIX = 'hplabs-pw-'
 
   def self.exists? bucket
     S3.head_bucket(bucket: prefixed(bucket))

@@ -12,6 +12,19 @@
     %figcaption {{ caption }}
     {{/if}}
 
+%script{ type: 'text/template', id: 'photowall-template-lightbox' }<
+  #photowall-lightbox
+    #lightbox-film
+    #lightbox-image
+      %image{ src: '{{src}}' }
+      %p
+        {{#if url}}
+        %a{ href: "{{url}}" } {{caption}}
+        {{else}}
+        {{caption}}
+        {{/if}}
+        %small - {{credit}}
+
 %section{ id: 'photowall-container', class: 'clf' }
 
 %script{ type: 'text/javascript', src: 'http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.0/jquery.js'}
@@ -23,6 +36,7 @@
     LabsPhotoWall.initialize({
       $section: $('#photowall-container'),
       $template: $('#photowall-template-tile'),
+      $lightbox: $('#photowall-template-lightbox'),
       json: "#{remote_json}"
     })
   });

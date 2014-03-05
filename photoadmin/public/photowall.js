@@ -108,14 +108,21 @@
   var setupLightboxHandlers = function($ss) {
     $ss.on('click', 'a', function(event) {
       event.preventDefault();
-      $imgSrc = $(event.target).siblings('img').attr('src');
+      var $a = $(event.target);
+      var $imgSrc = $(event.target).siblings('img').attr('src');
       console.log($imgSrc)
-      var $lightBoxContainer = $('<div id="photowall-lightbox">');
-      $lightBoxContainer.append('<div id="lightbox-film">');
-      $lightBoxImage = $('<div id="lightbox-image"><img src="'+$imgSrc+'">')
-      $lightBoxContainer.append($lightBoxImage);
+      // var $lightBoxContainer = $('<div id="photowall-lightbox">');
+      // $lightBoxContainer.append('<div id="lightbox-film">');
+      // $lightBoxImage = $('<div id="lightbox-image"><img src="'+$imgSrc+'">')
+      // $lightBoxContainer.append($lightBoxImage);
+      var $lightBoxContainer = $(PW.lightboxTemplate({
+        src: $imgSrc,
+        url: $a.data('url'),
+        caption: $a.data('caption'),
+        credit: $a.data('credit')
+      }));
       $ss.append($lightBoxContainer);
-      adjustLightBoxCoords($lightBoxImage);
+      adjustLightBoxCoords($lightBoxContainer.find('#lightbox-image'));
     });
     $ss.on('click', '#lightbox-film', function() {
       $('#photowall-lightbox').remove();
@@ -148,6 +155,7 @@
     $.getJSON(options.json, function(json) {
       PW.$ss = options.$section;
       PW.tileTemplate = Handlebars.compile(options.$template.html());
+      PW.lightboxTemplate = Handlebars.compile(options.$lightbox.html());
       var _pictures = _.groupBy(json, function(el) {
         return (el.large === true) ? 'large' : 'small';
       });

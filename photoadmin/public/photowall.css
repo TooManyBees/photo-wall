@@ -10,7 +10,22 @@
     font-size: inherit;
     font-weight: inherit; }
   #photowall-container a {
-    text-decoration: none; }
+    text-decoration: none;
+    color: inherit; }
+
+#lightbox-image p {
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  width: 100%;
+  font-size: 20px;
+  color: #eeeeee;
+  padding: 5px;
+  position: absolute;
+  bottom: 5px;
+  text-align: center; }
+#lightbox-image small {
+  font-size: 80%; }
 
 #photowall-container {
   box-sizing: border-box;
@@ -138,5 +153,3 @@
     #photowall-container .tile:hover .frame {
       opacity: 1;
       border-width: 25px; }
-      #photowall-container .tile:hover .frame.half {
-        border-width: 12.5px; }
