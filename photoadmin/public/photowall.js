@@ -110,11 +110,6 @@
       event.preventDefault();
       var $a = $(event.target);
       var $imgSrc = $(event.target).siblings('img').attr('src');
-      console.log($imgSrc)
-      // var $lightBoxContainer = $('<div id="photowall-lightbox">');
-      // $lightBoxContainer.append('<div id="lightbox-film">');
-      // $lightBoxImage = $('<div id="lightbox-image"><img src="'+$imgSrc+'">')
-      // $lightBoxContainer.append($lightBoxImage);
       var $lightBoxContainer = $(PW.lightboxTemplate({
         src: $imgSrc,
         url: $a.data('url'),
