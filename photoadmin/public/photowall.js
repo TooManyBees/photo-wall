@@ -106,7 +106,7 @@
   }
 
   var setupLightboxHandlers = function($ss) {
-    $ss.on('click', 'a', function(event) {
+    $ss.on('click', 'a.frame', function(event) {
       event.preventDefault();
       var $a = $(event.target);
       var $imgSrc = $(event.target).siblings('img').attr('src');

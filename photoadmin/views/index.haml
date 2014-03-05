@@ -16,13 +16,14 @@
   #photowall-lightbox
     #lightbox-film
     #lightbox-image
+      {{#if url}}
+      %a{ href: "{{url}}" }
+        %image{ src: '{{src}}' }
+      {{else}}
       %image{ src: '{{src}}' }
+      {{/if}}
       %p
-        {{#if url}}
-        %a{ href: "{{url}}" } {{caption}}
-        {{else}}
         {{caption}}
-        {{/if}}
         %small - {{credit}}
 
 %section{ id: 'photowall-container', class: 'clf' }
