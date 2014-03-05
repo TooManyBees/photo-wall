@@ -11,7 +11,7 @@ end
 
 get '/api/buckets/:bucket' do
   bucket = params[:bucket]
-  try_s3 { JSON.dump(AwsConnection.get_images(bucket)) }
+  try_s3 { JSON.dump(AwsConnection.get_all_images(bucket)) }
 end
 
 get '/api/buckets/:bucket/saved' do
@@ -53,14 +53,14 @@ end
 get '/walls/:bucket/?' do
   bucket = params[:bucket]
   halt 404 unless AwsConnection.exists? bucket
-  photos = AwsConnection.get_images(bucket)
+  photos = AwsConnection.get_all_images(bucket)
   haml :bucket_show, locals: {bucket: bucket, images: photos}
 end
 
 get '/walls/:bucket/build/?' do
   bucket = params[:bucket]
   halt 404 unless AwsConnection.exists? bucket
-  images = AwsConnection.get_images(bucket)
+  images = AwsConnection.get_all_images(bucket)
   haml :bucket_build, locals: {bucket: bucket, images: images}
 end
 

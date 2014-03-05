@@ -55,6 +55,10 @@ module AwsConnection
     {name: location}
   end
 
+  def self.get_all_images bucket
+    get_images(bucket) + get_external_images(bucket)
+  end
+
   def self.get_images bucket
     bucket = prefixed(bucket)
     S3.list_objects(bucket: bucket).contents
@@ -63,11 +67,22 @@ module AwsConnection
       .map { |i| url_for(bucket, i) }
   end
 
+  def self.get_external_images bucket
+    bucket = prefixed(bucket)
+    string_io = S3.get_object(bucket: bucket, key: "external_images.json").body
+    string_io.rewind
+    JSON.parse(string_io.read)
+  rescue Aws::S3::Errors::NoSuchKey
+    []
+  rescue Aws::S3::Errors::NoSuckBucket
+    [] # TODO: pick a good erorr message for this
+  end
+
   def self.get_saved_walls bucket
     bucket = prefixed(bucket)
     S3.list_objects(bucket: bucket).contents
       .map(&:key)
-      .select { |key| key.end_with? '.json' }
+      .select { |key| key.end_with? '.json' && key != 'external_images.json' }
       .map { |i| url_for(bucket, i) }
   end
 
