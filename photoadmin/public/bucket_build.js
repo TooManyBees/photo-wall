@@ -26,10 +26,14 @@ $(document).ready(function() {
       var $inputs = $(this).find('input');
       var obj = {};
       $inputs.each(function() {
-        if ($(this).val() !== "")
-        obj[$(this).prop('name')] = $(this).val();
+        var $input = $(this);
+        if ($input.val() !== "")
+          obj[$input.prop('name')] = $input.val();
+        else if ($input.prop('checked') === true)
+          obj[$input.prop('name')] = true;
       });
-      serialized.push(obj);
+      if (obj['skip'] !== true)
+        serialized.push(obj);
     });
     return serialized;
   }
@@ -38,7 +42,7 @@ $(document).ready(function() {
     event.preventDefault();
     var serialized = serializeImages($images);
     _.each(serialized, function(img) {
-      if (img.importance === undefined) {
+      if (img.large !== true) {
         img.dimX = img.dimX / 2;
         img.dimY = img.dimY / 2;
       }

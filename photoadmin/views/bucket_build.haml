@@ -14,9 +14,8 @@
     %dt URL
     %dd The image will link to this URL. (This is not the path |
         to the image itself.) |
-    %dt Offsets
-    %dd Click the shift controls to offset the portion of the image |
-        that will be visible in the layout. |
+    %dt Shift
+    %dd The interior of the red frame will be visible as a square tile.
 
   #image-list
     .spinner
@@ -37,13 +36,19 @@
           %label
             Importance:
             %input{ name: "importance", type: "text", placeholder: "(Numeric, optional)" }
-          %label.short.disabled
-            Offset X:
-            %input{ name: "dimX", type: "text", value: 0}(disabled)
-          %label.short.disabled
-            Offset Y:
-            %input{ name: "dimY", type: "text", value: 0}(disabled)
-            %br
+          %label
+            Display large
+            %input{ type: "checkbox", name: "large", value: true}
+          %label
+            Skip this image
+            %input{ type: "checkbox", name: "skip", value: true}
+          / %label.short.disabled
+          /   Offset X:
+          %input{ name: "dimX", hidden: "text", value: 0}
+          / %label.short.disabled
+          /   Offset Y:
+          %input{ name: "dimY", hidden: "text", value: 0}
+          %br
           %input{ name: "dim", type: "hidden", value: ''}
           %label
             Caption:

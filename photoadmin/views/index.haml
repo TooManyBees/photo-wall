@@ -2,7 +2,7 @@
   %link{ rel: 'stylesheet', type: 'text/css', href: '/photowall.css' }
 
 %script{ type: 'text/template', id: 'photowall-template-tile' }<
-  %figure{ class: "tile {{#if importance}}big{{/if}}"}<
+  %figure{ class: "tile {{#if large}}big{{/if}}"}<
     %img{ class: '{{ dim }}', src: '{{ src }}', style: 'left:{{dimX}}px;top:{{dimY}}px'}
     {{#if url}}
     %a{ href: '{{url}}', class: 'frame {{color}}'}

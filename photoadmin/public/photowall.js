@@ -117,7 +117,7 @@
       PW.$ss = options.$section;
       PW.tileTemplate = Handlebars.compile(options.$template.html());
       var _pictures = _.groupBy(json, function(el) {
-        return (el.importance > 0) ? 'large' : 'small';
+        return (el.large === true) ? 'large' : 'small';
       });
       _pictures.large || (_pictures.large = [])
       PW.important = _pictures.large.sort(function(first, second) {
