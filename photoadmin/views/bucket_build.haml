@@ -6,9 +6,11 @@
 
   %dl#instructions
     %dt Importance
-    %dd If 0 or blank, this image will be small. If greater |
-        than 0, this image will be large. Large images appear |
-        in descending order of importance. |
+    %dd Images get sorted in descending order of importance.
+    %dt Display large
+    %dd If checked, the image will take up the size of 4 small tiles.
+    %dt Skip this image
+    %dd If checked, the image will not be a part of the wall.
     %dt Caption
     %dd A caption on hover over the image. (Optional)
     %dt URL
@@ -50,6 +52,10 @@
           %input{ name: "dimY", hidden: "text", value: 0}
           %br
           %input{ name: "dim", type: "hidden", value: ''}
+          %label
+            Image credit:
+            %input.long{ name: "credit", type: "text", placeholder: "(Optional)"}
+            %br
           %label
             Caption:
             %input.long{ name: "caption", type: "text", placeholder: "(Optional)" }

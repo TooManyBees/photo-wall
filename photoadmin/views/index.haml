@@ -7,7 +7,10 @@
     {{#if url}}
     %a{ href: '{{url}}', class: 'frame {{color}}'}
     {{else}}
-    .frame{ class: 'half {{color}}'}
+    .frame{ class: '{{color}}'}
+    {{/if}}
+    {{#if credit}}
+    %small {{ credit }}
     {{/if}}
     {{#if caption}}
     %figcaption {{ caption }}

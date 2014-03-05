@@ -3,6 +3,18 @@
 
 $border-transition: 0.3s ease-in-out
 
+@mixin transform($t, $o)
+  transform: $t
+  -o-transform: $t
+  -ms-transform: $t
+  -moz-transform: $t
+  -webkit-transform: $t
+  transform-origin: $o
+  -o-transform-origin: $o
+  -ms-transform-origin: $o
+  -moz-transform-origin: $o
+  -webkit-transform-origin: $o
+
 #photowall-container
   @include box-sizzle
   width: 900px
@@ -73,8 +85,18 @@ $border-transition: 0.3s ease-in-out
         width: 100%
       &.wide
         height: 100%
+    figcaption, small
+      @include transition(opacity $border-transition)
+    small
+      opacity: 0
+      font-size: 90%
+      position: absolute
+      right: 5px
+      bottom: 10px
+      color: white
+      @include transform(rotate(90deg), 100% 0%)
     figcaption
-      display: none
+      opacity: 0
       position: absolute
       bottom: 0
       left: 0
@@ -82,10 +104,11 @@ $border-transition: 0.3s ease-in-out
       font-size: 24px
       text-align: center
       width: 100%
-    &:hover figcaption
-      display: block
-    &:hover .frame
-      opacity: 1
-      border-width: $border-width
-      &.half
-        opacity: 0.5
+    &:hover
+      figcaption, small
+        opacity: 1
+      .frame
+        opacity: 1
+        border-width: $border-width
+        &.half
+          border-width: $border-width / 2
