@@ -4,11 +4,7 @@
 %script{ type: 'text/template', id: 'photowall-template-tile' }<
   %figure{ class: "tile {{#if large}}big{{/if}}"}<
     %img{ class: '{{ dim }}', src: '{{ src }}', style: 'left:{{dimX}}px;top:{{dimY}}px'}
-    {{#if url}}
-    %a{ href: '{{url}}', class: 'frame {{color}}'}
-    {{else}}
-    .frame{ class: '{{color}}'}
-    {{/if}}
+    %a{ href: '#', class: 'frame {{color}}', data: {url: '{{url}}', caption: '{{caption}}', credit: '{{credit}}'} }
     {{#if credit}}
     %small {{ credit }}
     {{/if}}

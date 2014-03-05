@@ -21,7 +21,22 @@ $border-transition: 0.3s ease-in-out
   padding: 5px
   margin: 0
   border: 0
-  .clf:after
+  #photowall-lightbox
+    position: fixed
+    top: 0
+    left: 0
+    width: 100%
+    height: 100%
+  #lightbox-film
+    background-color: black
+    opacity: 0.6
+    width: 100%
+    height: 100%
+  #lightbox-image
+    position: fixed
+    top: 0
+    left: 0
+  &:after, .clf:after
     content: ""
     display: table
     clear: both

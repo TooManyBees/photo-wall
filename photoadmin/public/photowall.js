@@ -105,6 +105,36 @@
     }
   }
 
+  var setupLightboxHandlers = function($ss) {
+    $ss.on('click', 'a', function(event) {
+      event.preventDefault();
+      $imgSrc = $(event.target).siblings('img').attr('src');
+      console.log($imgSrc)
+      var $lightBoxContainer = $('<div id="photowall-lightbox">');
+      $lightBoxContainer.append('<div id="lightbox-film">');
+      $lightBoxImage = $('<div id="lightbox-image"><img src="'+$imgSrc+'">')
+      $lightBoxContainer.append($lightBoxImage);
+      $ss.append($lightBoxContainer);
+      adjustLightBoxCoords($lightBoxImage);
+    });
+    $ss.on('click', '#lightbox-film', function() {
+      $('#photowall-lightbox').remove();
+    });
+  }
+
+  var adjustLightBoxCoords = function($div) {
+    var margin = 40;
+
+    var wWidth = $(window).width();
+    var wHeight = $(window).height();
+    $div.find('img').css('max-height', wHeight - margin * 2);
+    $div.find('img').css('max-width', wWidth - margin * 2);
+    var iWidth = $div.find('img').width();
+    var iHeight = $div.find('img').height();
+    $div.css('left', (wWidth - iWidth) / 2);
+    $div.css('top', (wHeight - iHeight) / 2);
+  }
+
   PW.populateGrid = function() {
     while (fillerRatio() > 4) placeOnlyLargePhotos();
     if (PW.important)
@@ -126,6 +156,8 @@
         return parseInt(first.importance) < parseInt(second.importance);
       });
       PW.filler = _pictures.small;
+
+      setupLightboxHandlers(PW.$ss);
 
       PW.populateGrid();
     });

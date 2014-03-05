@@ -20,7 +20,22 @@
   padding: 5px;
   margin: 0;
   border: 0; }
-  #photowall-container .clf:after {
+  #photowall-container #photowall-lightbox {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%; }
+  #photowall-container #lightbox-film {
+    background-color: black;
+    opacity: 0.6;
+    width: 100%;
+    height: 100%; }
+  #photowall-container #lightbox-image {
+    position: fixed;
+    top: 0;
+    left: 0; }
+  #photowall-container:after, #photowall-container .clf:after {
     content: "";
     display: table;
     clear: both; }
