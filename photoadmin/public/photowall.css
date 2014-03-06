@@ -36,6 +36,13 @@
   padding: 5px;
   margin: 0;
   border: 0; }
+  #photowall-container .spinner {
+    height: 128px;
+    width: 128px;
+    background-image: url("/spinner.gif");
+    margin: 50px auto; }
+  #photowall-container.ready .spinner {
+    display: none; }
   #photowall-container #photowall-lightbox {
     position: fixed;
     top: 0;

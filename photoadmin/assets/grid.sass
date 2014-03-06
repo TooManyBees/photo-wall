@@ -35,6 +35,14 @@ $border-transition: 0.3s ease-in-out
   padding: 5px
   margin: 0
   border: 0
+  .spinner
+    height: 128px
+    width: 128px
+    background-image: url("/spinner.gif")
+    margin: 50px auto
+  &.ready
+    .spinner
+      display: none
   #photowall-lightbox
     position: fixed
     top: 0

@@ -108,7 +108,6 @@
   var setupLightboxHandlers = function($ss) {
     $ss.on('click', '.tile>a', function(event) {
       event.preventDefault();
-      console.log(event.currentTarget)
       var $a = $(event.currentTarget);
       var $imgSrc = $(event.currentTarget).siblings('img').attr('src');
       var $lightBoxContainer = $(PW.lightboxTemplate({
@@ -139,6 +138,7 @@
   }
 
   PW.populateGrid = function() {
+    PW.$ss.addClass('ready');
     if (PW.filler && PW.important)
       while (PW.important.length > 0 && PW.filler.length >= 4) placeMixOfPhotos();
     if (PW.important)
@@ -158,6 +158,8 @@
           el.snippet = el.caption.split(' ').slice(0, 11).join(" ") + "..."
         else if (el.caption)
           el.snippet = el.caption
+        if (el.url && el.url.split('').slice(0,8).join('') !== "http://" && el.url.split('').slice(0,9).join('') !== "https://")
+          el.url = "http://"+el.url
       });
       var _pictures = _.groupBy(json, function(el) {
         return (el.large === true) ? 'large' : 'small';
