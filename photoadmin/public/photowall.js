@@ -106,10 +106,11 @@
   }
 
   var setupLightboxHandlers = function($ss) {
-    $ss.on('click', 'a.frame', function(event) {
+    $ss.on('click', '.tile>a', function(event) {
       event.preventDefault();
-      var $a = $(event.target);
-      var $imgSrc = $(event.target).siblings('img').attr('src');
+      console.log(event.currentTarget)
+      var $a = $(event.currentTarget);
+      var $imgSrc = $(event.currentTarget).siblings('img').attr('src');
       var $lightBoxContainer = $(PW.lightboxTemplate({
         src: $imgSrc,
         url: $a.data('url'),
@@ -138,9 +139,10 @@
   }
 
   PW.populateGrid = function() {
-    while (fillerRatio() > 4) placeOnlyLargePhotos();
+    if (PW.filler && PW.important)
+      while (PW.important.length > 0 && PW.filler.length >= 4) placeMixOfPhotos();
     if (PW.important)
-      while (PW.important.length > 0) placeMixOfPhotos();
+      while (PW.important.length > 0) placeOnlyLargePhotos();
     if (PW.filler)
       while (PW.filler.length > 0) placeOnlySmallPhotos();
   }
@@ -151,6 +153,12 @@
       PW.$ss = options.$section;
       PW.tileTemplate = Handlebars.compile(options.$template.html());
       PW.lightboxTemplate = Handlebars.compile(options.$lightbox.html());
+      _.each(json, function(el) {
+        if (el.caption && el.caption.split(' ').length > 10)
+          el.snippet = el.caption.split(' ').slice(0, 11).join(" ") + "..."
+        else if (el.caption)
+          el.snippet = el.caption
+      });
       var _pictures = _.groupBy(json, function(el) {
         return (el.large === true) ? 'large' : 'small';
       });

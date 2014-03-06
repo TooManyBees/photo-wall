@@ -17,12 +17,13 @@
   box-sizing: border-box;
   -moz-box-sizing: border-box;
   -webkit-box-sizing: border-box;
+  background-color: rgba(0, 0, 0, 0.4);
   width: 100%;
   font-size: 20px;
   color: #eeeeee;
   padding: 5px;
   position: absolute;
-  bottom: 5px;
+  bottom: 0;
   text-align: center; }
 #lightbox-image small {
   font-size: 80%; }
@@ -82,6 +83,12 @@
     -o-transition: opacity 0.3s ease-in-out, border-width 0.3s ease-in-out;
     -moz-transition: opacity 0.3s ease-in-out, border-width 0.3s ease-in-out;
     -webkit-transition: opacity 0.3s ease-in-out, border-width 0.3s ease-in-out; }
+  #photowall-container a {
+    width: inherit;
+    height: inherit;
+    position: absolute;
+    top: 0;
+    left: 0; }
   #photowall-container .c1 {
     border-color: #ffbe59; }
   #photowall-container .c2 {
@@ -140,14 +147,19 @@
       -moz-transform-origin: 100% 0%;
       -webkit-transform-origin: 100% 0%; }
     #photowall-container .tile figcaption {
+      box-sizing: border-box;
+      -moz-box-sizing: border-box;
+      -webkit-box-sizing: border-box;
+      padding: 5px 25px;
       opacity: 0;
       position: absolute;
       bottom: 0;
       left: 0;
       color: white;
-      font-size: 24px;
+      font-size: 14px;
       text-align: center;
-      width: 100%; }
+      width: 100%;
+      background-color: rgba(0, 0, 0, 0.4); }
     #photowall-container .tile:hover figcaption, #photowall-container .tile:hover small {
       opacity: 1; }
     #photowall-container .tile:hover .frame {

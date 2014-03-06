@@ -18,12 +18,13 @@ $border-transition: 0.3s ease-in-out
 #lightbox-image
   p
     @include box-sizzle
+    background-color: rgba(0,0,0,0.4)
     width: 100%
     font-size: 20px
     color: #eee
     padding: 5px
     position: absolute
-    bottom: 5px
+    bottom: 0
     text-align: center
   small
     font-size: 80%
@@ -76,6 +77,12 @@ $border-transition: 0.3s ease-in-out
     left: 0
     opacity: 0
     @include transition(opacity $border-transition, border-width $border-transition)
+  a
+    width: inherit
+    height: inherit
+    position: absolute
+    top: 0
+    left: 0
 
   .c1
     border-color: $color1
@@ -123,14 +130,17 @@ $border-transition: 0.3s ease-in-out
       color: white
       @include transform(rotate(90deg), 100% 0%)
     figcaption
+      @include box-sizzle
+      padding: 5px $border-width
       opacity: 0
       position: absolute
       bottom: 0
       left: 0
       color: white
-      font-size: 24px
+      font-size: 14px
       text-align: center
       width: 100%
+      background-color: rgba(0,0,0,0.4)
     &:hover
       figcaption, small
         opacity: 1

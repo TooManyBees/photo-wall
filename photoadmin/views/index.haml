@@ -4,13 +4,14 @@
 %script{ type: 'text/template', id: 'photowall-template-tile' }<
   %figure{ class: "tile {{#if large}}big{{/if}}"}<
     %img{ class: '{{ dim }}', src: '{{ src }}', style: 'left:{{dimX}}px;top:{{dimY}}px'}
-    %a{ href: '#', class: 'frame {{color}}', data: {url: '{{url}}', caption: '{{caption}}', credit: '{{credit}}'} }
-    {{#if credit}}
-    %small {{ credit }}
-    {{/if}}
-    {{#if caption}}
-    %figcaption {{ caption }}
-    {{/if}}
+    .frame{ class: '{{color}}' }
+    %a{ href: '#', data: {url: '{{url}}', caption: '{{caption}}', credit: '{{credit}}'} }
+      {{#if caption}}
+      %figcaption {{ snippet }}
+      {{/if}}
+      {{#if credit}}
+      %small {{ credit }}
+      {{/if}}
 
 %script{ type: 'text/template', id: 'photowall-template-lightbox' }<
   #photowall-lightbox
