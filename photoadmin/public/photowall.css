@@ -12,6 +12,9 @@
   #photowall-container a {
     text-decoration: none;
     color: inherit; }
+  #photowall-container img {
+    max-width: inherit;
+    max-height: inherit; }
 
 #lightbox-image p {
   box-sizing: border-box;
@@ -44,6 +47,7 @@
   #photowall-container.ready .spinner {
     display: none; }
   #photowall-container #photowall-lightbox {
+    z-index: 10001;
     position: fixed;
     top: 0;
     left: 0;
