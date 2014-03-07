@@ -44,6 +44,7 @@ $border-transition: 0.3s ease-in-out
     .spinner
       display: none
   #photowall-lightbox
+    z-index: 10001
     position: fixed
     top: 0
     left: 0
@@ -67,6 +68,7 @@ $border-transition: 0.3s ease-in-out
     margin: 0
     border: 0
     figcaption
+      display: block
       padding: 0
       margin: 0
       border: 0
@@ -131,9 +133,9 @@ $border-transition: 0.3s ease-in-out
       @include transition(opacity $border-transition)
     small
       opacity: 0
-      font-size: 90%
+      font-size: 80%
       position: absolute
-      right: 5px
+      right: 0
       bottom: 10px
       color: white
       @include transform(rotate(90deg), 100% 0%)
