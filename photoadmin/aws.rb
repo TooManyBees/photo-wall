@@ -80,11 +80,10 @@ module AwsConnection
 
   def self.get_saved_walls bucket
     bucket = prefixed(bucket)
-    p "getting #{bucket}"
     S3.list_objects(bucket: bucket).contents
       .map(&:key)
       .select { |key| key.end_with?('.json') && key != 'external_images.json' }
-      .map { |i| url_for(bucket, i) }
+      .map { |i| {name: i, url: url_for(bucket, i)} }
   end
 
   def self.save_json bucket, json

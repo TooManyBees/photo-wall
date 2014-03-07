@@ -1,4 +1,4 @@
-(function(root) {
+(function(root, $) {
 
   var PW = root.LabsPhotoWall = (root.LabsPhotoWall || {});
 
@@ -112,10 +112,12 @@
       var $imgSrc = $(event.currentTarget).siblings('img').attr('src');
       var $lightBoxContainer = $(PW.lightboxTemplate({
         src: $imgSrc,
+        lightboxSrc: ($a.data('lightboxSrc') || $imgSrc),
         url: $a.data('url'),
         caption: $a.data('caption'),
         credit: $a.data('credit')
       }));
+      console.log($a.data())
       $ss.append($lightBoxContainer);
       adjustLightBoxCoords($lightBoxContainer.find('#lightbox-image'));
     });
@@ -158,8 +160,6 @@
           el.snippet = el.caption.split(' ').slice(0, 11).join(" ") + "..."
         else if (el.caption)
           el.snippet = el.caption
-        if (el.url && el.url.split('').slice(0,8).join('') !== "http://" && el.url.split('').slice(0,9).join('') !== "https://")
-          el.url = "http://"+el.url
       });
       var _pictures = _.groupBy(json, function(el) {
         return (el.large === true) ? 'large' : 'small';
@@ -176,4 +176,4 @@
     });
   }
 
-}(this));
+}(this, jQuery));

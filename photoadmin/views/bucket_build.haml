@@ -32,8 +32,12 @@
             .controls.horizontal.right{ data: {x: 5} } Shift<br>Right
             .controls.vertical.down{ data: {y: 5} } Shift Down
           %label.disabled
-            Image source:
+            Tile image source:
             %input.long{ name: "src", type: "text", value: image }(disabled)
+            %br
+          %label
+            Lightbox image source:
+            %inpug.long{ name: "lightbox_src", type: "text", placeholder: "(If blank, the lightbox will show the tile image.)"}
             %br
           %label
             Importance:

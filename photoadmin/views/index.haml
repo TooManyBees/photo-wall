@@ -5,7 +5,7 @@
   %figure{ class: "tile {{#if large}}big{{/if}}"}<
     %img{ class: '{{ dim }}', src: '{{ src }}', style: 'left:{{dimX}}px;top:{{dimY}}px'}
     .frame{ class: '{{color}}' }
-    %a{ href: '#', data: {url: '{{url}}', caption: '{{caption}}', credit: '{{credit}}'} }
+    %a{ href: '#', data: {url: '{{url}}', caption: '{{caption}}', credit: '{{credit}}', lightbox_src: '{{lightboxSrc}}'} }
       {{#if caption}}
       %figcaption {{ snippet }}
       {{/if}}
@@ -18,14 +18,12 @@
     #lightbox-film
     #lightbox-image
       {{#if url}}
-      %a{ href: "{{url}}" }
-        %image{ src: '{{src}}' }
-      {{else}}
-      %image{ src: '{{src}}' }
+      %a.clickthrough{ href: "{{url}}" }
       {{/if}}
+      %image{ src: '{{lightboxSrc}}' }
       %p
         {{caption}}
-        %small - {{credit}}
+        %small {{credit}}
 
 %section{ id: 'photowall-container', class: 'clf' }
   .spinner

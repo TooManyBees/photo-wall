@@ -1,22 +1,17 @@
 [
   {
-   "src": "http://placekitten.com/g/435/435",
-   "url": "/upload/",
-   "caption": "Upload images",
-   "importance": 100
+   "src": "http://placekitten.com/435/435",
+   "lightboxSrc": "http://placekitten.com/800/800",
+   "url": "/walls/",
+   "caption": "Make some photo walls!",
+   "large": true
  },
  {
-   "src": "http://placekitten.com/g/435/435",
-   "url": "/buildjson/",
-   "caption": "Build JSON",
-   "importance": 90
- },
- {
-   "src": "http://placekitten.com/g/215/215",
+   "src": "http://placekitten.com/g/500/500",
    "caption": "Kitties!"
  },
  {
-   "src": "http://placekitten.com/g/215/215",
+   "src": "http://placekitten.com/215/215",
    "caption": "Look, it's a kitty"
  },
  {
@@ -32,7 +27,7 @@
    "caption": "Hello, Kitty."
  },
  {
-   "src": "http://placekitten.com/g/215/215",
+   "src": "http://placekitten.com/215/215",
    "caption": "kittykittykittykitty"
  },
  {

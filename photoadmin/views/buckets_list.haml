@@ -24,7 +24,9 @@
             %a.hide-layouts{ href: '#'} (Hide)
             - bucket[:walls].each do |wall|
               %li
-                %a{ href: "/test?src=#{wall}" }= wall
+                = wall[:name]
+                %a{ href: "/test?src=#{wall[:url]}" } Preview
+                %a{ href: "/walls/#{bucket[:name]}/edit/#{wall[:name]}"} Edit
 
   %script#list-template{ type: 'text/template' }
     %li.collapsed
