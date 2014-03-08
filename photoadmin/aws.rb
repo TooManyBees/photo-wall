@@ -74,8 +74,25 @@ module AwsConnection
     JSON.parse(string_io.read)
   rescue Aws::S3::Errors::NoSuchKey
     []
-  rescue Aws::S3::Errors::NoSuckBucket
+  rescue Aws::S3::Errors::NoSuchBucket
     [] # TODO: pick a good erorr message for this
+  end
+
+  def self.get_wall options
+    raise ArgumentError.new("Missing argument :bucket") unless options.key? :bucket
+    raise ArgumentError.new("Missing argument :wall") unless options.key? :wall
+    bucket = prefixed(options[:bucket])
+    wall = (options[:wall].end_with? ".json") ? options[:wall] : options[:wall] + ".json"
+    string_io = S3.get_object(bucket: bucket, key: wall).body
+    string_io.rewind
+    data = JSON.parse(string_io.read)
+    data.reduce({}) do |hash, el|
+      hash.merge({el['src'] => el})
+    end
+  rescue Aws::S3::Errors::NoSuchKey
+    Hash.new({})
+  rescue Aws::S3::Errors::NoSuchBucket
+    Hash.new({})
   end
 
   def self.get_saved_walls bucket
@@ -114,6 +131,10 @@ module AwsConnection
       )
       url_for(bucket, key)
     end
+  end
+
+  def self.url_for_json(bucket, key)
+    self.url_for(prefixed(bucket), "#{key}.json")
   end
 
   private

@@ -61,15 +61,17 @@ get '/walls/:bucket/build/?' do
   bucket = params[:bucket]
   halt 404 unless AwsConnection.exists? bucket
   images = AwsConnection.get_all_images(bucket)
-  haml :bucket_build, locals: {bucket: bucket, images: images}
+  haml :bucket_build, locals: {bucket: bucket, images: images, presets: Hash.new({})}
 end
 
 # TODO: Prepopulate form with saved data
 get '/walls/:bucket/edit/:wall' do
   bucket = params[:bucket]
   halt 404 unless AwsConnection.exists? bucket
+  # halt 404 unless AwsConnection.wall_exists? params[:wall]
   images = AwsConnection.get_all_images(bucket)
-  haml :bucket_build, locals: {bucket: bucket, images: images}
+  presets = AwsConnection.get_wall(bucket: bucket, wall: params[:wall])
+  haml :bucket_build, locals: {bucket: bucket, images: images, presets: presets}
 end
 
 get '/walls/:bucket/upload/?' do

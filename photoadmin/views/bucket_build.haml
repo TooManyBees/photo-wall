@@ -5,6 +5,9 @@
   %h1 Labs Photo Wall Builder
 
   %dl#instructions
+    %dt Lightbox image
+    %dd The image that will display when the user clicks on a tile. If left blank, |
+        it will be the same image as the tile itself. |
     %dt Importance
     %dd Images get sorted in descending order of importance.
     %dt Display large
@@ -23,50 +26,47 @@
     .spinner
     %ul
       - images.each do |image|
+        - preset = presets[image]
         %li
           %img{ src: image }
           .border
             / Controls for shifting
-            .controls.vertical.up{ data: {y: -5} } Shift Up
-            .controls.horizontal.left{ data: {x: -5} } Shift<br>Left
-            .controls.horizontal.right{ data: {x: 5} } Shift<br>Right
-            .controls.vertical.down{ data: {y: 5} } Shift Down
+            .controls.vertical.up{ data: {y: 5} } Shift Up
+            .controls.horizontal.left{ data: {x: 5} } Shift<br>Left
+            .controls.horizontal.right{ data: {x: -5} } Shift<br>Right
+            .controls.vertical.down{ data: {y: -5} } Shift Down
           %label.disabled
-            Tile image source:
+            Tile image:
             %input.long{ name: "src", type: "text", value: image }(disabled)
             %br
           %label
-            Lightbox image source:
-            %inpug.long{ name: "lightbox_src", type: "text", placeholder: "(If blank, the lightbox will show the tile image.)"}
+            Lightbox image:
+            %input.long{ name: "lightbox_src", type: "text", value: preset['lightbox_src'], placeholder: "(If blank, the lightbox will show the tile image.)" }
             %br
           %label
             Importance:
-            %input{ name: "importance", type: "text", placeholder: "(Numeric, optional)" }
+            %input{ name: "importance", type: "text", value: preset['importance'], placeholder: "(Numeric, optional)" }
           %label
             Display large
-            %input{ type: "checkbox", name: "large", value: true}
+            %input{ type: "checkbox", name: "large", value: true, checked: preset['large'] || false }
           %label
             Skip this image
-            %input{ type: "checkbox", name: "skip", value: true}
-          / %label.short.disabled
-          /   Offset X:
-          %input{ name: "dimX", hidden: "text", value: 0}
-          / %label.short.disabled
-          /   Offset Y:
-          %input{ name: "dimY", hidden: "text", value: 0}
+            %input{ type: "checkbox", name: "skip", value: true, checked: preset['skip'] || false }
+          %input{ name: "dimX", type: "hidden", value: preset['dimX'] || 0 }
+          %input{ name: "dimY", type: "hidden", value: preset['dimY'] || 0 }
           %br
-          %input{ name: "dim", type: "hidden", value: ''}
+          %input{ name: "dim", type: "hidden", value: preset['dim'] }
           %label
             Image credit:
-            %input.long{ name: "credit", type: "text", placeholder: "(Optional)"}
+            %input.long{ name: "credit", type: "text", value: preset['credit'], placeholder: "(Optional)" }
             %br
           %label
             Caption:
-            %input.long{ name: "caption", type: "text", placeholder: "(Optional)" }
+            %input.long{ name: "caption", type: "text", value: preset['caption'], placeholder: "(Optional)" }
             %br
           %label
             Url:
-            %input.long{ name: "url", type: "text", placeholder: "(Clickthrough URL, optional)"}
+            %input.long{ name: "url", type: "text", value: preset['url'], placeholder: "(Clickthrough URL, optional)"}
 
   %form#build-form{ action: "/api/save/#{bucket}", method: 'POST' }
     %input#build-button{ type: 'submit', value: "Build and save JSON to AWS!" }
@@ -80,3 +80,10 @@
   %script{ type: 'text/javascript', src: 'http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.0/jquery.js'}
   %script{ type: 'text/javascript', src: 'http://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.5.2/underscore-min.js'}
   %script{ type: "text/javascript", src: "/bucket_build.js" }
+  :javascript
+    $(document).ready(function() {
+      setupBuilder();
+      $('#image-list').find('li').each(function() {
+        matchBorderToInputValues($(this));
+      });
+    });

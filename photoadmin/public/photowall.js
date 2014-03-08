@@ -117,7 +117,6 @@
         caption: $a.data('caption'),
         credit: $a.data('credit')
       }));
-      console.log($a.data())
       $ss.append($lightBoxContainer);
       adjustLightBoxCoords($lightBoxContainer.find('#lightbox-image'));
     });
