@@ -45,12 +45,12 @@ $(document).ready(function() {
   $form.on("submit", function(event) {
     event.preventDefault();
     var serialized = serializeImages($images);
-    _.each(serialized, function(img) {
-      if (img.large !== true) {
-        img.dimX = img.dimX / 2;
-        img.dimY = img.dimY / 2;
-      }
-    });
+    // _.each(serialized, function(img) {
+    //   if (img.large !== true) {
+    //     img.dimX = img.dimX / 2;
+    //     img.dimY = img.dimY / 2;
+    //   }
+    // });
     var generatedJSON = JSON.stringify(serialized, null, "  ");
     var $pre = $('<pre>').text(generatedJSON);
     $output.empty();
