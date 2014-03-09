@@ -2,6 +2,24 @@
 
   var Builder = root.Builder = (root.Builder || {});
 
+  var resizeImage = function($img) {
+    var height = $img.height();
+    var width = $img.width();
+    if (height / width === 1) {
+      $img.addClass('tall');
+      $img.parent().find('.controls').hide();
+      $img.parent().find('input[name=dim]').val('tall');
+    } else if (height / width > 1) {
+      $img.addClass('tall');
+      $img.parent().find('.horizontal').hide();
+      $img.parent().find('input[name=dim]').val('tall');
+    } else {
+      $img.addClass('wide');
+      $img.parent().find('.vertical').hide();
+      $img.parent().find('input[name=dim]').val('wide');
+    }
+  }
+
   Builder.setup = function() {
     var $images = $('#image-list ul');
     var $form = $('#build-form');
@@ -9,23 +27,12 @@
 
     $images.find('img').each(function() {
       var $img = $(this);
-      $img.on('load', function() {
-        var height = $img.height();
-        var width = $img.width();
-        if (height / width === 1) {
-          $img.addClass('tall');
-          $img.parent().find('.controls').hide();
-          $img.parent().find('input[name=dim]').val('tall');
-        } else if (height / width > 1) {
-          $img.addClass('tall');
-          $img.parent().find('.horizontal').hide();
-          $img.parent().find('input[name=dim]').val('tall');
-        } else {
-          $img.addClass('wide');
-          $img.parent().find('.vertical').hide();
-          $img.parent().find('input[name=dim]').val('wide');
-        }
-      });
+      if ($img[0].complete)
+        resizeImage($img);
+      else
+        $img.on('load', function() {
+          resizeImage($img);
+        });
     });
 
     $form.on("submit", function(event) {
