@@ -82,8 +82,8 @@
   %script{ type: "text/javascript", src: "/bucket_build.js" }
   :javascript
     $(document).ready(function() {
-      setupBuilder();
+      Builder.setup();
       $('#image-list').find('li').each(function() {
-        matchBorderToInputValues($(this));
+        Builder.matchBorderToInputValues($(this));
       });
     });
