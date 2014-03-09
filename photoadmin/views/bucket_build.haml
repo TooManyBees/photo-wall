@@ -83,7 +83,5 @@
   :javascript
     $(document).ready(function() {
       Builder.setup();
-      $('#image-list').find('li').each(function() {
-        Builder.matchBorderToInputValues($(this));
-      });
+      Builder.matchBorderToInputValues($('#image-list').find('li'));
     });

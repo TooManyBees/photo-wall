@@ -60,7 +60,7 @@
     $images.on('click', '.controls', function() {
       var $control = $(this);
       var $border = $(this).parent();
-      applyOffset($(this).parents('li'), {x: $control.data('x'), y: $control.data('y')})
+      nudgeBorder($(this).parents('li'), {x: $control.data('x'), y: $control.data('y')})
     });
   }
 
@@ -83,28 +83,30 @@
     return serialized;
   }
 
-  var applyOffset = function(thisVal, offset) {
-    var $border = thisVal.find('.border');
-    var $inputX = thisVal.find('input[name=dimX]');
-    var $inputY = thisVal.find('input[name=dimY]');
+  var nudgeBorder = function($thisVal, offset) {
+    var $border = $thisVal.find('.border');
+    var $inputX = $thisVal.find('input[name=dimX]');
+    var $inputY = $thisVal.find('input[name=dimY]');
     var offsetX = parseInt(offset.x || 0);
     var offsetY = parseInt(offset.y || 0);
 
     $inputX.val(parseInt($inputX.val()) + offsetX);
     $inputY.val(parseInt($inputY.val()) + offsetY);
 
-    shiftBorder($border, offsetX, offsetY);
+    shiftBorder($border, $inputX.val(), $inputY.val());
   }
 
   var shiftBorder = function($border, offsetX, offsetY) {
-    $border.css('left', parseInt($border.css('left')) - offsetX);
-    $border.css('top', parseInt($border.css('top')) - offsetY);
+    $border.css('left', offsetX * -1);
+    $border.css('top', offsetY * -1);
   }
 
-  Builder.matchBorderToInputValues = function($li) {
-    var offsetX = parseInt($li.find('input[name=dimX]').val());
-    var offsetY = parseInt($li.find('input[name=dimY]').val());
-    shiftBorder($li.find('.border'), offsetX, offsetY);
+  Builder.matchBorderToInputValues = function($images) {
+    $images.each(function() {
+      var offsetX = parseInt($(this).find('input[name=dimX]').val());
+      var offsetY = parseInt($(this).find('input[name=dimY]').val());
+      shiftBorder($(this).find('.border'), offsetX, offsetY);
+    });
   }
 
 }(this, jQuery));

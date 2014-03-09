@@ -72,9 +72,11 @@ h3 {
 
 .border {
   position: absolute;
-  top: -4px;
-  left: -4px;
+  top: 0;
+  left: 0;
   border: 4px solid rgba(255, 0, 0, 0.4);
+  margin-left: -4px;
+  margin-top: -4px;
   width: 435px;
   height: 435px; }
 
