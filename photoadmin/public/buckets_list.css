@@ -62,7 +62,7 @@ h3 {
   -moz-box-sizing: border-box;
   -webkit-box-sizing: border-box;
   display: none;
-  background: rgba(0, 0, 0, 0.6);
+  background: rgba(0, 0, 0, 0.4);
   position: fixed;
   height: 100%;
   width: 100%;
@@ -71,7 +71,15 @@ h3 {
   padding: 25px; }
 
 #drop-target {
-  border: 4px dashed white;
+  border: 5px dashed white;
   border-radius: 50px;
   height: 100%;
   background-color: #aaaaaa; }
+  #drop-target .file-list {
+    margin: 25px; }
+  #drop-target .file-name {
+    padding: 5px 10px; }
+  #drop-target .success {
+    color: lime; }
+  #drop-target .error {
+    color: red; }

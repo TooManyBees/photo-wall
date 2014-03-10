@@ -42,7 +42,7 @@ $main-size: 800px
 #drop-screen
   @include box-sizzle
   display: none
-  background: rgba(0,0,0,0.6)
+  background: rgba(0,0,0,0.4)
   position: fixed
   height: 100%
   width: 100%
@@ -51,7 +51,15 @@ $main-size: 800px
   padding: 25px
 
 #drop-target
-  border: 4px dashed white
+  border: 5px dashed white
   border-radius: 50px
   height: 100%
   background-color: #aaa
+  .file-list
+    margin: 25px
+  .file-name
+    padding: 5px 10px
+  .success
+    color: #0F0
+  .error
+    color: #F00
