@@ -15,7 +15,6 @@
     - buckets.each do |bucket|
       %li.collapsed
         %a{ href: "/walls/#{bucket[:name]}"}= bucket[:name]
-        %a{ href: "/walls/#{bucket[:name]}/upload" } Upload images
         %a{ href: "/walls/#{bucket[:name]}/build" } New layout
         %ol
           - if bucket[:walls].length > 0

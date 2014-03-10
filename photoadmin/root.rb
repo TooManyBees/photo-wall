@@ -85,7 +85,6 @@ get '/walls/:bucket/build/?' do
   haml :bucket_build, locals: {bucket: bucket, images: images, presets: Hash.new({})}
 end
 
-# TODO: Prepopulate form with saved data
 get '/walls/:bucket/edit/:wall' do
   bucket = params[:bucket]
   halt 404 unless AwsConnection.bucket_exists? bucket

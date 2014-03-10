@@ -77,8 +77,10 @@ h3 {
   background-color: #aaaaaa; }
   #drop-target .file-list {
     margin: 25px; }
-  #drop-target .file-name {
+  #drop-target .file-entry {
     padding: 5px 10px; }
+  #drop-target .name {
+    padding-right: 25px; }
   #drop-target .success {
     color: lime; }
   #drop-target .error {

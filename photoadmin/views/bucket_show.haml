@@ -16,7 +16,7 @@
   #{images.length} image#{"s" unless images.length == 1}
   %a#click-to-upload{ href: '#' } Upload more
 
-%ul
+%ul#thumbs-list
   - images.each do |image|
     %li
       %figure.tile-thumb
@@ -31,9 +31,15 @@
     %ol.file-list
 
 %script#file-template{ type: 'text/template' }
-  %li
-    %span {{basename}}
+  %li.file-name{ data: {name: "{{name}}" } }
+    %span.name {{name}}
     %span.status Pending
+
+%script#tile-template{ type: 'text/template' }
+  %li
+    %figure.tile-thumb
+      %img{ src: "{{ src }}" }
+      %figcaption {{ name }}
 
 %script{ type: 'text/javascript', src: 'http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.0/jquery.js'}
 %script{ type: 'text/javascript', src: 'http://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.5.2/underscore-min.js'}
