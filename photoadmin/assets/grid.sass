@@ -34,10 +34,9 @@ $border-transition: 0.3s ease-in-out
 
 #photowall-container
   @include box-sizzle
-  width: 900px
-  padding: 5px
   margin: 0
   border: 0
+  padding: $tile-margin 0 0 $tile-margin
   .spinner
     height: 128px
     width: 128px
@@ -70,16 +69,11 @@ $border-transition: 0.3s ease-in-out
     padding: 0
     margin: 0
     border: 0
-    figcaption
+    figcaption, img
       display: block
       padding: 0
       margin: 0
       border: 0
-    img
-      padding: 0
-      margin: 0
-      border: 0
-      display: block
   .frame
     @include box-sizzle
     border: 0 solid black
@@ -111,21 +105,22 @@ $border-transition: 0.3s ease-in-out
   .cell
     @include box-sizzle
     float: left
-    margin-right: 5px
-    margin-bottom: 5px
+    border: $tile-border
+    margin-top: -$tile-margin
+    margin-left: -$tile-margin
 
   .tile
     position: relative
     clear: both
     width: $small-tile-width
     height: $small-tile-width
-    margin-bottom: 5px
+    border-bottom: $tile-border
     overflow: hidden
     &.big
       width: $large-tile-width
       height: $large-tile-width
     &:last-child
-      margin: 0
+      border: 0
     img
       position: relative
       &.tall
