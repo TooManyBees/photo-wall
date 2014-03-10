@@ -54,7 +54,7 @@ get '/walls/:bucket/?' do
   bucket = params[:bucket]
   halt 404 unless AwsConnection.exists? bucket
   photos = AwsConnection.get_all_images(bucket)
-  haml :bucket_show, locals: {bucket: bucket, images: photos}
+  haml :bucket_show, locals: {bucket: bucket, images: photos, walls: walls}
 end
 
 get '/walls/:bucket/build/?' do

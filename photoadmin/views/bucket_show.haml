@@ -3,9 +3,18 @@
 
 %h1= bucket
 
-%h2 #{images.length} images
+%h2
+  #{walls.length} saved layout#{"s" unless walls.length == 1}
+%ol
+  - walls.each do |wall|
+    %li
+      = wall[:name]
+      %a{ href: "/test?src=#{wall[:url]}" } Preview
+      %a{ href: "/walls/#{bucket}/edit/#{wall[:name]}"} Edit
 
-#upload-pad
+%h2
+  #{images.length} image#{"s" unless images.length == 1}
+  %a#click-to-upload{ href: '#' } Upload more
 
 %ul
   - images.each do |image|
@@ -14,13 +23,19 @@
         %img{ src: image }
         %figcaption= image.split('/').last
 
-/ #drop-target
-/   %h1 Drag to upload
+#drop-screen
+  #drop-target
+    %h1
+      Drag to upload
+      %a{ href: '#' } (Hide)
+    %ol.file-list
 
-/ #upload-progress
-/   %p#counter ...
-/   #meter
+%script#file-template{ type: 'text/template' }
+  %li
+    %span {{basename}}
+    %span.status Pending
 
-/ %script{ type: 'text/javascript', src: 'http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.0/jquery.js'}
-/ %script{ type: 'text/javascript', src: '/ajaxupload.js' }
-/ %script{ type: 'text/javascript', src: '/upload.js'}
+%script{ type: 'text/javascript', src: 'http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.0/jquery.js'}
+%script{ type: 'text/javascript', src: '/ajaxupload.js' }
+%script{ type: 'text/javascript', src: 'http://cdnjs.cloudflare.com/ajax/libs/handlebars.js/1.3.0/handlebars.min.js'}
+%script{ type: 'text/javascript', src: '/upload.js'}

@@ -36,3 +36,22 @@ $main-size: 800px
 .main
   width: $main-size
   margin: 40px auto
+
+// Uploader
+
+#drop-screen
+  @include box-sizzle
+  display: none
+  background: rgba(0,0,0,0.6)
+  position: fixed
+  height: 100%
+  width: 100%
+  top: 0
+  left: 0
+  padding: 25px
+
+#drop-target
+  border: 4px dashed white
+  border-radius: 50px
+  height: 100%
+  background-color: #aaa

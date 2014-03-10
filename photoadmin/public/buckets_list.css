@@ -56,3 +56,22 @@ h3 {
 .main {
   width: 800px;
   margin: 40px auto; }
+
+#drop-screen {
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  display: none;
+  background: rgba(0, 0, 0, 0.6);
+  position: fixed;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: 0;
+  padding: 25px; }
+
+#drop-target {
+  border: 4px dashed white;
+  border-radius: 50px;
+  height: 100%;
+  background-color: #aaaaaa; }
