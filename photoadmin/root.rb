@@ -31,9 +31,29 @@ post '/api/buckets/?' do
   end
 end
 
-put '/api/buckets/:bucket' do
-  # one-by-one upload to aws and return location
-  halt 400
+post '/api/buckets/:bucket' do
+  file = params[:files].first
+  p file
+
+  if AwsConnection.item_exists?(bucket: params[:bucket], item: file[:filename])
+    halt 422, {"Content-Type" => "text/json"}, JSON.dump(
+      {
+        filename: file[:filename],
+        error: "A file already exists by this name."
+      }
+    )
+  end
+
+  result = try_s3 do
+    AwsConnection.upload_image(
+      bucket: params[:bucket],
+      name: file[:filename],
+      source: file[:tempfile]
+    )
+  end
+
+  JSON.dump(filename: file[:filename], src: result)
+
 end
 
 post '/api/save/:bucket/?' do
@@ -52,14 +72,15 @@ end
 
 get '/walls/:bucket/?' do
   bucket = params[:bucket]
-  halt 404 unless AwsConnection.exists? bucket
+  halt 404 unless AwsConnection.bucket_exists? bucket
+  walls = AwsConnection.get_saved_walls(bucket)
   photos = AwsConnection.get_all_images(bucket)
   haml :bucket_show, locals: {bucket: bucket, images: photos, walls: walls}
 end
 
 get '/walls/:bucket/build/?' do
   bucket = params[:bucket]
-  halt 404 unless AwsConnection.exists? bucket
+  halt 404 unless AwsConnection.bucket_exists? bucket
   images = AwsConnection.get_all_images(bucket)
   haml :bucket_build, locals: {bucket: bucket, images: images, presets: Hash.new({})}
 end
@@ -67,7 +88,7 @@ end
 # TODO: Prepopulate form with saved data
 get '/walls/:bucket/edit/:wall' do
   bucket = params[:bucket]
-  halt 404 unless AwsConnection.exists? bucket
+  halt 404 unless AwsConnection.bucket_exists? bucket
   # halt 404 unless AwsConnection.wall_exists? params[:wall]
   images = AwsConnection.get_all_images(bucket)
   presets = AwsConnection.get_wall(bucket: bucket, wall: params[:wall])
@@ -76,7 +97,7 @@ end
 
 get '/walls/:bucket/upload/?' do
   bucket = params[:bucket]
-  halt 404 unless AwsConnection.exists? bucket
+  halt 404 unless AwsConnection.bucket_exists? bucket
   haml :upload, locals: {bucket: bucket}
 end
 

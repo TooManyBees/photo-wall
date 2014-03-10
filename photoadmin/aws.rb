@@ -17,12 +17,30 @@ module AwsConnection
   ]
   BUCKET_PREFIX = 'hplabs-pw-'
 
-  def self.exists? bucket
+  def self.bucket_exists? bucket
     S3.head_bucket(bucket: prefixed(bucket))
-  rescue Aws::Errors::ServiceError
+  rescue Aws::S3::Errors::NotFound
     false
   else
     true
+  end
+
+  def self.item_exists? options
+    bucket = prefixed(options[:bucket])
+    item = options[:item]
+    S3.head_object(bucket: bucket, key: item)
+  rescue Aws::S3::Errors::NotFound
+    false
+  else
+    true
+  end
+
+  def self.wall_exists? options
+    passed = options
+    unless passed[:item].end_with? ".json"
+      passed[:item] = passed[:item] + ".json"
+    end
+    item_exists? passed
   end
 
   def self.get_buckets
@@ -116,12 +134,17 @@ module AwsConnection
     {url: url_for(bucket, key)}
   end
 
-  def self.upload_image bucket, image
-    bucket = prefixed(bucket)
-    key = File.basename(image)
+  def self.upload_image options
+    [:bucket, :source].each do |key|
+      raise ArgumentError.new("missing required key: #{key}") unless options.key?(key)
+    end
+    bucket = prefixed(options[:bucket])
+    source = options[:source]
+    key = options[:name] ? options[:name] : File.basename(options[:source])
+
     mime = MIME::Types.of(key).first.simplified
-    ext = image.split('.').last
-    File.open(image) do |img|
+    ext = key.split('.').last
+    File.open(source) do |img|
       obj = S3.put_object(
         acl: 'public-read',
         body: img,
