@@ -1,16 +1,16 @@
-$border-width: 15px
-$large-tile-width: 435px
-$small-tile-width: 215px
-$tile-margin: 5px
-
-// $border-width: 15px
-// $large-tile-width: 450px
-// $small-tile-width: 225px
-// $tile-margin: 0px
-
 $tile-background: transparent
 
-$tile-border: $tile-margin solid $tile-background
+$border-width-wide: 15px
+$large-tile-width-wide: 435px
+$small-tile-width-wide: 215px
+$tile-margin-wide: 5px
+$tile-border-wide: $tile-margin-wide solid $tile-background
+
+$border-width-narrow: 15px
+$large-tile-width-narrow: 320px
+$small-tile-width-narrow: 160px
+$tile-margin-narrow: 0px
+$tile-border-narrow: $tile-margin-narrow solid $tile-background
 
 $color1: #FFBE59
 $color2: #E88751
@@ -28,3 +28,15 @@ $color5: #D55EFF
   -o-transition: $t
   -moz-transition: $t
   -webkit-transition: $t
+
+@mixin transform($t, $o)
+  transform: $t
+  -o-transform: $t
+  -ms-transform: $t
+  -moz-transform: $t
+  -webkit-transform: $t
+  transform-origin: $o
+  -o-transform-origin: $o
+  -ms-transform-origin: $o
+  -moz-transform-origin: $o
+  -webkit-transform-origin: $o

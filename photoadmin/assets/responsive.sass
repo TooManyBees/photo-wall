@@ -1,0 +1,48 @@
+@import constants
+
+@media all and (max-width: 800px)
+  @-viewport
+    width: 768px
+  #photowall-container
+    padding: 0
+    width: 768px
+    .cell
+      border: 0
+      margin: 0
+    .tile
+      float: left
+      border: 0
+      width: $small-tile-width-wide
+      height: $small-tile-width-wide
+      &.big
+        width: $large-tile-width-wide
+        height: $large-tile-width-wide
+        figcaption
+          padding: 5px 5px
+        &:hover
+          .frame
+            border-width: $border-width-wide
+
+@media all and (max-width: 320px)
+  @-viewport
+    width: 320px
+  #photowall-container
+    padding: $tile-margin-narrow 0 0 $tile-margin-narrow
+    width: 320px
+    .cell
+      border: $tile-border-narrow
+      margin-top: -$tile-margin-narrow
+      margin-left: -$tile-margin-narrow
+    .tile
+      float: left
+      border-bottom: $tile-border-narrow
+      width: $small-tile-width-narrow
+      height: $small-tile-width-narrow
+      &.big
+        width: $large-tile-width-narrow
+        height: $large-tile-width-narrow
+      figcaption
+        display: none
+      &:hover
+        .frame
+          border-width: $border-width-narrow

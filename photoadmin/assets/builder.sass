@@ -43,9 +43,9 @@ h3
   img
     margin-bottom: 10px
   img.tall
-    width: $large-tile-width
+    width: $large-tile-width-wide
   img.wide
-    height: $large-tile-width
+    height: $large-tile-width-wide
   label.disabled
     color: #aaa
     input
@@ -66,8 +66,8 @@ h3
   border: $guide-width solid rgba(255, 0, 0, 0.4)
   margin-left: -$guide-width
   margin-top: -$guide-width
-  width: $large-tile-width
-  height: $large-tile-width
+  width: $large-tile-width-wide
+  height: $large-tile-width-wide
 
 #build-button
   font-size: 150%
@@ -102,24 +102,24 @@ h3
   &.up
     border-radius: 0 0 $control-radius $control-radius
     top: 0
-    left: $large-tile-width / 2 - 25px
+    left: $large-tile-width-wide / 2 - 25px
     &:hover
       padding-bottom: $control-padding
   &.left
     border-radius: 0 $control-radius $control-radius 0
     left: 0
-    top: $large-tile-width / 2
+    top: $large-tile-width-wide / 2
     &:hover
       padding-right: $control-padding
   &.right
     border-radius: $control-radius 0 0 $control-radius
     right: 0
-    top: $large-tile-width / 2
+    top: $large-tile-width-wide / 2
     &:hover
       padding-left: $control-padding
   &.down
     border-radius: $control-radius $control-radius 0 0
     bottom: 0
-    left: $large-tile-width / 2 - 25px
+    left: $large-tile-width-wide / 2 - 25px
     &:hover
       padding-top: $control-padding

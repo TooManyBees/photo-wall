@@ -40,7 +40,8 @@
   -webkit-box-sizing: border-box;
   margin: 0;
   border: 0;
-  padding: 5px 0 0 5px; }
+  padding: 5px 0 0 5px;
+  width: 900px; }
   #photowall-container .spinner {
     height: 128px;
     width: 128px;
@@ -70,8 +71,7 @@
     clear: both; }
   #photowall-container .tile {
     padding: 0;
-    margin: 0;
-    border: 0; }
+    margin: 0; }
     #photowall-container .tile figcaption, #photowall-container .tile img {
       display: block;
       padding: 0;
@@ -113,16 +113,15 @@
     -moz-box-sizing: border-box;
     -webkit-box-sizing: border-box;
     float: left;
-    border: 5px solid #444444;
+    border: 5px solid transparent;
     margin-top: -5px;
     margin-left: -5px; }
   #photowall-container .tile {
     position: relative;
-    clear: both;
+    overflow: hidden;
+    border-bottom: 5px solid transparent;
     width: 215px;
-    height: 215px;
-    border-bottom: 5px solid #444444;
-    overflow: hidden; }
+    height: 215px; }
     #photowall-container .tile.big {
       width: 435px;
       height: 435px; }
