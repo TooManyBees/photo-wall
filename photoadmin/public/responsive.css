@@ -1,45 +1,33 @@
-@media all and (max-width: 800px) {
+@media all and (max-width: 768px) {
   @-viewport {
-    width: 768px; }
-
-  #photowall-container {
-    padding: 0;
-    width: 768px; }
-    #photowall-container .cell {
-      border: 0;
-      margin: 0; }
-    #photowall-container .tile {
-      float: left;
-      border: 0;
-      width: 215px;
-      height: 215px; }
-      #photowall-container .tile.big {
-        width: 435px;
-        height: 435px; }
-        #photowall-container .tile.big figcaption {
-          padding: 5px 5px; }
-        #photowall-container .tile.big:hover .frame {
-          border-width: 15px; } }
-@media all and (max-width: 320px) {
-  @-viewport {
-    width: 320px; }
+    width: 640px; }
 
   #photowall-container {
     padding: 0px 0 0 0px;
-    width: 320px; }
+    width: 640px; }
     #photowall-container .cell {
       border: 0px solid transparent;
       margin-top: 0px;
       margin-left: 0px; }
+    #photowall-container .frame {
+      display: none; }
     #photowall-container .tile {
-      float: left;
       border-bottom: 0px solid transparent;
       width: 160px;
       height: 160px; }
+      #photowall-container .tile .credit {
+        transform: none;
+        -o-transform: none;
+        -ms-transform: none;
+        -moz-transform: none;
+        -webkit-transform: none;
+        transform-origin: none;
+        -o-transform-origin: none;
+        -ms-transform-origin: none;
+        -moz-transform-origin: none;
+        -webkit-transform-origin: none; }
       #photowall-container .tile.big {
         width: 320px;
         height: 320px; }
       #photowall-container .tile figcaption {
-        display: none; }
-      #photowall-container .tile:hover .frame {
-        border-width: 15px; } }
+        display: none; } }

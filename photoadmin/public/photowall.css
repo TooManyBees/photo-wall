@@ -133,12 +133,12 @@
         width: 100%; }
       #photowall-container .tile img.wide {
         height: 100%; }
-    #photowall-container .tile figcaption, #photowall-container .tile small {
+    #photowall-container .tile figcaption, #photowall-container .tile .credit {
       transition: opacity 0.3s ease-in-out;
       -o-transition: opacity 0.3s ease-in-out;
       -moz-transition: opacity 0.3s ease-in-out;
       -webkit-transition: opacity 0.3s ease-in-out; }
-    #photowall-container .tile small {
+    #photowall-container .tile .credit {
       opacity: 0;
       font-size: 80%;
       position: absolute;
@@ -169,7 +169,7 @@
       text-align: center;
       width: 100%;
       background-color: rgba(0, 0, 0, 0.4); }
-    #photowall-container .tile:hover figcaption, #photowall-container .tile:hover small {
+    #photowall-container .tile:hover figcaption, #photowall-container .tile:hover .credit {
       opacity: 1; }
     #photowall-container .tile:hover .frame {
       opacity: 1;

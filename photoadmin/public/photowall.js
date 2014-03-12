@@ -128,8 +128,8 @@
   var adjustLightBoxCoords = function($div) {
     var margin = 40;
 
-    var wWidth = $(window).width();
-    var wHeight = $(window).height();
+    var wWidth = window.innerWidth;
+    var wHeight = window.innerHeight;
     $div.find('img').css('max-height', wHeight - margin * 2);
     $div.find('img').css('max-width', wWidth - margin * 2);
     var iWidth = $div.find('img').width();

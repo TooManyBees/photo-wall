@@ -126,9 +126,9 @@ $border-transition: 0.3s ease-in-out
         width: 100%
       &.wide
         height: 100%
-    figcaption, small
+    figcaption, .credit
       @include transition(opacity $border-transition)
-    small
+    .credit
       opacity: 0
       font-size: 80%
       position: absolute
@@ -149,7 +149,7 @@ $border-transition: 0.3s ease-in-out
       width: 100%
       background-color: rgba(0,0,0,0.4)
     &:hover
-      figcaption, small
+      figcaption, .credit
         opacity: 1
       .frame
         opacity: 1

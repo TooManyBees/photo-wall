@@ -18,7 +18,7 @@
       %figcaption {{ snippet }}
       {{/if}}
       {{#if credit}}
-      %small {{ credit }}
+      %small.credit {{ credit }}
       {{/if}}
 
 %script{ type: 'text/template', id: 'photowall-template-lightbox' }<
@@ -31,7 +31,7 @@
       %image{ src: '{{lightboxSrc}}' }
       %p
         {{caption}}
-        %small {{credit}}
+        %small.credit {{credit}}
 
 %section{ id: 'photowall-container', class: 'clf' }
   .spinner
