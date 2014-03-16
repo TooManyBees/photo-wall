@@ -5,6 +5,7 @@
 
 %h2
   #{walls.length} saved layout#{"s" unless walls.length == 1}
+  %a{ href: "/walls/#{bucket}/build" } Create new layout
 %ol
   - walls.each do |wall|
     %li
