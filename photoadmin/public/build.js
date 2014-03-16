@@ -84,12 +84,6 @@ $(document).ready(function() {
   $button.on("click", function() {
     $(this).prop('disabled', true).text("Building...");
     var serialized = serializeImages($images);
-    _.each(serialized, function(img) {
-      if (img.importance === undefined) {
-        img.dimX = img.dimX / 2;
-        img.dimY = img.dimY / 2;
-      }
-    });
     var generatedJSON = JSON.stringify(serialized, null, "  ");
     var $pre = $('<pre>').text(generatedJSON);
     $output.empty();
