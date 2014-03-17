@@ -35,38 +35,43 @@
             .controls.horizontal.left{ data: {x: 5} } Shift<br>Left
             .controls.horizontal.right{ data: {x: -5} } Shift<br>Right
             .controls.vertical.down{ data: {y: -5} } Shift Down
-          %label.disabled
-            Tile image:
-            %input.long{ name: "src", type: "text", value: image }(disabled)
+          %fieldset
+            %legend
+              %input{ type: "checkbox", name: "show", value: true, checked: true }
+              Include this image?
+            %label.disabled
+              Tile image:
+              %input.long{ name: "src", type: "text", value: image }(disabled)
+              %br
+            %label
+              Use lightbox?
+              %input{ type: "checkbox", name: "useLightbox", value: true, checked: preset['useLightbox'] || false }
+              %br
+            %label
+              Lightbox image:
+              %input.long{ name: "lightboxSrc", type: "text", value: preset['lightboxSrc'], placeholder: "(If blank, lightbox will show the tile image.)" }
+              %br
+            %label
+              Importance:
+              %input{ name: "importance", type: "text", value: preset['importance'], placeholder: "(Numeric, optional)" }
+            %label
+              Display large
+              %input{ type: "checkbox", name: "large", value: true, checked: preset['large'] || false }
+            %input{ name: "dimX", type: "hidden", value: preset['dimX'] || 0 }
+            %input{ name: "dimY", type: "hidden", value: preset['dimY'] || 0 }
             %br
-          %label
-            Lightbox image:
-            %input.long{ name: "lightbox_src", type: "text", value: preset['lightbox_src'], placeholder: "(If blank, the lightbox will show the tile image.)" }
-            %br
-          %label
-            Importance:
-            %input{ name: "importance", type: "text", value: preset['importance'], placeholder: "(Numeric, optional)" }
-          %label
-            Display large
-            %input{ type: "checkbox", name: "large", value: true, checked: preset['large'] || false }
-          %label
-            Skip this image
-            %input{ type: "checkbox", name: "skip", value: true, checked: preset['skip'] || false }
-          %input{ name: "dimX", type: "hidden", value: preset['dimX'] || 0 }
-          %input{ name: "dimY", type: "hidden", value: preset['dimY'] || 0 }
-          %br
-          %input{ name: "dim", type: "hidden", value: preset['dim'] }
-          %label
-            Image credit:
-            %input.long{ name: "credit", type: "text", value: preset['credit'], placeholder: "(Optional)" }
-            %br
-          %label
-            Caption:
-            %input.long{ name: "caption", type: "text", value: preset['caption'], placeholder: "(Optional)" }
-            %br
-          %label
-            Url:
-            %input.long{ name: "url", type: "text", value: preset['url'], placeholder: "(Clickthrough URL, optional)"}
+            %input{ name: "dim", type: "hidden", value: preset['dim'] }
+            %label
+              Image credit:
+              %input.long{ name: "credit", type: "text", value: preset['credit'], placeholder: "(Optional)" }
+              %br
+            %label
+              Caption:
+              %input.long{ name: "caption", type: "text", value: preset['caption'], placeholder: "(Optional)" }
+              %br
+            %label
+              Url:
+              %input.long{ name: "url", type: "text", value: preset['url'], placeholder: "(Clickthrough URL, optional)"}
 
   %form#build-form{ action: "/api/save/#{bucket}", method: 'POST' }
     %input#build-button{ type: 'submit', value: "Build and save JSON to AWS!" }

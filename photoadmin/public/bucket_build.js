@@ -37,7 +37,7 @@
 
     $form.on("submit", function(event) {
       event.preventDefault();
-      var serialized = serializeImages($images);
+      var serialized = {tiles: serializeImages($images)};
       var generatedJSON = JSON.stringify(serialized, null, "  ");
       var $pre = $('<pre>').text(generatedJSON);
       $output.empty();
@@ -77,8 +77,10 @@
         else if ($input.prop('checked') === true)
           obj[$input.prop('name')] = true;
       });
-      if (obj['skip'] !== true)
+      if (obj['show'] === true) {
+        delete obj['show'];
         serialized.push(obj);
+      }
     });
     return serialized;
   }

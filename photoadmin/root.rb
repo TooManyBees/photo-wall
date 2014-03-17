@@ -94,18 +94,8 @@ get '/walls/:bucket/edit/:wall' do
   haml :bucket_build, locals: {bucket: bucket, images: images, presets: presets}
 end
 
-get '/walls/:bucket/upload/?' do
-  bucket = params[:bucket]
-  halt 404 unless AwsConnection.bucket_exists? bucket
-  haml :upload, locals: {bucket: bucket}
-end
-
 get '/test/?' do
-  haml :index, locals: {remote_json: params[:src]}
-end
-
-get '/seed' do
-  erb :seed, locals: {remote_json: 'kitty.json'}
+  erb :index, locals: {remote_json: params[:src]}
 end
 
 get '/*.*' do

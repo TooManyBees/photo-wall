@@ -95,6 +95,6 @@
 
 }(this, jQuery));
 
-$(document).one('ready', function() {
-  LabsPhotoWall.bootstrap()
-});
+// jQuery(document).ready(function() {
+//   LabsPhotoWall.bootstrap()
+// });

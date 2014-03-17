@@ -5,39 +5,48 @@
          "lightboxSrc": "http://placekitten.com/800/800",
          "url": "/walls/",
          "caption": "Make some photo walls!",
-         "large": true
+         "large": true,
+         "dim": "tall"
       },
       {
          "src": "http://placekitten.com/g/500/500",
-         "caption": "Kitties!"
+         "caption": "Kitties!",
+         "dim": "tall"
       },
       {
          "src": "http://placekitten.com/215/215",
-         "caption": "Look, it's a kitty"
+         "caption": "Look, it's a kitty",
+         "dim": "tall"
       },
       {
          "src": "http://placekitten.com/g/215/215",
-         "caption": "So many kitties..."
+         "caption": "So many kitties...",
+         "dim": "tall"
       },
       {
          "src": "http://placekitten.com/g/215/215",
-         "caption": "KITTEH!"
+         "caption": "KITTEH!",
+         "dim": "tall"
       },
       {
          "src": "http://placekitten.com/g/215/215",
-         "caption": "Hello, Kitty."
+         "caption": "Hello, Kitty.",
+         "dim": "tall"
       },
       {
          "src": "http://placekitten.com/215/215",
-         "caption": "kittykittykittykitty"
+         "caption": "kittykittykittykitty",
+         "dim": "tall"
       },
       {
          "src": "http://placekitten.com/g/215/215",
-         "caption": "Kittyyyyyyyyyyyyyy!"
+         "caption": "Kittyyyyyyyyyyyyyy!",
+         "dim": "tall"
       },
       {
          "src": "http://placekitten.com/g/215/215",
-         "caption": "Mah kitteh"
+         "caption": "Mah kitteh",
+         "dim": "tall"
       }
    ]
 }
