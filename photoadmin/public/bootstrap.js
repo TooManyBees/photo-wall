@@ -38,6 +38,7 @@
       if (options.version) PW.version = options.version;
       if (options.staticUrl) PW.staticUrl = options.staticURL;
     }
+    if ($('meta[name=photo-wall-static]').attr('content') === "local") PW.local = true;
 
     loadDependencies();
     PW.walls = searchSeeds(PW.selector);
@@ -95,6 +96,6 @@
 
 }(this, jQuery));
 
-// jQuery(document).ready(function() {
-//   LabsPhotoWall.bootstrap()
-// });
+jQuery(document).ready(function() {
+  LabsPhotoWall.bootstrap()
+});

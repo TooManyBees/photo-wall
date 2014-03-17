@@ -7,13 +7,9 @@
       }
     }
   </style>
+  <meta name="photo-wall-static" content="local">
 <% end %>
 
 <div class="photowall-container" data-layout='<%= remote_json %>'></div>
 
 <script type="text/javascript" src="/bootstrap.js"></script>
-<script type="text/javascript">
-  jQuery(document).ready(function() {
-    LabsPhotoWall.bootstrap({local: true});
-  })
-</script>
