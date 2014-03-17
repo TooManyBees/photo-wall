@@ -175,7 +175,12 @@
   }
 
   var preprocess = function(tiles) {
-    _.each(tiles, function(el) {
+    var important_tiles = new Array();
+    var filler_tiles = new Array();
+
+    var i = 0;
+    for (i; i < tiles.length; i++) {
+      var el = tiles[i];
       if (el.caption) {
         var split = el.caption.split(' ');
         if (split.length > 10)
@@ -190,27 +195,38 @@
       // cached the lightbox preview
       // TODO: move this to a scroll handler on the page, to only fetch
       // visible lb pics
-      if (el.lightboxSrc) {
+      if (el.useLightbox && el.lightboxSrc) {
         var prefetched = new Image();
         prefetched.src = el.lightboxSrc;
       }
-    });
-    var _pictures = _.groupBy(tiles, function(el) {
-      return (el.large === true) ? 'large' : 'small';
-    });
 
-    _pictures.large || (_pictures.large = []);
-    _pictures.small || (_pictures.small = []);
-
-    var sorted = {
-      important: _pictures.large.sort(function(first, second) {
-        return parseInt(first.importance) < parseInt(second.importance);
-      }),
-      filler: _pictures.small.sort(function(first, second) {
-        return parseInt(first.importance) < parseInt(second.importance);
-      })
+      if (el.large === true){
+        el.i = important_tiles.length;
+        important_tiles.push(el);
+      }
+      else {
+        el.i = filler_tiles.length;
+        filler_tiles.push(el);
+      }
     }
-    return sorted;
+
+    return {
+      important: important_tiles.sort(byImportance),
+      filler: filler_tiles.sort(byImportance)
+    };
+  }
+
+  var byImportance = function(first, second) {
+    var diff = second.importance - first.importance;
+
+    if (isNaN(diff)) {
+      if (first.importantce) diff = -1;
+      if (second.importance) diff = 1;
+      diff = 0; // maintain original order in case of tie
+    }
+
+    if (diff === 0) return first.i - second.i;
+    return diff;
   }
 
 }(this, jQuery));

@@ -6,7 +6,7 @@
   PW.staticUrl = "https://photo-wall-static.s3.amazonaws.com/";
 
   PW.versionedUrl = function(resource) {
-    if (PW.local) return resource;
+    if (PW.local) return "/"+resource;
 
     var base = PW.staticUrl + "v" + PW.version + "/";
     if (resource !== undefined) return base + resource;
@@ -50,9 +50,6 @@
   }
 
   var dependenciesLoaded = function() {
-    if (window._ === undefined || _.VERSION === undefined) {
-      return false;
-    }
     if (window.Handlebars === undefined) {
       return false;
     }
@@ -64,12 +61,15 @@
 
   var initialize = function() {
     if (dependenciesLoaded()) {
-      _.each(PW.walls, function(wall) {
+      var i = 0;
+      for (i; i < PW.walls.length; i++) {
+        var wall = PW.walls[i];
+        console.log("Fetching wall from "+wall.layout);
         $.getJSON(wall.layout, function(layout) {
           var $ss = $('#'+wall.id);
           PW.build($ss, layout);
         });
-      });
+      }
     }
   }
 
@@ -83,14 +83,6 @@
       .attr('href', PW.versionedUrl('responsive.css'))
       .appendTo('head');
 
-    if (window._ === undefined || _.VERSION === undefined) {
-      $.ajax({
-        url: 'http://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.5.2/underscore-min.js',
-        dataType: 'script',
-        cache: true,
-        success: initialize
-      });
-    }
     if (window.Handlebars === undefined) {
       $.ajax({
         url: 'http://cdnjs.cloudflare.com/ajax/libs/handlebars.js/1.3.0/handlebars.min.js',
