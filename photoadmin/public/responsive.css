@@ -10,7 +10,8 @@
       margin-top: 0px;
       margin-left: 0px; }
     .photowall-container .frame {
-      display: none; }
+      opacity: 1;
+      border-width: 0 0 15px 0; }
     .photowall-container .tile {
       border-bottom: 0px solid transparent;
       width: 160px;
