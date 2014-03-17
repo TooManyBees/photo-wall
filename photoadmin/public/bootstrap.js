@@ -64,12 +64,14 @@
     if (dependenciesLoaded()) {
       var i = 0;
       for (i; i < PW.walls.length; i++) {
-        var wall = PW.walls[i];
-        console.log("Fetching wall from "+wall.layout);
-        $.getJSON(wall.layout, function(layout) {
-          var $ss = $('#'+wall.id);
-          PW.build($ss, layout);
-        });
+        (function() {
+          var wall = PW.walls[i];
+          console.log("Fetching wall from "+wall.layout);
+          $.getJSON(wall.layout, function(layout) {
+            var $ss = $('#'+wall.id);
+            PW.build($ss, layout);
+          });
+        })();
       }
     }
   }

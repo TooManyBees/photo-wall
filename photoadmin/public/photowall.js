@@ -142,27 +142,33 @@
   PW.build = function($ss, layout) {
     var tileTemplate = (layout.tileTemplate || PW.versionedUrl("template-photowall-tile.html"));
     var lightboxTemplate = (layout.lightboxTemplate || PW.versionedUrl("template-photowall-lightbox.html"));
-    $.ajax({
-      url: tileTemplate,
-      dataType: 'html',
-      success: function(data) {
-        PW.tileTemplate = Handlebars.compile(data);
-        PW.populateGrid($ss, layout.tiles);
-      }
-    })
+
+    if (PW.tileTemplate === undefined) {
+      $.ajax({
+        url: tileTemplate,
+        dataType: 'html',
+        cache: true,
+        success: function(data) {
+          PW.tileTemplate = Handlebars.compile(data);
+          PW.populateGrid($ss, layout.tiles);
+        }
+      });
+    } else {
+      PW.populateGrid($ss, layout.tiles);
+    }
     $.ajax({
       url: lightboxTemplate,
       dataType: 'html',
+      cache: true,
       success: function(data) {
         PW.lightboxTemplate = Handlebars.compile(data);
-        PW.populateGrid($ss, layout.tiles);
       }
     })
     setupLightboxHandlers($ss);
   }
 
   PW.populateGrid = function($ss, tiles) {
-    if (PW.lightboxTemplate && PW.tileTemplate) {
+    if (PW.tileTemplate) {
       var processed = preprocess(tiles);
       $ss.addClass('ready');
       if (processed.filler && processed.important)
