@@ -75,6 +75,14 @@
 
   var loadDependencies = function() {
     // assume that the page loads jQuery anyway
+    $('<link rel="stylesheet" type="text/css">')
+      .attr('href', PW.versionedUrl('photowall.css'))
+      .appendTo('head');
+
+    $('<link rel="stylesheet" type="text/css">')
+      .attr('href', PW.versionedUrl('responsive.css'))
+      .appendTo('head');
+
     if (window._ === undefined || _.VERSION === undefined) {
       $.ajax({
         url: 'http://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.5.2/underscore-min.js',
