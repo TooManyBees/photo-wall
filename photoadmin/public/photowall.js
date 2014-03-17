@@ -156,15 +156,20 @@
     } else {
       PW.populateGrid($ss, layout.tiles);
     }
-    $.ajax({
-      url: lightboxTemplate,
-      dataType: 'html',
-      cache: true,
-      success: function(data) {
-        PW.lightboxTemplate = Handlebars.compile(data);
-      }
-    })
-    setupLightboxHandlers($ss);
+
+    if (PW.lightboxTemplate === undefined) {
+      $.ajax({
+        url: lightboxTemplate,
+        dataType: 'html',
+        cache: true,
+        success: function(data) {
+          PW.lightboxTemplate = Handlebars.compile(data);
+          setupLightboxHandlers($ss);
+        }
+      })
+    } else {
+      setupLightboxHandlers($ss);
+    }
   }
 
   PW.populateGrid = function($ss, tiles) {
