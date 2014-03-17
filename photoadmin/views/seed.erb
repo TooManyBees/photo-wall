@@ -1,0 +1,16 @@
+<% content_for :css do %>
+  <link rel="stylesheet" type="text/css" href="/photowall.css">
+  <link rel="stylesheet" type="text/css" href="/responsive.css">
+  <style type="text/css">
+    @media (max-width: 800px) {
+      body: {
+        margin: 0;
+        padding: 0;
+      }
+    }
+  </style>
+<% end %>
+
+<div class="photowall-container" data-layout='<%= remote_json %>'></div>
+
+<script type="text/javascript" src="/bootstrap.js"></script>

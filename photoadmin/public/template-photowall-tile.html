@@ -1,0 +1,12 @@
+<figure class="tile {{#if large}}big{{/if}}">
+  <img class="{{ dim }}" src="{{ src }}" style="left:{{dimX}}px;top:{{dimY}}px">
+  <div class="frame {{ color }}"></div>
+  {{#unless nolightbox}}
+  <a href="#" data-url="{{url}}" data-caption="{{caption}}" data-credit="{{credit}}" data-lightbox-src="{{lightboxSrc}}">
+  {{else}}
+  <a href="{{url}}">
+  {{/unless}}
+  {{#if caption}}<figcaption>{{ snippet }}</figcaption>{{/if}}
+  {{#if credit}}<small class="credit">{{ credit }}</small>{{/if}}
+  </a>
+</figure>

@@ -1,0 +1,11 @@
+<div id="photowall-lightbox">
+  <div id="lightbox-film"></div>
+  <div id="lightbox-image">
+    {{#if url}}<a class="clickthrough" href="{{url}}"></a>{{/if}}
+    <img src="{{ lightboxSrc }}">
+    <p>
+      {{caption}}
+      <small class="credit">{{ credit }}</small>
+    </p>
+  </div>
+</div>

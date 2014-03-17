@@ -1,6 +1,7 @@
 (function(root, $) {
 
   var PW = root.LabsPhotoWall = (root.LabsPhotoWall || {});
+  PW.loaded = true;
 
   var fillerRatio = function() {
     if (PW.important.length === 0) return 0;
@@ -42,7 +43,7 @@
     }
   }
 
-  PW.renderSingleCell = function(arr) {
+  var renderSingleCell = function(arr) {
     if (arr.length === 0)
       return null;
     var el = arr.splice(0,1);
@@ -55,7 +56,7 @@
     return $cell;
   }
 
-  PW.renderDoubleCell = function(arr) {
+  var renderDoubleCell = function(arr) {
     if (arr.length === 0)
       return null;
     var els = arr.splice(0,2);
@@ -68,39 +69,39 @@
     return $cell;
   }
 
-  var placeOnlyLargePhotos = function() {
-    PW.$ss.append(PW.renderSingleCell(PW.important));
-    PW.$ss.append(PW.renderSingleCell(PW.important));
+  var placeOnlyLargePhotos = function($ss, tiles) {
+    $ss.append(renderSingleCell(tiles.important));
+    $ss.append(renderSingleCell(tiles.important));
   }
 
-  var placeOnlySmallPhotos = function() {
-    if (PW.filler.length >= 8) {
+  var placeOnlySmallPhotos = function($ss, tiles) {
+    if (tiles.filler.length >= 8) {
       var i = 0;
       for (i=0; i < 4; i++) {
-        PW.$ss.append(PW.renderDoubleCell(PW.filler));
+        $ss.append(renderDoubleCell(tiles.filler));
       }
     } else {
-      while (PW.filler.length > 0) {
-        PW.$ss.append(PW.renderSingleCell(PW.filler));
+      while (tiles.filler.length > 0) {
+        $ss.append(renderSingleCell(tiles.filler));
       }
     }
   }
-  var placeMixOfPhotos = function() {
+  var placeMixOfPhotos = function($ss, tiles) {
     switch (rand(3)) {
       case 1:
-        PW.$ss.append(PW.renderSingleCell(PW.important));
-        PW.$ss.append(PW.renderDoubleCell(PW.filler));
-        PW.$ss.append(PW.renderDoubleCell(PW.filler));
+        $ss.append(renderSingleCell(tiles.important));
+        $ss.append(renderDoubleCell(tiles.filler));
+        $ss.append(renderDoubleCell(tiles.filler));
         break;
       case 2:
-        PW.$ss.append(PW.renderDoubleCell(PW.filler));
-        PW.$ss.append(PW.renderSingleCell(PW.important));
-        PW.$ss.append(PW.renderDoubleCell(PW.filler));
+        $ss.append(renderDoubleCell(tiles.filler));
+        $ss.append(renderSingleCell(tiles.important));
+        $ss.append(renderDoubleCell(tiles.filler));
         break;
       case 3:
-        PW.$ss.append(PW.renderDoubleCell(PW.filler));
-        PW.$ss.append(PW.renderDoubleCell(PW.filler));
-        PW.$ss.append(PW.renderSingleCell(PW.important));
+        $ss.append(renderDoubleCell(tiles.filler));
+        $ss.append(renderDoubleCell(tiles.filler));
+        $ss.append(renderSingleCell(tiles.important));
         break;
     }
   }
@@ -138,45 +139,75 @@
     $div.css('top', (wHeight - iHeight) / 2);
   }
 
-  PW.populateGrid = function() {
-    PW.$ss.addClass('ready');
-    if (PW.filler && PW.important)
-      while (PW.important.length > 0 && PW.filler.length >= 4) placeMixOfPhotos();
-    if (PW.important)
-      while (PW.important.length > 0) placeOnlyLargePhotos();
-    if (PW.filler)
-      while (PW.filler.length > 0) placeOnlySmallPhotos();
+  PW.build = function($ss, layout) {
+    $.ajax({
+      url: layout.tileTemplate,
+      dataType: 'html',
+      success: function(data) {
+        PW.tileTemplate = Handlebars.compile(data);
+        PW.populateGrid($ss, layout.tiles);
+      }
+    })
+    $.ajax({
+      url: layout.lightboxTemplate,
+      dataType: 'html',
+      success: function(data) {
+        PW.lightboxTemplate = Handlebars.compile(data);
+        PW.populateGrid($ss, layout.tiles);
+      }
+    })
   }
 
-  PW.initialize = function(options) {
-    console.log('Fetching wall from '+ options.json);
-    $.getJSON(options.json, function(json) {
-      PW.$ss = options.$section;
-      PW.tileTemplate = Handlebars.compile(options.$template.html());
-      PW.lightboxTemplate = Handlebars.compile(options.$lightbox.html());
-      _.each(json, function(el) {
-        if (el.caption && el.caption.split(' ').length > 10)
-          el.snippet = el.caption.split(' ').slice(0, 11).join(" ") + "..."
-        else if (el.caption)
+  PW.populateGrid = function($ss, tiles) {
+    if (PW.lightboxTemplate && PW.tileTemplate) {
+      var processed = preprocess(tiles);
+      $ss.addClass('ready');
+      if (processed.filler && processed.important)
+        while (processed.important.length > 0 && processed.filler.length >= 4) placeMixOfPhotos($ss, processed);
+      if (processed.important)
+        while (processed.important.length > 0) placeOnlyLargePhotos($ss, processed);
+      if (processed.filler)
+        while (processed.filler.length > 0) placeOnlySmallPhotos($ss, processed);
+    }
+  }
+
+  var preprocess = function(tiles) {
+    _.each(tiles, function(el) {
+      if (el.caption) {
+        var split = el.caption.split(' ');
+        if (split.length > 10)
+          el.snippet = split.slice(0, 10).join(" ") + "...";
+        else
           el.snippet = el.caption
-        if (el.large !== true) {
-          el.dimX = el.dimX / 2;
-          el.dimY = el.dimY / 2;
-        }
-      });
-      var _pictures = _.groupBy(json, function(el) {
-        return (el.large === true) ? 'large' : 'small';
-      });
-      _pictures.large || (_pictures.large = [])
-      PW.important = _pictures.large.sort(function(first, second) {
-        return parseInt(first.importance) < parseInt(second.importance);
-      });
-      PW.filler = _pictures.small;
-
-      setupLightboxHandlers(PW.$ss);
-
-      PW.populateGrid();
+      }
+      if (el.large !== true) {
+        el.dimX = el.dimX / 2;
+        el.dimY = el.dimY / 2;
+      }
+      // cached the lightbox preview
+      // TODO: move this to a scroll handler on the page, to only fetch
+      // visible lb pics
+      if (el.lightboxSrc) {
+        var prefetched = new Image();
+        prefetched.src = el.lightboxSrc;
+      }
     });
+    var _pictures = _.groupBy(tiles, function(el) {
+      return (el.large === true) ? 'large' : 'small';
+    });
+
+    _pictures.large || (_pictures.large = []);
+    _pictures.small || (_pictures.small = []);
+
+    var sorted = {
+      important: _pictures.large.sort(function(first, second) {
+        return parseInt(first.importance) < parseInt(second.importance);
+      }),
+      filler: _pictures.small.sort(function(first, second) {
+        return parseInt(first.importance) < parseInt(second.importance);
+      })
+    }
+    return sorted;
   }
 
 }(this, jQuery));

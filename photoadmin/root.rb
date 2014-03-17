@@ -100,17 +100,12 @@ get '/walls/:bucket/upload/?' do
   haml :upload, locals: {bucket: bucket}
 end
 
-# get '/buildjson/?' do
-#   buckets = AwsConnection.get_buckets
-#   haml :build, locals: {buckets: buckets}
-# end
-
-# get '/upload/?' do
-#   haml :upload
-# end
-
 get '/test/?' do
   haml :index, locals: {remote_json: params[:src]}
+end
+
+get '/seed' do
+  erb :seed, locals: {remote_json: 'kitty.json'}
 end
 
 get '/*.*' do
@@ -118,7 +113,7 @@ get '/*.*' do
 end
 
 get '/' do
-  haml :index, locals: {remote_json: 'kitty.json'}
+  erb :index, locals: {remote_json: 'kitty.json'}
 end
 
 helpers do
