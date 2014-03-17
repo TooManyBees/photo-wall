@@ -1,16 +1,15 @@
 (function(root, $) {
 
-  var defaultVersion = 3;
-  var defaultSelector = ".photowall-container";
-  var staticUrl = "https://photo-wall-static.s3.amazonaws.com/";
-
   var PW = root.LabsPhotoWall = (root.LabsPhotoWall || {});
+  PW.version = 3;
+  PW.selector = ".photowall-container";
+  PW.staticUrl = "https://photo-wall-static.s3.amazonaws.com/";
 
-  var versionedUrl = function(version, resource) {
+  PW.versionedUrl = function(resource) {
     // TODO: remove this hack:
     return resource;
 
-    var base = staticUrl + "v" + version + "/";
+    var base = PW.staticUrl + "v" + PW.version + "/";
     if (resource !== undefined)
       return base + resource;
     else
@@ -36,12 +35,16 @@
   }
 
   PW.bootstrap = function(options) {
+    if (options) {
+      if (options.selector) PW.selector = options.selector;
+      if (options.version) PW.version = options.version;
+      if (options.staticUrl) PW.staticUrl = options.staticURL;
+    }
+
     loadDependencies();
-    var version = (options.version || defaultVersion);
-    var selector = (options.selector || defaultSelector);
-    PW.walls = searchSeeds(selector);
+    PW.walls = searchSeeds(PW.selector);
     $.ajax({
-      url: versionedUrl(version, "photowall.js"),
+      url: PW.versionedUrl("photowall.js"),
       dataType: 'script',
       cache: true,
       success: initialize
@@ -95,5 +98,5 @@
 }(this, jQuery));
 
 $(document).one('ready', function() {
-  LabsPhotoWall.bootstrap({version: 3})
+  LabsPhotoWall.bootstrap()
 });

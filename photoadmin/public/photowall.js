@@ -140,8 +140,10 @@
   }
 
   PW.build = function($ss, layout) {
+    var tileTemplate = (layout.tileTemplate || PW.versionedUrl("template-photowall-tile.html"));
+    var lightboxTemplate = (layout.lightboxTemplate || PW.versionedUrl("template-photowall-lightbox.html"));
     $.ajax({
-      url: layout.tileTemplate,
+      url: tileTemplate,
       dataType: 'html',
       success: function(data) {
         PW.tileTemplate = Handlebars.compile(data);
@@ -149,7 +151,7 @@
       }
     })
     $.ajax({
-      url: layout.lightboxTemplate,
+      url: lightboxTemplate,
       dataType: 'html',
       success: function(data) {
         PW.lightboxTemplate = Handlebars.compile(data);

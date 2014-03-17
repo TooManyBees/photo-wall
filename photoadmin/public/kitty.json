@@ -1,6 +1,4 @@
 {
-   "tileTemplate": "template-photowall-tile.html",
-   "lightboxTemplate": "template-photowall-lightbox.html",
    "tiles": [
       {
          "src": "http://placekitten.com/435/435",
