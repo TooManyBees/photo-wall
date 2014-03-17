@@ -1,18 +1,18 @@
-#photowall-container {
+.photowall-container {
   font-weight: normal;
   font-size: 100%;
   font-family: sans-serif; }
-  #photowall-container h1, #photowall-container h2, #photowall-container h3, #photowall-container div, #photowall-container p, #photowall-container ul, #photowall-container ol, #photowall-container li, #photowall-container dl, #photowall-container dt, #photowall-container dd, #photowall-container iframe, #photowall-container figure, #photowall-container figcaption, #photowall-container small {
+  .photowall-container h1, .photowall-container h2, .photowall-container h3, .photowall-container div, .photowall-container p, .photowall-container ul, .photowall-container ol, .photowall-container li, .photowall-container dl, .photowall-container dt, .photowall-container dd, .photowall-container iframe, .photowall-container figure, .photowall-container figcaption, .photowall-container small {
     border: 0;
     margin: 0;
     padding: 0;
     list-style: none;
     font-size: inherit;
     font-weight: inherit; }
-  #photowall-container a {
+  .photowall-container a {
     text-decoration: none;
     color: inherit; }
-  #photowall-container img {
+  .photowall-container img {
     max-width: inherit;
     max-height: inherit; }
 

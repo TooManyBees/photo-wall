@@ -107,7 +107,7 @@
   }
 
   var setupLightboxHandlers = function($ss) {
-    $ss.on('click', '.tile>a', function(event) {
+    $ss.on('click', '.lb', function(event) {
       event.preventDefault();
       var $a = $(event.currentTarget);
       var $imgSrc = $(event.currentTarget).siblings('img').attr('src');
@@ -158,6 +158,7 @@
         PW.populateGrid($ss, layout.tiles);
       }
     })
+    setupLightboxHandlers($ss);
   }
 
   PW.populateGrid = function($ss, tiles) {

@@ -6,14 +6,11 @@
   PW.staticUrl = "https://photo-wall-static.s3.amazonaws.com/";
 
   PW.versionedUrl = function(resource) {
-    // TODO: remove this hack:
-    return resource;
+    if (PW.local) return resource;
 
     var base = PW.staticUrl + "v" + PW.version + "/";
-    if (resource !== undefined)
-      return base + resource;
-    else
-      return base;
+    if (resource !== undefined) return base + resource;
+    else return base;
   }
 
   var searchSeeds = function(selector) {
@@ -36,6 +33,7 @@
 
   PW.bootstrap = function(options) {
     if (options) {
+      if (options.local) PW.local = true;
       if (options.selector) PW.selector = options.selector;
       if (options.version) PW.version = options.version;
       if (options.staticUrl) PW.staticUrl = options.staticURL;
