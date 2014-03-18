@@ -90,6 +90,9 @@
         prefetched.src = el.lightboxSrc;
       }
 
+      if (el.importance === undefined)
+        el.importance = -Infinity;
+
       if (el.large === true){
         el.i = important_tiles.length;
         important_tiles.push(el);
@@ -214,15 +217,10 @@
   var byImportance = function(first, second) {
     // Sort first by importance. In case of a tie, sort by original order (saved as 'i')
     var diff = second.importance - first.importance;
-
-    if (isNaN(diff)) {
-      if (first.importantce) diff = -1;
-      if (second.importance) diff = 1;
-      diff = 0; // maintain original order in case of tie
-    }
-
-    if (diff === 0) return first.i - second.i;
-    return diff;
+    if (diff === 0 || isNaN(diff))
+      return first.i - second.i;
+    else
+      return diff;
   }
 
   var rand = (function() {
