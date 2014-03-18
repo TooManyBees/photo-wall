@@ -5,6 +5,12 @@
   PW.selector = ".photowall-container";
   PW.staticUrl = "https://photo-wall-static.s3.amazonaws.com/";
 
+  /*
+   * If we pass {local: true} to the bootstrap function, or if there's a meta
+   * tag called "photo-wall-static" with content "local" then this function will
+   * return a path to this server. Else, will return a path to s3 using the default
+   * version.
+   */
   PW.versionedUrl = function(resource) {
     if (PW.local) return "/"+resource;
 
@@ -13,6 +19,13 @@
     else return base;
   }
 
+  /*
+   * Searches the document for elements matching the passed css selector,
+   * then adds it to the list of walls for the page.
+   *
+   * Tags each element with an id equal to the name of the json file, for
+   * later reference.
+   */
   var searchSeeds = function(selector) {
     var $seeds = $(selector);
     var walls = [];
@@ -31,6 +44,12 @@
     return walls;
   }
 
+  /*
+   * Called at the bottom of this file.
+   * Sets options like the version number, the static url, and whether or not to use
+   * the local server for assets. Also loads css, the rest of the photo viewer, and
+   * kicks off the viewer populating the grids.
+   */
   PW.bootstrap = function(options) {
     if (options) {
       if (options.local) PW.local = true;
@@ -60,6 +79,9 @@
     return true;
   }
 
+  /*
+   * For each wall, fetches the json and calls the viewer's build method.
+   */
   var initialize = function() {
     if (dependenciesLoaded()) {
       var i = 0;
