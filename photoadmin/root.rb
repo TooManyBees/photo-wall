@@ -95,7 +95,7 @@ get '/walls/:bucket/edit/:wall' do
 end
 
 get '/test/?' do
-  erb :index, locals: {remote_json: params[:src]}
+  erb :index, locals: {remote_json: params[:src], show_embed_code: true}
 end
 
 get '/*.*' do
@@ -107,6 +107,10 @@ get '/' do
 end
 
 helpers do
+  def h output
+    Rack::Utils.escape_html output
+  end
+
   def four_oh_four bucket=nil
     halt 404, {"Content-Type" => "application/json"}, JSON.dump(error: "Bucket not found")
   end

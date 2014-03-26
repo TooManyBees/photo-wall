@@ -74,7 +74,7 @@
               %input.long{ name: "url", type: "text", value: preset['url'], placeholder: "(Clickthrough URL, optional)"}
 
   %form#build-form{ action: "/api/save/#{bucket}", method: 'POST' }
-    %input#build-button{ type: 'submit', value: "Build and save JSON to AWS!" }
+    %input#build-button{ type: 'submit', value: "Save and preview!" }
   #build-output.off
     %h2 Layout saved!
     %h3

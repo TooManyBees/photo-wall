@@ -1,3 +1,4 @@
+<% show_embed_code ||= false %>
 <% content_for :css do %>
   <style type="text/css">
     @media (max-width: 800px) {
@@ -8,6 +9,14 @@
     }
   </style>
   <meta name="photo-wall-static" content="local">
+<% end %>
+
+<% if show_embed_code %>
+  <pre class="embed_code">
+    <%=h "<!-- Photowall embed code, subject to the whims of a capricious master -->" %>
+    <%=h "<div class='photowall-container' data-layout='#{remote_json}'></div>" %>
+    <%=h "<script type='text/javascript' src='/bootstrap.js'></script>" %>
+  </pre>
 <% end %>
 
 <div class="photowall-container" data-layout='<%= remote_json %>'></div>
