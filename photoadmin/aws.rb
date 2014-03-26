@@ -104,11 +104,12 @@ module AwsConnection
     string_io = S3.get_object(bucket: bucket, key: wall).body
     string_io.rewind
     data = JSON.parse(string_io.read)
-    result = data.reduce({}) do |hash, el|
+    # Key tiles by their src url
+    data["tiles"] = data["tiles"].reduce({}) do |hash, el|
       hash.merge({el['src'] => el})
     end
-    result.default = {}
-    result
+    data.default = {}
+    data
   rescue Aws::S3::Errors::NoSuchKey
     Hash.new({})
   rescue Aws::S3::Errors::NoSuchBucket
