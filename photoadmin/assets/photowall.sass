@@ -67,6 +67,8 @@ $border-transition: 0.3s ease-in-out
     display: table
     clear: both
   .tile
+    float: none
+    @include box-sizzle(content-box)
     padding: 0
     margin: 0
     figcaption, img

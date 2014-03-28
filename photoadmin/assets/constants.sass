@@ -18,10 +18,10 @@ $color3: #FF7466
 $color4: #E855AA
 $color5: #D55EFF
 
-@mixin box-sizzle
-  box-sizing: border-box
-  -moz-box-sizing: border-box
-  -webkit-box-sizing: border-box
+@mixin box-sizzle($type: border-box)
+  box-sizing: $type
+  -moz-box-sizing: $type
+  -webkit-box-sizing: $type
 
 @mixin transition($t...)
   transition: $t

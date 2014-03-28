@@ -70,6 +70,10 @@
     display: table;
     clear: both; }
   .photowall-container .tile {
+    float: none;
+    box-sizing: content-box;
+    -moz-box-sizing: content-box;
+    -webkit-box-sizing: content-box;
     padding: 0;
     margin: 0; }
     .photowall-container .tile figcaption, .photowall-container .tile img {
