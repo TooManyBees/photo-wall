@@ -104,10 +104,6 @@
       .attr('href', PW.versionedUrl('photowall.css'))
       .appendTo('head');
 
-    $('<link rel="stylesheet" type="text/css">')
-      .attr('href', PW.versionedUrl('responsive.css'))
-      .appendTo('head');
-
     if (window.Handlebars === undefined) {
       $.ajax({
         url: 'https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/1.3.0/handlebars.min.js',

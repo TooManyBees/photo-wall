@@ -34,10 +34,14 @@ $border-transition: 0.3s ease-in-out
 
 .photowall-container
   @include box-sizzle
-  margin: 0
+  margin: auto
   border: 0
   padding: $tile-margin-wide 0 0 $tile-margin-wide
   width: 900px
+  @media #{$mobile-query}
+    padding: $tile-margin-narrow 0 0 $tile-margin-narrow
+    width: 300px
+    font-size: 80%
   .spinner
     height: 128px
     width: 128px
@@ -84,9 +88,12 @@ $border-transition: 0.3s ease-in-out
     position: absolute
     top: 0
     left: 0
-    opacity: 0
-    @include transition(opacity $border-transition, border-width $border-transition)
-  a
+    @media #{$desktop-query}
+      opacity: 0
+      @include transition(opacity $border-transition, border-width $border-transition)
+    @media #{$mobile-query}
+      border-width: 0 0 $border-width-narrow 0
+  a.lb
     width: inherit
     height: inherit
     position: absolute
@@ -110,6 +117,10 @@ $border-transition: 0.3s ease-in-out
     border: $tile-border-wide
     margin-top: -$tile-margin-wide
     margin-left: -$tile-margin-wide
+    @media #{$mobile-query}
+      border: $tile-border-narrow
+      margin-top: -$tile-margin-narrow
+      margin-left: -$tile-margin-narrow
 
   .tile
     position: relative
@@ -117,9 +128,17 @@ $border-transition: 0.3s ease-in-out
     border-bottom: $tile-border-wide
     width: $small-tile-width-wide
     height: $small-tile-width-wide
+    @media #{$mobile-query}
+      // float: left
+      border-bottom: $tile-border-narrow
+      width: $small-tile-width-narrow
+      height: $small-tile-width-narrow
     &.big
       width: $large-tile-width-wide
       height: $large-tile-width-wide
+      @media #{$mobile-query}
+        width: $large-tile-width-narrow
+        height: $large-tile-width-narrow
     &:last-child
       border: 0
     img
@@ -137,7 +156,8 @@ $border-transition: 0.3s ease-in-out
       right: 0
       bottom: 10px
       color: white
-      @include transform(rotate(90deg), 100% 0%)
+      @media #{$desktop-query}
+        @include transform(rotate(90deg), 100% 0%)
     figcaption
       @include box-sizzle
       padding: 5px $border-width-wide
@@ -150,9 +170,13 @@ $border-transition: 0.3s ease-in-out
       text-align: center
       width: 100%
       background-color: rgba(0,0,0,0.4)
-    &:hover
-      figcaption, .credit
-        opacity: 1
-      .frame
-        opacity: 1
-        border-width: $border-width-wide
+      @media #{$mobile-query}
+        // padding: 5px $border-width-narrow
+        display: none
+    @media #{$desktop-query}
+      &:hover
+        figcaption, .credit
+          opacity: 1
+        .frame
+          opacity: 1
+          border-width: $border-width-wide

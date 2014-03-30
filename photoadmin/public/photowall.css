@@ -38,10 +38,15 @@
   box-sizing: border-box;
   -moz-box-sizing: border-box;
   -webkit-box-sizing: border-box;
-  margin: 0;
+  margin: auto;
   border: 0;
   padding: 5px 0 0 5px;
   width: 900px; }
+  @media only screen and (min-device-width: 320px) and (max-device-width: 480px) {
+    .photowall-container {
+      padding: 0px 0 0 0px;
+      width: 300px;
+      font-size: 80%; } }
   .photowall-container .spinner {
     height: 128px;
     width: 128px;
@@ -90,13 +95,18 @@
     height: inherit;
     position: absolute;
     top: 0;
-    left: 0;
-    opacity: 0;
-    transition: opacity 0.3s ease-in-out, border-width 0.3s ease-in-out;
-    -o-transition: opacity 0.3s ease-in-out, border-width 0.3s ease-in-out;
-    -moz-transition: opacity 0.3s ease-in-out, border-width 0.3s ease-in-out;
-    -webkit-transition: opacity 0.3s ease-in-out, border-width 0.3s ease-in-out; }
-  .photowall-container a {
+    left: 0; }
+    @media only screen and (min-device-width: 481px) {
+      .photowall-container .frame {
+        opacity: 0;
+        transition: opacity 0.3s ease-in-out, border-width 0.3s ease-in-out;
+        -o-transition: opacity 0.3s ease-in-out, border-width 0.3s ease-in-out;
+        -moz-transition: opacity 0.3s ease-in-out, border-width 0.3s ease-in-out;
+        -webkit-transition: opacity 0.3s ease-in-out, border-width 0.3s ease-in-out; } }
+    @media only screen and (min-device-width: 320px) and (max-device-width: 480px) {
+      .photowall-container .frame {
+        border-width: 0 0 8px 0; } }
+  .photowall-container a.lb {
     width: inherit;
     height: inherit;
     position: absolute;
@@ -120,15 +130,29 @@
     border: 5px solid transparent;
     margin-top: -5px;
     margin-left: -5px; }
+    @media only screen and (min-device-width: 320px) and (max-device-width: 480px) {
+      .photowall-container .cell {
+        border: 0px solid transparent;
+        margin-top: 0px;
+        margin-left: 0px; } }
   .photowall-container .tile {
     position: relative;
     overflow: hidden;
     border-bottom: 5px solid transparent;
     width: 215px;
     height: 215px; }
+    @media only screen and (min-device-width: 320px) and (max-device-width: 480px) {
+      .photowall-container .tile {
+        border-bottom: 0px solid transparent;
+        width: 75px;
+        height: 75px; } }
     .photowall-container .tile.big {
       width: 435px;
       height: 435px; }
+      @media only screen and (min-device-width: 320px) and (max-device-width: 480px) {
+        .photowall-container .tile.big {
+          width: 150px;
+          height: 150px; } }
     .photowall-container .tile:last-child {
       border: 0; }
     .photowall-container .tile img {
@@ -148,17 +172,19 @@
       position: absolute;
       right: 0;
       bottom: 10px;
-      color: white;
-      transform: rotate(90deg);
-      -o-transform: rotate(90deg);
-      -ms-transform: rotate(90deg);
-      -moz-transform: rotate(90deg);
-      -webkit-transform: rotate(90deg);
-      transform-origin: 100% 0%;
-      -o-transform-origin: 100% 0%;
-      -ms-transform-origin: 100% 0%;
-      -moz-transform-origin: 100% 0%;
-      -webkit-transform-origin: 100% 0%; }
+      color: white; }
+      @media only screen and (min-device-width: 481px) {
+        .photowall-container .tile .credit {
+          transform: rotate(90deg);
+          -o-transform: rotate(90deg);
+          -ms-transform: rotate(90deg);
+          -moz-transform: rotate(90deg);
+          -webkit-transform: rotate(90deg);
+          transform-origin: 100% 0%;
+          -o-transform-origin: 100% 0%;
+          -ms-transform-origin: 100% 0%;
+          -moz-transform-origin: 100% 0%;
+          -webkit-transform-origin: 100% 0%; } }
     .photowall-container .tile figcaption {
       box-sizing: border-box;
       -moz-box-sizing: border-box;
@@ -173,8 +199,12 @@
       text-align: center;
       width: 100%;
       background-color: rgba(0, 0, 0, 0.4); }
-    .photowall-container .tile:hover figcaption, .photowall-container .tile:hover .credit {
-      opacity: 1; }
-    .photowall-container .tile:hover .frame {
-      opacity: 1;
-      border-width: 15px; }
+      @media only screen and (min-device-width: 320px) and (max-device-width: 480px) {
+        .photowall-container .tile figcaption {
+          display: none; } }
+    @media only screen and (min-device-width: 481px) {
+      .photowall-container .tile:hover figcaption, .photowall-container .tile:hover .credit {
+        opacity: 1; }
+      .photowall-container .tile:hover .frame {
+        opacity: 1;
+        border-width: 15px; } }
