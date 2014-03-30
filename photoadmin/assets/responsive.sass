@@ -1,18 +1,18 @@
 @import constants
 
-@media all and (max-width: 768px)
+@media only screen and (min-device-width: 320px) and (max-device-width: 480px)
   @-viewport
-    width: 640px
+    width: 300px
   .photowall-container
     padding: $tile-margin-narrow 0 0 $tile-margin-narrow
-    width: 640px
+    width: 300px
     .cell
       border: $tile-border-narrow
       margin-top: -$tile-margin-narrow
       margin-left: -$tile-margin-narrow
     .frame
       opacity: 1
-      border-width: 0 0 15px 0
+      border-width: 0 0 $border-width-narrow 0
     .tile
       // float: left
       border-bottom: $tile-border-narrow
@@ -24,7 +24,10 @@
         width: $large-tile-width-narrow
         height: $large-tile-width-narrow
       figcaption
+        padding: 5px $border-width-narrow
         display: none
+      &:hover .frame
+        border-width: $border-width-narrow
   // #photowall-lightbox
   //   z-index: 10001
   //   position: fixed
