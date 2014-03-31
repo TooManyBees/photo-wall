@@ -189,7 +189,9 @@
       $ss.append($lightBoxContainer);
       adjustLightBoxCoords($lightBoxContainer.find('#lightbox-image'));
     });
-    $ss.on('click', '#lightbox-film', function() {
+    $ss.on('click', '#photowall-lightbox', function() {
+      if ($(event.target).attr('href') !== undefined)
+        event.stopPropagation
       $('#photowall-lightbox').remove();
     });
   }

@@ -1,7 +1,7 @@
 (function(root, $) {
 
   var PW = root.LabsPhotoWall = (root.LabsPhotoWall || {});
-  PW.version = "v3";
+  PW.version = "v4";
   PW.selector = ".photowall-container";
   PW.staticUrl = "https://photo-wall-static.s3.amazonaws.com/";
 
