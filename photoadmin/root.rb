@@ -84,7 +84,7 @@ get '/walls/:bucket/build/?' do
   bucket = params[:bucket]
   halt 404 unless AwsConnection.bucket_exists? bucket
   images = AwsConnection.get_all_images(bucket)
-  haml :bucket_build, locals: {bucket: bucket, images: images, presets: Hash.new({})}
+  erb :bucket_build, locals: {bucket: bucket, images: images, presets: Hash.new({})}
 end
 
 get '/walls/:bucket/edit/:wall' do
@@ -93,7 +93,7 @@ get '/walls/:bucket/edit/:wall' do
   # halt 404 unless AwsConnection.wall_exists? params[:wall]
   images = AwsConnection.get_all_images(bucket)
   presets = AwsConnection.get_wall(bucket: bucket, wall: params[:wall])
-  haml :bucket_build, locals: {bucket: bucket, images: images, presets: presets}
+  erb :bucket_build, locals: {bucket: bucket, images: images, presets: presets}
 end
 
 get '/test/?' do

@@ -78,10 +78,6 @@
         else
           el.snippet = el.caption
       }
-      if (el.large !== true) {
-        el.dimX = el.dimX / 2;
-        el.dimY = el.dimY / 2;
-      }
 
       // cache the lightbox preview
       // TODO: move this to a scroll handler on the page

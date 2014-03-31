@@ -1,0 +1,99 @@
+<% content_for :css do %>
+  <link rel="stylesheet" type="text/css" href="/builder.css">
+<% end %>
+
+<section id="main">
+  <h1>Labs Photo Wall Builder</h1>
+
+  <dl>
+    <dt>Lightbox image</dt>
+    <dd>The image that will display when the user clicks on a tile. If left blank, it will be the same image as the tile itself.</dd>
+    <dt>Importance</dt>
+    <dd>Images get sorted in decreasing order of importance, or if left unset, in the order that they appear in this list.</dd>
+    <dt>Display large</dt>
+    <dd>If checked, the image will take up the size of 4 small tiles.</dd>
+    <dt>Skip this image</dt>
+    <dd>If checked, the image will not be a part of the wall.</dd>
+    <dt>Caption</dt>
+    <dd>A caption on hover over the image. (Optional)</dd>
+    <dt>URL</dt>
+    <dd>The image will link to this URL. (This is not the path to the image itself.)</dd>
+    <dt>Shift</dt>
+    <dd>The interior of the red frame will be visible in the square tile.</dd>
+  </dl>
+
+  <div id="image-list">
+    <div class="spinner"></div>
+
+    <ul>
+      <% images.each do |image| %>
+        <% preset = presets['tiles'][image] %>
+        <li>
+          <img src="<%= image %>">
+          <div class="border">
+            <!-- Controls for shifting -->
+            <div class="controls vertical up" data-y=5>Shift Up</div>
+            <div class="controls horizontal left" data-x=5>Shift<br>Left</div>
+            <div class="controls horizontal right" data-x=-5>Shift<br>Right</div>
+            <div class="controls vertical down" data-y=-5>Shift Down</div>
+          </div>
+          <fieldset>
+            <legend>
+              <input type="checkbox" name="show" value=true checked>
+              Include this image?
+            </legend>
+            <label class="disabled">
+              Tile image: <input class="long" name="src" type="text" value="<%= image %>" disabled><br>
+            </label>
+            <label>
+              Use lightbox? <input type="checkbox" name="useLightbox" value=true <%= "checked" if preset['useLightbox'] %>><br>
+            </label>
+            <label>
+              Lightbox image: <input class="long" name="lightboxSrc" type="text" value="<% preset['lightboxSrc'] %>" placeholder="(If blank, lightbox will show the tile image.)"><br>
+            </label>
+            <label>
+              Importance: <input name="importance" type="text" value="<%= preset['importance'] %>" placeholder="(Numeric, optional)">
+            </label>
+            <label>
+              Display large? <input type="checkbox" name="large" value=true <%= "checked" if preset['large'] %>><br>
+            </label>
+            <input name="dimX" type="hidden" value="<%= preset['dimX'] || 0 %>">
+            <input name="dimY" type="hidden" value="<%= preset['dimY'] || 0 %>">
+            <input name="offsetX" type="hidden" value="<%= preset['offsetX'] || 0 %>">
+            <input name="offsetY" type="hidden" value="<%= preset['offsetY'] || 0 %>">
+            <input name="dim" type="hidden" value="<%= preset['dim'] %>">
+            <label>
+              Image credit: <input class="long" name="credit" type="text" value="<%= preset['credit'] %>" placeholder="(Optional)"><br>
+            </label>
+            <label>
+              Caption: <input class="long" name="caption" type="text" value="<%= preset['caption'] %>" placeholder="(Optional)"><br>
+            </label>
+            <label>
+              URL: <input class="long" name="url" type="text" value="<%= preset['url'] %>" placeholder="(Clickthrough URL, optional)">
+            </label>
+          </fieldset>
+        </li>
+      <% end %>
+
+      <form id="build-form" action="/api/save/<%= bucket %>" method="POST">
+        <input id="build-button" type="submit" value="Save and preview!">
+      </form>
+      <div id="build-output" class="off">
+        <h2>Layout saved!</h2>
+        <h3>Click to preview: <a id="saved-url"></a></h3>
+        <iframe></iframe>
+      </div>
+    </ul>
+  </div>
+
+</section>
+
+<script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.0/jquery.js"></script>
+<script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.5.2/underscore-min.js"></script>
+<script type="text/javascript" src="/bucket_build.js"></script>
+<script type="text/javascript">
+  $(document).ready(function() {
+    Builder.setup();
+    Builder.matchBorderToInputValues($('#image-list').find('li'));
+  })
+</script>

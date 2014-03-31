@@ -72,10 +72,13 @@
       var obj = {};
       $inputs.each(function() {
         var $input = $(this);
-        if ($input.val() !== "")
-          obj[$input.prop('name')] = $input.val();
-        else if ($input.prop('checked') === true)
-          obj[$input.prop('name')] = true;
+        if ($input.attr('type') === 'checkbox') {
+          if ($input.prop('checked') === true)
+            obj[$input.prop('name')] = true;
+        } else {
+          if ($input.val() !== "")
+            obj[$input.prop('name')] = $input.val();
+        }
       });
       if (obj['show'] === true) {
         delete obj['show'];
@@ -89,11 +92,19 @@
     var $border = $thisVal.find('.border');
     var $inputX = $thisVal.find('input[name=dimX]');
     var $inputY = $thisVal.find('input[name=dimY]');
+    var $offsetX = $thisVal.find('input[name=offsetX]');
+    var $offsetY = $thisVal.find('input[name=offsetY]');
     var offsetX = parseInt(offset.x || 0);
     var offsetY = parseInt(offset.y || 0);
 
     $inputX.val(parseInt($inputX.val()) + offsetX);
     $inputY.val(parseInt($inputY.val()) + offsetY);
+
+    var pctX = "" + 100 * $inputX.val() / $border.width();
+    var pctY = "" + 100 * $inputY.val() / $border.height();
+
+    $offsetX.val(pctX.slice(0,6));
+    $offsetY.val(pctY.slice(0,6));
 
     shiftBorder($border, $inputX.val(), $inputY.val());
   }
