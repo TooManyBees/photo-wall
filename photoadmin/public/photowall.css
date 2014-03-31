@@ -31,6 +31,9 @@
   position: absolute;
   bottom: 4px;
   text-align: center; }
+  @media only screen and (min-device-width: 320px) and (max-device-width: 480px) {
+    #lightbox-image p {
+      font-size: 16px; } }
 #lightbox-image small {
   font-size: 80%; }
 
@@ -106,7 +109,7 @@
     @media only screen and (min-device-width: 320px) and (max-device-width: 480px) {
       .photowall-container .frame {
         border-width: 0 0 8px 0; } }
-  .photowall-container a.lb {
+  .photowall-container a {
     width: inherit;
     height: inherit;
     position: absolute;
@@ -161,12 +164,12 @@
         width: 100%; }
       .photowall-container .tile img.wide {
         height: 100%; }
-    .photowall-container .tile figcaption, .photowall-container .tile .credit {
+    .photowall-container .tile .tile-caption, .photowall-container .tile .tile-credit {
       transition: opacity 0.3s ease-in-out;
       -o-transition: opacity 0.3s ease-in-out;
       -moz-transition: opacity 0.3s ease-in-out;
       -webkit-transition: opacity 0.3s ease-in-out; }
-    .photowall-container .tile .credit {
+    .photowall-container .tile .tile-credit {
       opacity: 0;
       font-size: 80%;
       position: absolute;
@@ -174,7 +177,7 @@
       bottom: 10px;
       color: white; }
       @media only screen and (min-device-width: 481px) {
-        .photowall-container .tile .credit {
+        .photowall-container .tile .tile-credit {
           transform: rotate(90deg);
           -o-transform: rotate(90deg);
           -ms-transform: rotate(90deg);
@@ -185,7 +188,10 @@
           -ms-transform-origin: 100% 0%;
           -moz-transform-origin: 100% 0%;
           -webkit-transform-origin: 100% 0%; } }
-    .photowall-container .tile figcaption {
+      @media only screen and (min-device-width: 320px) and (max-device-width: 480px) {
+        .photowall-container .tile .tile-credit {
+          display: none; } }
+    .photowall-container .tile .tile-caption {
       box-sizing: border-box;
       -moz-box-sizing: border-box;
       -webkit-box-sizing: border-box;
@@ -200,10 +206,10 @@
       width: 100%;
       background-color: rgba(0, 0, 0, 0.4); }
       @media only screen and (min-device-width: 320px) and (max-device-width: 480px) {
-        .photowall-container .tile figcaption {
+        .photowall-container .tile .tile-caption {
           display: none; } }
     @media only screen and (min-device-width: 481px) {
-      .photowall-container .tile:hover figcaption, .photowall-container .tile:hover .credit {
+      .photowall-container .tile:hover .tile-caption, .photowall-container .tile:hover .tile-credit {
         opacity: 1; }
       .photowall-container .tile:hover .frame {
         opacity: 1;

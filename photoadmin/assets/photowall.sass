@@ -24,6 +24,8 @@ $border-transition: 0.3s ease-in-out
     background-color: rgba(0,0,0,0.4)
     width: 100%
     font-size: 20px
+    @media #{$mobile-query}
+      font-size: 16px
     color: #eee
     padding: 5px
     position: absolute
@@ -93,7 +95,7 @@ $border-transition: 0.3s ease-in-out
       @include transition(opacity $border-transition, border-width $border-transition)
     @media #{$mobile-query}
       border-width: 0 0 $border-width-narrow 0
-  a.lb
+  a
     width: inherit
     height: inherit
     position: absolute
@@ -147,9 +149,9 @@ $border-transition: 0.3s ease-in-out
         width: 100%
       &.wide
         height: 100%
-    figcaption, .credit
+    .tile-caption, .tile-credit
       @include transition(opacity $border-transition)
-    .credit
+    .tile-credit
       opacity: 0
       font-size: 80%
       position: absolute
@@ -158,7 +160,9 @@ $border-transition: 0.3s ease-in-out
       color: white
       @media #{$desktop-query}
         @include transform(rotate(90deg), 100% 0%)
-    figcaption
+      @media #{$mobile-query}
+        display: none
+    .tile-caption
       @include box-sizzle
       padding: 5px $border-width-wide
       opacity: 0
@@ -175,7 +179,7 @@ $border-transition: 0.3s ease-in-out
         display: none
     @media #{$desktop-query}
       &:hover
-        figcaption, .credit
+        .tile-caption, .tile-credit
           opacity: 1
         .frame
           opacity: 1
