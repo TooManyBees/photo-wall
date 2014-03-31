@@ -1,7 +1,7 @@
 (function(root, $) {
 
   var PW = root.LabsPhotoWall = (root.LabsPhotoWall || {});
-  PW.version = 3;
+  PW.version = "v3";
   PW.selector = ".photowall-container";
   PW.staticUrl = "https://photo-wall-static.s3.amazonaws.com/";
 
@@ -14,7 +14,7 @@
   PW.versionedUrl = function(resource) {
     if (PW.local) return "/"+resource;
 
-    var base = PW.staticUrl + "v" + PW.version + "/";
+    var base = PW.staticUrl + PW.version + "/";
     if (resource !== undefined) return base + resource;
     else return base;
   }
@@ -59,14 +59,8 @@
     }
     if ($('meta[name=photo-wall-static]').attr('content') === "local") PW.local = true;
 
-    loadDependencies();
     PW.walls = searchSeeds(PW.selector);
-    $.ajax({
-      url: PW.versionedUrl("photowall.js"),
-      dataType: 'script',
-      cache: true,
-      success: initialize
-    });
+    loadDependencies();
   }
 
   var dependenciesLoaded = function() {
@@ -87,12 +81,7 @@
       var i = 0;
       for (i; i < PW.walls.length; i++) {
         (function() {
-          var wall = PW.walls[i];
-          console.log("Fetching wall from "+wall.layout);
-          $.getJSON(wall.layout, function(layout) {
-            var $ss = $('#'+wall.id);
-            PW.build($ss, layout);
-          });
+          PW.build(PW.walls[i]);
         })();
       }
     }
@@ -112,10 +101,14 @@
         success: initialize
       });
     }
+    $.ajax({
+      url: PW.versionedUrl("photowall.js"),
+      dataType: 'script',
+      cache: true,
+      success: initialize
+    });
   }
 
 }(this, jQuery));
 
-jQuery(document).ready(function() {
-  LabsPhotoWall.bootstrap()
-});
+LabsPhotoWall.bootstrap()

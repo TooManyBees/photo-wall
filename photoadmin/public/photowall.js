@@ -2,61 +2,62 @@
 
   var PW = root.LabsPhotoWall = (root.LabsPhotoWall || {});
   PW.loaded = true;
+  PW.templates = [];
 
-  /*
-   * $ss : A jQuery object in which to place the photo grid
-   * layout: An object describing how to place the photos
-   *
-   * At this point we still need to load the two templates.
-   * TODO: Make templates specific to a wall instead of global
-   *       (for when there are multiple walls on a page).
-   */
-  PW.build = function($ss, layout) {
-    var tileTemplate = (layout.tileTemplate || PW.versionedUrl("template-photowall-tile.html"));
-    var lightboxTemplate = (layout.lightboxTemplate || PW.versionedUrl("template-photowall-lightbox.html"));
+  PW.build = function(wall) {
+    console.log("Fetching wall from "+wall.layout);
+    $.getJSON(wall.layout, function(layout) {
 
-    if (PW.tileTemplate === undefined) {
-      $.ajax({
-        url: tileTemplate,
-        dataType: 'html',
-        cache: true,
-        success: function(data) {
-          PW.tileTemplate = Handlebars.compile(data);
-          populateGrid($ss, layout.tiles);
-        }
-      });
-    } else {
-      populateGrid($ss, layout.tiles);
-    }
+      var tileTemplateSrc = (layout.tileTemplateSrc || PW.versionedUrl("template-photowall-tile.html"));
+      var lightboxTemplateSrc = (layout.lightboxTemplateSrc || PW.versionedUrl("template-photowall-lightbox.html"));
 
-    if (PW.lightboxTemplate === undefined) {
-      $.ajax({
-        url: lightboxTemplate,
-        dataType: 'html',
-        cache: true,
-        success: function(data) {
-          PW.lightboxTemplate = Handlebars.compile(data);
-          setupLightboxHandlers($ss);
-        }
-      })
-    } else {
-      setupLightboxHandlers($ss);
-    }
+      if (PW.templates[tileTemplateSrc] === undefined) {
+        console.log("Fetching template "+tileTemplateSrc);
+        $.ajax({
+          url: tileTemplateSrc,
+          dataType: 'html',
+          cache: true,
+          success: function(data) {
+            PW.templates[tileTemplateSrc] = Handlebars.compile(data);
+            populateGrid(wall.element, layout.tiles, tileTemplateSrc);
+          }
+        });
+      } else {
+        console.log("Using cached template "+tileTemplateSrc);
+        populateGrid(wall.element, layout.tiles, tileTemplateSrc);
+      }
+
+      if (PW.templates[lightboxTemplateSrc] === undefined) {
+        console.log("Fetching template "+lightboxTemplateSrc);
+        $.ajax({
+          url: lightboxTemplateSrc,
+          dataType: 'html',
+          cache: true,
+          success: function(data) {
+            PW.templates[lightboxTemplateSrc] = Handlebars.compile(data);
+            setupLightboxHandlers(wall.element, lightboxTemplateSrc);
+          }
+        });
+      } else {
+        console.log("Using cached template "+lightboxTemplateSrc);
+        setupLightboxHandlers(wall.element, lightboxTemplateSrc);
+      }
+    }); // End $.getJSON()
   }
 
-  var populateGrid = function($ss, tiles) {
-    if (PW.tileTemplate) {
+  var populateGrid = function($ss, tiles, templateSrc) {
+    if (templateSrc) {
       var processed = preprocess(tiles);
       $ss.addClass('ready'); // Removes the spinner animation
 
       // To keep layout intact, arranges large and small images appropriately based
       // on what images haven't been placed yet.
       if (processed.filler && processed.important)
-        while (processed.important.length > 0 && processed.filler.length >= 4) placeMixOfPhotos($ss, processed);
+        while (processed.important.length > 0 && processed.filler.length >= 4) placeMixOfPhotos($ss, processed, templateSrc);
       if (processed.important)
-        while (processed.important.length > 0) placeOnlyLargePhotos($ss, processed);
+        while (processed.important.length > 0) placeOnlyLargePhotos($ss, processed, templateSrc);
       if (processed.filler)
-        while (processed.filler.length > 0) placeOnlySmallPhotos($ss, processed);
+        while (processed.filler.length > 0) placeOnlySmallPhotos($ss, processed, templateSrc);
     }
   }
 
@@ -109,7 +110,7 @@
    * Functions for placing photos onto the grid
    */
 
-  var renderSingleCell = function(arr) {
+  var renderSingleCell = function(arr, templateSrc) {
     if (arr.length === 0)
       return null;
     var el = arr.splice(0,1);
@@ -117,12 +118,12 @@
     if (el[0] !== undefined) {
       var e = el[0];
       e.color = randomColor();
-      $cell.append(PW.tileTemplate(e));
+      $cell.append(PW.templates[templateSrc](e));
     }
     return $cell;
   }
 
-  var renderDoubleCell = function(arr) {
+  var renderDoubleCell = function(arr, templateSrc) {
     if (arr.length === 0)
       return null;
     var els = arr.splice(0,2);
@@ -130,55 +131,55 @@
     while (els.length > 0) {
       var e = els.splice(0,1)[0];
       e.color = randomColor();
-      $cell.append(PW.tileTemplate(e));
+      $cell.append(PW.templates[templateSrc](e));
     }
     return $cell;
   }
 
-  var placeOnlyLargePhotos = function($ss, tiles) {
-    $ss.append(renderSingleCell(tiles.important));
-    $ss.append(renderSingleCell(tiles.important));
+  var placeOnlyLargePhotos = function($ss, tiles, templateSrc) {
+    $ss.append(renderSingleCell(tiles.important, templateSrc));
+    $ss.append(renderSingleCell(tiles.important, templateSrc));
   }
 
-  var placeOnlySmallPhotos = function($ss, tiles) {
+  var placeOnlySmallPhotos = function($ss, tiles, templateSrc) {
     if (tiles.filler.length >= 8) {
       var i = 0;
       for (i=0; i < 4; i++) {
-        $ss.append(renderDoubleCell(tiles.filler));
+        $ss.append(renderDoubleCell(tiles.filler, templateSrc));
       }
     } else {
       while (tiles.filler.length > 0) {
-        $ss.append(renderSingleCell(tiles.filler));
+        $ss.append(renderSingleCell(tiles.filler, templateSrc));
       }
     }
   }
 
-  var placeMixOfPhotos = function($ss, tiles) {
+  var placeMixOfPhotos = function($ss, tiles, templateSrc) {
     switch (rand(3)) {
       case 1:
-        $ss.append(renderSingleCell(tiles.important));
-        $ss.append(renderDoubleCell(tiles.filler));
-        $ss.append(renderDoubleCell(tiles.filler));
+        $ss.append(renderSingleCell(tiles.important, templateSrc));
+        $ss.append(renderDoubleCell(tiles.filler, templateSrc));
+        $ss.append(renderDoubleCell(tiles.filler, templateSrc));
         break;
       case 2:
-        $ss.append(renderDoubleCell(tiles.filler));
-        $ss.append(renderSingleCell(tiles.important));
-        $ss.append(renderDoubleCell(tiles.filler));
+        $ss.append(renderDoubleCell(tiles.filler, templateSrc));
+        $ss.append(renderSingleCell(tiles.important, templateSrc));
+        $ss.append(renderDoubleCell(tiles.filler, templateSrc));
         break;
       case 3:
-        $ss.append(renderDoubleCell(tiles.filler));
-        $ss.append(renderDoubleCell(tiles.filler));
-        $ss.append(renderSingleCell(tiles.important));
+        $ss.append(renderDoubleCell(tiles.filler, templateSrc));
+        $ss.append(renderDoubleCell(tiles.filler, templateSrc));
+        $ss.append(renderSingleCell(tiles.important, templateSrc));
         break;
     }
   }
 
-  var setupLightboxHandlers = function($ss) {
+  var setupLightboxHandlers = function($ss, templateSrc) {
     $ss.on('click', '.lb', function(event) {
       event.preventDefault();
       var $a = $(event.currentTarget);
       var $imgSrc = $(event.currentTarget).siblings('img').attr('src');
-      var $lightBoxContainer = $(PW.lightboxTemplate({
+      var $lightBoxContainer = $(PW.templates[templateSrc]({
         src: $imgSrc,
         lightboxSrc: ($a.data('lightboxSrc') || $imgSrc),
         url: $a.data('url'),
@@ -194,14 +195,15 @@
   }
 
   var adjustLightBoxCoords = function($div) {
-    var margin = 40;
+    var margin = 20;
+    var $img = $div.find('img');
 
     var wWidth = window.innerWidth;
     var wHeight = window.innerHeight;
-    $div.find('img').css('max-height', wHeight - margin * 2);
-    $div.find('img').css('max-width', wWidth - margin * 2);
-    var iWidth = $div.find('img').width();
-    var iHeight = $div.find('img').height();
+    $img.css('max-height', wHeight - margin * 2);
+    $img.css('max-width', wWidth - margin * 2);
+    var iWidth = $img.width();
+    var iHeight = $img.height();
     $div.css('left', (wWidth - iWidth) / 2);
     $div.css('top', (wHeight - iHeight) / 2);
   }
