@@ -1,0 +1,12 @@
+- default_title = "HuffPost Labs Photo Grid"
+
+!!! 5
+%head
+  %title= content_for?(:title) ? yield_content(:title) : default_title
+  %meta{ charset: "utf-8" }
+  %meta{ name: "viewport", content: "width=device-width"}
+  = yield_content(:css) if content_for?(:css)
+  %script{ type: "text/javascript", src: "http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.0/jquery.js" }
+
+%body
+  = yield

@@ -64,7 +64,9 @@ end
 get '/walls/?' do
   buckets = AwsConnection.get_buckets
   buckets.map! do |bucket|
-    walls = AwsConnection.get_saved_walls(bucket)
+    walls = AwsConnection.get_saved_walls(bucket).map do |wall|
+      wall.merge(pretty_name: Time.at(wall[:name][/\d+/].to_i).strftime("%Y %b %d, %H:%M:%S"))
+    end
     {name: bucket, walls: walls}
   end
   haml :buckets_list, locals: {buckets: buckets}

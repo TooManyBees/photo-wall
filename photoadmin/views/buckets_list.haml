@@ -13,19 +13,16 @@
 
   %ul#bucket-list
     - buckets.each do |bucket|
-      %li.collapsed
-        %a{ href: "/walls/#{bucket[:name]}"}= bucket[:name]
-        %a{ href: "/walls/#{bucket[:name]}/build" } New layout
-        %ol
-          - if bucket[:walls].length > 0
-            = "#{bucket[:walls].length} saved layout#{'s' if bucket[:walls].length != 1}"
-            %a.show-layouts{ href: '#'} (Show)
-            %a.hide-layouts{ href: '#'} (Hide)
-            - bucket[:walls].each do |wall|
-              %li
-                = wall[:name]
-                %a{ href: "/test?src=#{wall[:url]}" } Preview
-                %a{ href: "/walls/#{bucket[:name]}/edit/#{wall[:name]}"} Edit
+      %li.bucket
+        %a.bucket-name{ href: "/walls/#{bucket[:name]}"}= "> " + bucket[:name]
+        %a.show-layouts{ href: '#'}= "(#{bucket[:walls].length})"
+        %a.new-layout{ href: "/walls/#{bucket[:name]}/build" } (New)
+        %ol.walls
+          - bucket[:walls].each do |wall|
+            %li.wall
+              = wall[:pretty_name]
+              %a{ href: "/test?src=#{wall[:url]}" } Preview
+              %a{ href: "/walls/#{bucket[:name]}/edit/#{wall[:name]}"} Edit
 
   %script#list-template{ type: 'text/template' }
     %li.collapsed

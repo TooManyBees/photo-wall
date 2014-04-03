@@ -4,12 +4,7 @@ $(document).ready(function() {
 
   $('.show-layouts').on('click', function(event) {
     event.preventDefault();
-    $(this).parents('li').removeClass('collapsed');
-  });
-
-  $('.hide-layouts').on('click', function(event) {
-    event.preventDefault();
-    $(this).parents('li').addClass('collapsed');
+    $(this).parents('li').toggleClass('open');
   });
 
   $('#new-bucket').on('submit', function(event) {

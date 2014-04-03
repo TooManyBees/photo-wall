@@ -3,17 +3,6 @@
 
 $main-size: 800px
 
-.show-layouts
-  display: none
-
-.collapsed
-  li
-    display: none
-  .show-layouts
-    display: inline
-  .hide-layouts
-    display: none
-
 .tile-thumb
   float: left
   width: $small-tile-width-wide
@@ -30,8 +19,31 @@ $main-size: 800px
     font-weight: lighter
 
 #bucket-list
-  ol
-    margin-left: 25px
+  .bucket
+    background-color: #eee
+    margin: 5px 0
+    border-radius: 5px
+    padding: 5px
+  .bucket-name
+    font-family: Times, serif
+    font-size: 32px
+    border-bottom: 1px dashed
+  .menu-item
+    display: inline-block
+    float: left
+  .bucket-name,
+  .show-layouts
+    margin-right: 5px
+  .wall
+    margin: 5px 0
+
+.walls
+  @include transition(height 0.5s ease-in-out)
+  height: 0
+  overflow: hidden
+.open
+  .walls
+    height: auto
 
 .main
   // width: $main-size

@@ -25,16 +25,6 @@ h2 {
 h3 {
   text-align: center; }
 
-.show-layouts {
-  display: none; }
-
-.collapsed li {
-  display: none; }
-.collapsed .show-layouts {
-  display: inline; }
-.collapsed .hide-layouts {
-  display: none; }
-
 .tile-thumb {
   float: left;
   width: 215px;
@@ -50,8 +40,34 @@ h3 {
   .tile-thumb figcaption {
     font-weight: lighter; }
 
-#bucket-list ol {
-  margin-left: 25px; }
+#bucket-list .bucket {
+  background-color: #eeeeee;
+  margin: 5px 0;
+  border-radius: 5px;
+  padding: 5px; }
+#bucket-list .bucket-name {
+  font-family: Times, serif;
+  font-size: 32px;
+  border-bottom: 1px dashed; }
+#bucket-list .menu-item {
+  display: inline-block;
+  float: left; }
+#bucket-list .bucket-name,
+#bucket-list .show-layouts {
+  margin-right: 5px; }
+#bucket-list .wall {
+  margin: 5px 0; }
+
+.walls {
+  transition: height 0.5s ease-in-out;
+  -o-transition: height 0.5s ease-in-out;
+  -moz-transition: height 0.5s ease-in-out;
+  -webkit-transition: height 0.5s ease-in-out;
+  height: 0;
+  overflow: hidden; }
+
+.open .walls {
+  height: auto; }
 
 .main {
   margin: 40px auto; }
