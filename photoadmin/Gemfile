@@ -11,3 +11,11 @@ gem 'haml'
 group :development do
   gem 'pry'
 end
+
+group :development, :test do
+  gem 'rspec'
+end
+
+group :test do
+  gem 'capybara'
+end
