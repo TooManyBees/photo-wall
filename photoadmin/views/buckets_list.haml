@@ -25,11 +25,11 @@
               %a{ href: "/walls/#{bucket[:name]}/edit/#{wall[:name]}"} Edit
 
   %script#list-template{ type: 'text/template' }
-    %li.collapsed
-      %a{ href: "/walls/{{name}}" } {{name}}
-      %a{ href: "/walls/{{name}}/upload" } Upload images
-      %a{ href: "/walls/{{name}}/build" } New layout
-      %ol 0 saved layouts
+    %li.bucket
+      %a.bucket-name{ href: "/walls/{{name}}" } > {{name}}
+      %a.show-layouts{ href: '#' }= "(0)"
+      %a.new-layout{ href: "/walls/{{name}}/build" } (New)
+      %ol.walls
 
 %script{ type: 'text/javascript', src: 'http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.0/jquery.js'}
 %script{ type: 'text/javascript', src: 'http://cdnjs.cloudflare.com/ajax/libs/handlebars.js/1.3.0/handlebars.min.js'}
