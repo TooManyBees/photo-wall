@@ -19,6 +19,11 @@
     else return base;
   }
 
+  var setSpinnerStyle = function() {
+    var style = '.photowall-container .spinner {height:128px;width:128px;background-image:url("/spinner.gif");margin:50px auto;}'
+    $('head').append('<style>'+style+'</style>');
+  }
+
   /*
    * Searches the document for elements matching the passed css selector,
    * then adds it to the list of walls for the page.
@@ -27,6 +32,7 @@
    * later reference.
    */
   var searchSeeds = function(selector) {
+    setSpinnerStyle();
     var $seeds = $(selector);
     var walls = [];
     $seeds.each(function() {
@@ -56,6 +62,7 @@
       if (options.selector) PW.selector = options.selector;
       if (options.version) PW.version = options.version;
       if (options.staticUrl) PW.staticUrl = options.staticURL;
+      if (options.stylesheet) PW.stylesheet = options.stylesheet;
     }
     if ($('meta[name=photo-wall-static]').attr('content') === "local") PW.local = true;
 
@@ -88,11 +95,6 @@
   }
 
   var loadDependencies = function() {
-    // assume that the page loads jQuery anyway
-    $('<link rel="stylesheet" type="text/css">')
-      .attr('href', PW.versionedUrl('photowall.css'))
-      .appendTo('head');
-
     if (window.Handlebars === undefined) {
       $.ajax({
         url: 'https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/1.3.0/handlebars.min.js',

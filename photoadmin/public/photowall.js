@@ -2,14 +2,18 @@
 
   var PW = root.LabsPhotoWall = (root.LabsPhotoWall || {});
   PW.loaded = true;
-  PW.templates = [];
+  PW.templates = {};
+  PW.stylesheets = {};
 
   PW.build = function(wall) {
     console.log("Fetching wall from "+wall.layout);
     $.getJSON(wall.layout, function(layout) {
 
+      var stylesheetSrc = (layout.stylesheetSrc || PW.versionedUrl('photowall.css'));
       var tileTemplateSrc = (layout.tileTemplateSrc || PW.versionedUrl("template-photowall-tile.html"));
       var lightboxTemplateSrc = (layout.lightboxTemplateSrc || PW.versionedUrl("template-photowall-lightbox.html"));
+
+      appendStylesheet(stylesheetSrc);
 
       if (PW.templates[tileTemplateSrc] === undefined) {
         console.log("Fetching template "+tileTemplateSrc);
@@ -43,6 +47,18 @@
         setupLightboxHandlers(wall.element, lightboxTemplateSrc);
       }
     }); // End $.getJSON()
+  }
+
+  var appendStylesheet = function(stylesheetSrc) {
+    if (PW.stylesheets[stylesheetSrc] === undefined) {
+      console.log("Appending stylesheet "+stylesheetSrc);
+      PW.stylesheets[stylesheetSrc] = true;
+      $('<link rel="stylesheet" type="text/css">')
+        .attr('href', stylesheetSrc)
+        .appendTo('head');
+    } else {
+      console.log("Reusing stylesheet "+stylesheetSrc);
+    }
   }
 
   var populateGrid = function($ss, tiles, templateSrc) {
