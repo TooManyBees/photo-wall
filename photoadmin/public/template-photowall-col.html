@@ -1,0 +1,15 @@
+<figure class="tile {{ class }}">
+  <img src="{{ src }}" style="height:{{height}}">
+  {{#if useLightbox}}
+  <a class="lb" href="#" data-url="{{url}}" data-caption="{{caption}}" data-credit="{{credit}}" data-lightbox-src="{{lightboxSrc}}">
+  {{else}}
+  {{#if url}}<a href="{{url}}">{{/if}}
+  {{/if}}
+  {{#if caption}}
+  <figcaption class="tile-caption">
+    {{ caption }}
+    <small class="tile-credit">{{ credit }}</small>
+  </figcaption>
+  {{/if}}
+  </a>
+</figure>

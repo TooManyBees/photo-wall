@@ -5,6 +5,24 @@
   PW.templates = {};
   PW.stylesheets = {};
 
+  var loadTemplate = function(templateSrc, callback) {
+    if (PW.templates[templateSrc] === undefined) {
+      console.log("Fetching template "+templateSrc);
+      $.ajax({
+        url: templateSrc,
+        dataType: 'html',
+        cache: true,
+        success: function(data) {
+          PW.templates[templateSrc] = Handlebars.compile(data);
+          if (callback) callback();
+        }
+      });
+    } else {
+      console.log("Using cached template "+tileTemplateSrc);
+      if (callback) callback();
+    }
+  }
+
   PW.build = function(wall) {
     console.log("Fetching wall from "+wall.layout);
     $.getJSON(wall.layout, function(layout) {
@@ -15,37 +33,13 @@
 
       appendStylesheet(stylesheetSrc);
 
-      if (PW.templates[tileTemplateSrc] === undefined) {
-        console.log("Fetching template "+tileTemplateSrc);
-        $.ajax({
-          url: tileTemplateSrc,
-          dataType: 'html',
-          cache: true,
-          success: function(data) {
-            PW.templates[tileTemplateSrc] = Handlebars.compile(data);
-            populateGrid(wall.element, layout.tiles, tileTemplateSrc);
-          }
-        });
-      } else {
-        console.log("Using cached template "+tileTemplateSrc);
-        populateGrid(wall.element, layout.tiles, tileTemplateSrc);
-      }
+      loadTemplate(tileTemplateSrc, function() {
+        populate(wall.element, layout, tileTemplateSrc);
+      });
 
-      if (PW.templates[lightboxTemplateSrc] === undefined) {
-        console.log("Fetching template "+lightboxTemplateSrc);
-        $.ajax({
-          url: lightboxTemplateSrc,
-          dataType: 'html',
-          cache: true,
-          success: function(data) {
-            PW.templates[lightboxTemplateSrc] = Handlebars.compile(data);
-            setupLightboxHandlers(wall.element, lightboxTemplateSrc);
-          }
-        });
-      } else {
-        console.log("Using cached template "+lightboxTemplateSrc);
+      loadTemplate(lightboxTemplateSrc, function() {
         setupLightboxHandlers(wall.element, lightboxTemplateSrc);
-      }
+      });
     }); // End $.getJSON()
   }
 
@@ -58,6 +52,36 @@
         .appendTo('head');
     } else {
       console.log("Reusing stylesheet "+stylesheetSrc);
+    }
+  }
+
+  var populate = function($ss, layout, templateSrc) {
+    switch (layout.type) {
+      case "columns":
+        populateColumns($ss, layout.tiles, templateSrc);
+        break;
+      default:
+        populateGrid($ss, layout.tiles, templateSrc);
+    }
+  }
+
+  var populateColumns = function($ss, tiles, templateSrc) {
+    var template = PW.templates[templateSrc];
+    var columns = [];
+    if (template) {
+      var i;
+      for (i = 0; i < tiles.length; i++) {
+        var tile = tiles[i];
+        var col = parseInt(tile.col || "0");
+        var $tile = template(tile);
+        columns[col] || (columns[col] = $('<div class="photo-column">'));
+        columns[col].append($tile);
+      }
+      $ss.addClass('ready'); // Removes the spinner animation
+      var c;
+      for (c = 0; c < columns.length; c++) {
+        $ss.append(columns[c]);
+      }
     }
   }
 

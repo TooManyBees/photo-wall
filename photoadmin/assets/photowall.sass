@@ -1,5 +1,6 @@
 @import gridresets
 @import constants
+@import lightbox
 
 $border-transition: 0.3s ease-in-out
 
@@ -14,25 +15,6 @@ $border-transition: 0.3s ease-in-out
   -ms-transform-origin: $o
   -moz-transform-origin: $o
   -webkit-transform-origin: $o
-
-#lightbox-image
-  .clickthrough
-    width: 100%
-    height: 100%
-  p
-    @include box-sizzle
-    background-color: rgba(0,0,0,0.4)
-    width: 100%
-    font-size: 20px
-    @media #{$mobile-query}
-      font-size: 16px
-    color: #eee
-    padding: 5px
-    position: absolute
-    bottom: 4px
-    text-align: center
-  small
-    font-size: 80%
 
 .photowall-container
   @include box-sizzle
@@ -52,22 +34,6 @@ $border-transition: 0.3s ease-in-out
   &.ready
     .spinner
       display: none
-  #photowall-lightbox
-    z-index: 10001
-    position: fixed
-    top: 0
-    left: 0
-    width: 100%
-    height: 100%
-  #lightbox-film
-    background-color: black
-    opacity: 0.6
-    width: 100%
-    height: 100%
-  #lightbox-image
-    position: fixed
-    top: 0
-    left: 0
   &:after, .clf:after
     content: ""
     display: table

@@ -1,0 +1,128 @@
+.photowall-container {
+  font-weight: normal;
+  font-size: 100%;
+  font-family: sans-serif; }
+  .photowall-container h1, .photowall-container h2, .photowall-container h3, .photowall-container div, .photowall-container p, .photowall-container ul, .photowall-container ol, .photowall-container li, .photowall-container dl, .photowall-container dt, .photowall-container dd, .photowall-container iframe, .photowall-container figure, .photowall-container figcaption, .photowall-container small {
+    border: 0;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    font-size: inherit;
+    font-weight: inherit; }
+  .photowall-container a {
+    text-decoration: none;
+    color: inherit; }
+  .photowall-container img {
+    max-width: inherit;
+    max-height: inherit; }
+
+#lightbox-image .clickthrough {
+  width: 100%;
+  height: 100%; }
+#lightbox-image p {
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  background-color: rgba(0, 0, 0, 0.4);
+  width: 100%;
+  font-size: 20px;
+  color: #eeeeee;
+  padding: 5px;
+  position: absolute;
+  bottom: 4px;
+  text-align: center; }
+  @media only screen and (min-device-width: 320px) and (max-device-width: 480px) {
+    #lightbox-image p {
+      font-size: 16px; } }
+#lightbox-image small {
+  font-size: 80%; }
+
+#photowall-lightbox {
+  z-index: 10001;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%; }
+
+#lightbox-film {
+  background-color: black;
+  opacity: 0.6;
+  width: 100%;
+  height: 100%; }
+
+#lightbox-image {
+  position: fixed;
+  top: 0;
+  left: 0; }
+
+.photowall-container {
+  width: 100%;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  margin: auto;
+  border: 0; }
+  .photowall-container .spinner {
+    height: 128px;
+    width: 128px;
+    background-image: url("/spinner.gif");
+    margin: 50px auto; }
+  .photowall-container.ready .spinner {
+    display: none; }
+  .photowall-container:after, .photowall-container .clf:after {
+    content: "";
+    display: table;
+    clear: both; }
+  .photowall-container .photo-column {
+    width: 50%;
+    height: 100%;
+    float: left;
+    padding: 0;
+    margin: 0;
+    border: 0;
+    position: relative; }
+  .photowall-container .tile {
+    position: relative;
+    float: none;
+    padding: 0;
+    margin: 0; }
+    .photowall-container .tile img {
+      display: block;
+      padding: 0;
+      border: 0;
+      width: auto;
+      height: 100%;
+      margin: auto; }
+    .photowall-container .tile a {
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      top: 0;
+      left: 0; }
+    .photowall-container .tile:hover .tile-caption {
+      opacity: 1; }
+  .photowall-container .logo-tag {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    height: 50px;
+    width: auto; }
+  .photowall-container .tile-caption {
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    transition: opacity 0.3s ease-in-out;
+    -o-transition: opacity 0.3s ease-in-out;
+    -moz-transition: opacity 0.3s ease-in-out;
+    -webkit-transition: opacity 0.3s ease-in-out;
+    padding: 10px 20px;
+    opacity: 0;
+    position: absolute;
+    bottom: 50%;
+    left: 0;
+    color: white;
+    font-size: 14px;
+    text-align: center;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.4); }
