@@ -73,7 +73,8 @@
       for (i = 0; i < tiles.length; i++) {
         var tile = tiles[i];
         var col = parseInt(tile.col || "0");
-        var $tile = template(tile);
+        var $tile = $(template(tile));
+        $tile.height(tile.height);
         columns[col] || (columns[col] = $('<div class="photo-column">'));
         columns[col].append($tile);
       }

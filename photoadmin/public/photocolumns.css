@@ -81,7 +81,8 @@
     position: relative; }
   .photowall-container .tile {
     position: relative;
-    float: none; }
+    float: none;
+    margin-bottom: 10px; }
     .photowall-container .tile img {
       display: block;
       max-width: 100%;

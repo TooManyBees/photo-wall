@@ -1,7 +1,7 @@
 {
   "type": "columns",
   "stylesheetSrc": "photocolumns.css",
-  "tileTemplateSrc": "template-photowall-col.html",
+  "tileTemplateSrc": "template-columns-tile.html",
   "tiles": [
     {
       "src": "/img/sports/Levis_Relaxed_Denim_Trucker_Jacket.jpg",
@@ -10,8 +10,7 @@
       "caption": "Levi's Relaxed Denim Trucker Jacket",
       "credit": "Macy's",
       "url": "http://www1.macys.com/shop/product/levis-relaxed-denim-trucker-jacket?ID=979366",
-      "col": 0,
-      "height": "400px"
+      "col": 0
     },
     {
       "src": "/img/sports/LRG_Big_Tall_Shirt_Core_Collection_Thermal_T-Shirt.jpg",
@@ -20,8 +19,7 @@
       "caption": "LRG Big & Tall Shirt, Core collection Thermal T-Shirt",
       "credit": "Macy's",
       "url": "http://www1.macys.com/shop/product/lrg-big-tall-shirt-core-collection-thermal-t-shirt?ID=1090424",
-      "col": 0,
-      "height": "300px"
+      "col": 0
     },
     {
       "src": "/img/levis.jpeg",
@@ -35,7 +33,16 @@
       "credit": "Macy's",
       "url": "http://www1.macys.com/shop/product/diesel-unisex-rdr-orange-silicone-strap-watch-52x44mm-dz1608?ID=1077927",
       "col": 1,
-      "height": "200px"
+      "height": 100
+    },
+    {
+      "src": "/img/sports/Levis_513_Slim_Straight-Leg_Welt_Camo_Trousers.jpg",
+      "lightboxSrc": "/img/sports/Levis_513_Slim_Straight-Leg_Welt_Camo_Trousers.jpg",
+      "useLightbox": true,
+      "caption": "Levi's 513 Slim Straight-Leg Welt Camo Trousers",
+      "credit": "Macy's",
+      "url": "http://www1.macys.com/shop/product/levis-513-slim-straight-leg-welt-camo-trousers?ID=968800",
+      "col": 1
     },
     {
       "src": "/img/sports/Timberland_6_Premium_Waterproof_Boots.jpg",
@@ -45,17 +52,7 @@
       "credit": "Macy's",
       "url": "http://www1.macys.com/shop/product/timberland-6-premium-waterproof-boots?ID=1376516",
       "col": 1,
-      "height": "200px"
-    },
-    {
-      "src": "/img/sports/Levis_513_Slim_Straight-Leg_Welt_Camo_Trousers.jpg",
-      "lightboxSrc": "/img/sports/Levis_513_Slim_Straight-Leg_Welt_Camo_Trousers.jpg",
-      "useLightbox": true,
-      "caption": "Levi's 513 Slim Straight-Leg Welt Camo Trousers",
-      "credit": "Macy's",
-      "url": "http://www1.macys.com/shop/product/levis-513-slim-straight-leg-welt-camo-trousers?ID=968800",
-      "col": 1,
-      "height": "400px"
+      "height": 100
     }
   ]
 }
