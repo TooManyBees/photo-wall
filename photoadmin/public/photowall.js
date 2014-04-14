@@ -219,36 +219,20 @@
     $ss.on('click', '.lb', function(event) {
       event.preventDefault();
       var $a = $(event.currentTarget);
-      var $imgSrc = $(event.currentTarget).siblings('img').attr('src');
+      var imgSrc = $(event.currentTarget).siblings('img').attr('src');
       var $lightBoxContainer = $(PW.templates[templateSrc]({
-        src: $imgSrc,
-        lightboxSrc: ($a.data('lightboxSrc') || $imgSrc),
+        lightboxSrc: ($a.data('lightboxSrc') || imgSrc),
         url: $a.data('url'),
         caption: $a.data('caption'),
         credit: $a.data('credit')
       }));
       $ss.append($lightBoxContainer);
-      adjustLightBoxCoords($lightBoxContainer.find('#lightbox-image'));
     });
     $ss.on('click', '#photowall-lightbox', function() {
       if ($(event.target).attr('href') !== undefined)
         event.stopPropagation
       $('#photowall-lightbox').remove();
     });
-  }
-
-  var adjustLightBoxCoords = function($div) {
-    var margin = 20;
-    var $img = $div.find('img');
-
-    var wWidth = window.innerWidth;
-    var wHeight = window.innerHeight;
-    $img.css('max-height', wHeight - margin * 2);
-    $img.css('max-width', wWidth - margin * 2);
-    var iWidth = $img.width();
-    var iHeight = $img.height();
-    $div.css('left', (wWidth - iWidth) / 2);
-    $div.css('top', (wHeight - iHeight) / 2);
   }
 
   /*

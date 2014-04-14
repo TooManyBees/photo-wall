@@ -1,23 +1,7 @@
-#lightbox-image
-  .clickthrough
-    width: 100%
-    height: 100%
-  p
-    @include box-sizzle
-    background-color: rgba(0,0,0,0.4)
-    width: 100%
-    font-size: 20px
-    @media #{$mobile-query}
-      font-size: 16px
-    color: #eee
-    padding: 5px
-    position: absolute
-    bottom: 4px
-    text-align: center
-  small
-    font-size: 80%
+$lb-padding: 20px
 
 #photowall-lightbox
+  @include box-sizzle
   z-index: 10001
   position: fixed
   top: 0
@@ -29,7 +13,37 @@
   opacity: 0.6
   width: 100%
   height: 100%
-#lightbox-image
+#lightbox-image-plane
+  @include box-sizzle
+  padding: $lb-padding
+  text-align: center
   position: fixed
   top: 0
   left: 0
+  width: 100%
+  height: 100%
+#lightbox-image
+  position: relative
+  display: inline-block
+  .clickthrough
+    width: 100%
+    height: 100%
+  img
+    display: block
+    margin: auto
+    max-width: 100%
+    max-height: 100%
+  p
+    @include box-sizzle
+    background-color: rgba(0,0,0,0.4)
+    width: 100%
+    font-size: 20px
+    @media #{$mobile-query}
+      font-size: 16px
+    color: #eee
+    padding: 5px
+    position: absolute
+    bottom: 0
+    text-align: center
+  small
+    font-size: 80%
