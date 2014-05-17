@@ -59,9 +59,19 @@
     switch (layout.type) {
       case "columns":
         populateColumns($ss, layout.tiles, templateSrc);
+        populateLogo($ss, layout);
         break;
       default:
         populateGrid($ss, layout.tiles, templateSrc);
+    }
+  }
+
+  var populateLogo = function($ss, layout) {
+    if (layout.logo) {
+      var logo = $('<img>')
+        .attr('src', layout.logo)
+        .addClass('photowall-logo');
+      $ss.append(logo);
     }
   }
 

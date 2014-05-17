@@ -2,6 +2,8 @@
   "type": "columns",
   "stylesheetSrc": "photocolumns.css",
   "tileTemplateSrc": "template-columns-tile.html",
+  "lightboxTemplateSrc": "template-product-lightbox.html",
+  "logo": "/img/levis.jpeg",
   "tiles": [
     {
       "src": "/img/sports/Levis_Relaxed_Denim_Trucker_Jacket.jpg",
@@ -20,10 +22,6 @@
       "credit": "Macy's",
       "url": "http://www1.macys.com/shop/product/lrg-big-tall-shirt-core-collection-thermal-t-shirt?ID=1090424",
       "col": 0
-    },
-    {
-      "src": "/img/levis.jpeg",
-      "class": "logo-tag"
     },
     {
       "src": "/img/sports/Diesel_Unisex_RDR_Orange_Silicone_Strap_Watch.jpg",
