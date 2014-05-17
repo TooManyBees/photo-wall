@@ -27,9 +27,9 @@
     console.log("Fetching wall from "+wall.layout);
     $.getJSON(wall.layout, function(layout) {
 
-      var stylesheetSrc = (layout.stylesheetSrc || PW.versionedUrl('photowall.css'));
-      var tileTemplateSrc = (layout.tileTemplateSrc || PW.versionedUrl("template-photowall-tile.html"));
-      var lightboxTemplateSrc = (layout.lightboxTemplateSrc || PW.versionedUrl("template-photowall-lightbox.html"));
+      var stylesheetSrc = (PW.versionedUrl(layout.stylesheetSrc) || PW.versionedUrl('photowall.css'));
+      var tileTemplateSrc = (PW.versionedUrl(layout.tileTemplateSrc) || PW.versionedUrl("template-photowall-tile.html"));
+      var lightboxTemplateSrc = (PW.versionedUrl(layout.lightboxTemplateSrc) || PW.versionedUrl("template-photowall-lightbox.html"));
 
       appendStylesheet(stylesheetSrc);
 
@@ -79,11 +79,18 @@
         columns[col].append($tile);
       }
       $ss.addClass('ready'); // Removes the spinner animation
+      var colSizeStyle = sizeColumns($ss.prop("id"), columns.length);
+      $ss.append(colSizeStyle);
       var c;
       for (c = 0; c < columns.length; c++) {
         $ss.append(columns[c]);
       }
     }
+  }
+
+  var sizeColumns = function(id, numColumns) {
+    var colPct = Math.floor(100 / numColumns);
+    return "<style>.photowall-container#"+id+" .photo-column {width: "+colPct+"%;}</style>"
   }
 
   var populateGrid = function($ss, tiles, templateSrc) {
