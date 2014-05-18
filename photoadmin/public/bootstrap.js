@@ -12,11 +12,10 @@
    * version.
    */
   PW.versionedUrl = function(resource) {
-    if (PW.local) return "/"+resource;
+    var base = PW.local ? "/" : (PW.staticUrl + PW.version + "/");
 
-    var base = PW.staticUrl + PW.version + "/";
     if (resource !== undefined) return base + resource;
-    else return base;
+    else return undefined;
   }
 
   var setSpinnerStyle = function() {
