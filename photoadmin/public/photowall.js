@@ -258,10 +258,11 @@
       }));
       $ss.append($lightBoxContainer);
     });
-    $ss.on('click', '#photowall-lightbox', function() {
+    $ss.on('click', '#photowall-lightbox', function(event) {
       if ($(event.target).attr('href') !== undefined)
-        event.stopPropagation
-      $('#photowall-lightbox').remove();
+        event.stopPropagation();
+      else
+        $('#photowall-lightbox').remove();
     });
   }
 
