@@ -14,11 +14,13 @@
 <% if show_embed_code %>
   <pre class="embed_code" style="white-space: pre-line;word-wrap: break-word;">
     <%=h "<!-- Photowall embed code, subject to the whims of a capricious master -->" %>
-    <%=h "<div class='photowall-container' data-layout='#{remote_json}'></div>" %>
-    <%=h "<script type='text/javascript' src='https://photo-wall-static.s3.amazonaws.com/v4/bootstrap.js'></script>" %>
+    <% remote_jsons.each do |remote_json| %><%=h "<div class='photowall-container' data-layout='#{remote_json}'></div>" %>
+    <% end %><%=h "<script type='text/javascript' src='https://photo-wall-static.s3.amazonaws.com/v4/bootstrap.js'></script>" %>
   </pre>
 <% end %>
 
+<% remote_jsons.each do |remote_json| %>
 <div class="photowall-container" data-layout='<%= remote_json %>'></div>
+<% end %>
 
 <script type="text/javascript" src="/bootstrap.js"></script>

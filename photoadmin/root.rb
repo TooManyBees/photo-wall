@@ -52,7 +52,7 @@ post '/api/buckets/:bucket' do
     )
   end
 
-  JSON.dump(filename: file[:filename], src: result)
+  JSON.dump(url: result)
 
 end
 
@@ -97,7 +97,8 @@ get '/walls/:bucket/edit/:wall' do
 end
 
 get '/test/?' do
-  erb :index, locals: {remote_json: params[:src], show_embed_code: true}
+  srcs = params[:src].split(',')
+  erb :index, locals: {remote_jsons: srcs, show_embed_code: true}
 end
 
 get '/*.*' do
@@ -105,7 +106,7 @@ get '/*.*' do
 end
 
 get '/' do
-  erb :index, locals: {remote_json: 'kitty.json'}
+  erb :index, locals: {remote_jsons: ['kitty.json']}
 end
 
 helpers do
