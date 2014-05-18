@@ -37,12 +37,17 @@
   box-sizing: border-box;
   -moz-box-sizing: border-box;
   -webkit-box-sizing: border-box;
-  padding: 20px;
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%; }
+  @media only screen and (min-device-width: 481px) {
+    #lightbox-image-plane {
+      padding: 20px; } }
+  @media only screen and (min-device-width: 320px) and (max-device-width: 480px) {
+    #lightbox-image-plane {
+      padding: 0; } }
   #lightbox-image-plane .click-to-close {
     position: absolute;
     top: 0;
@@ -68,17 +73,32 @@
 #lightbox-image {
   position: relative;
   display: inline-block;
-  left: 50%;
-  transform: translateX(-50%);
-  -o-transform: translateX(-50%);
-  -ms-transform: translateX(-50%);
-  -moz-transform: translateX(-50%);
-  -webkit-transform: translateX(-50%);
-  transform-origin: none;
-  -o-transform-origin: none;
-  -ms-transform-origin: none;
-  -moz-transform-origin: none;
-  -webkit-transform-origin: none; }
+  left: 50%; }
+  @media only screen and (min-device-width: 481px) {
+    #lightbox-image {
+      transform: translateX(-50%);
+      -o-transform: translateX(-50%);
+      -ms-transform: translateX(-50%);
+      -moz-transform: translateX(-50%);
+      -webkit-transform: translateX(-50%);
+      transform-origin: 50% 50% 0;
+      -o-transform-origin: 50% 50% 0;
+      -ms-transform-origin: 50% 50% 0;
+      -moz-transform-origin: 50% 50% 0;
+      -webkit-transform-origin: 50% 50% 0; } }
+  @media only screen and (min-device-width: 320px) and (max-device-width: 480px) {
+    #lightbox-image {
+      top: 50%;
+      transform: translate(-50%, -50%);
+      -o-transform: translate(-50%, -50%);
+      -ms-transform: translate(-50%, -50%);
+      -moz-transform: translate(-50%, -50%);
+      -webkit-transform: translate(-50%, -50%);
+      transform-origin: 50% 50% 0;
+      -o-transform-origin: 50% 50% 0;
+      -ms-transform-origin: 50% 50% 0;
+      -moz-transform-origin: 50% 50% 0;
+      -webkit-transform-origin: 50% 50% 0; } }
   #lightbox-image .clickthrough {
     width: 100%;
     height: 100%;
@@ -101,11 +121,11 @@
     -ms-transform: translateY(-50%);
     -moz-transform: translateY(-50%);
     -webkit-transform: translateY(-50%);
-    transform-origin: none;
-    -o-transform-origin: none;
-    -ms-transform-origin: none;
-    -moz-transform-origin: none;
-    -webkit-transform-origin: none;
+    transform-origin: 50% 50% 0;
+    -o-transform-origin: 50% 50% 0;
+    -ms-transform-origin: 50% 50% 0;
+    -moz-transform-origin: 50% 50% 0;
+    -webkit-transform-origin: 50% 50% 0;
     position: relative;
     top: 50%;
     color: #4040c5;
@@ -116,11 +136,11 @@
     -ms-transform: translateY(-50%);
     -moz-transform: translateY(-50%);
     -webkit-transform: translateY(-50%);
-    transform-origin: none;
-    -o-transform-origin: none;
-    -ms-transform-origin: none;
-    -moz-transform-origin: none;
-    -webkit-transform-origin: none;
+    transform-origin: 50% 50% 0;
+    -o-transform-origin: 50% 50% 0;
+    -ms-transform-origin: 50% 50% 0;
+    -moz-transform-origin: 50% 50% 0;
+    -webkit-transform-origin: 50% 50% 0;
     position: relative;
     top: 50%;
     box-sizing: border-box;
@@ -203,8 +223,9 @@
       position: absolute;
       top: 0;
       left: 0; }
-    .photowall-container .tile:hover .tile-caption {
-      opacity: 1; }
+    @media only screen and (min-device-width: 481px) {
+      .photowall-container .tile:hover .tile-caption {
+        opacity: 1; } }
   .photowall-container .tile-caption {
     box-sizing: border-box;
     -moz-box-sizing: border-box;
@@ -223,13 +244,16 @@
     -ms-transform: translateY(-50%);
     -moz-transform: translateY(-50%);
     -webkit-transform: translateY(-50%);
-    transform-origin: none;
-    -o-transform-origin: none;
-    -ms-transform-origin: none;
-    -moz-transform-origin: none;
-    -webkit-transform-origin: none;
+    transform-origin: 50% 50% 0;
+    -o-transform-origin: 50% 50% 0;
+    -ms-transform-origin: 50% 50% 0;
+    -moz-transform-origin: 50% 50% 0;
+    -webkit-transform-origin: 50% 50% 0;
     color: white;
     font-size: 14px;
     text-align: center;
     width: 100%;
     background-color: rgba(0, 0, 0, 0.4); }
+    @media only screen and (min-device-width: 320px) and (max-device-width: 480px) {
+      .photowall-container .tile-caption {
+        display: none; } }

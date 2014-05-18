@@ -1,3 +1,5 @@
+@import constants
+
 $lb-padding: 20px
 
 #photowall-lightbox
@@ -15,7 +17,10 @@ $lb-padding: 20px
   height: 100%
 #lightbox-image-plane
   @include box-sizzle
-  padding: $lb-padding
+  @media #{$desktop-query}
+    padding: $lb-padding
+  @media #{$mobile-query}
+    padding: 0
   position: fixed
   top: 0
   left: 0
@@ -44,7 +49,11 @@ $lb-padding: 20px
   position: relative
   display: inline-block
   left: 50%
-  @include transform(translateX(-50%))
+  @media #{$desktop-query}
+    @include transform(translateX(-50%))
+  @media #{$mobile-query}
+    top: 50%
+    @include transform(translate(-50%, -50%))
   .clickthrough
     width: 100%
     height: 100%

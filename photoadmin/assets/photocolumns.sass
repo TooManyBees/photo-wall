@@ -52,10 +52,13 @@ $border-transition: 0.3s ease-in-out
       position: absolute
       top: 0
       left: 0
-    &:hover
-      .tile-caption
-        opacity: 1
+    @media #{$desktop-query}
+      &:hover
+        .tile-caption
+          opacity: 1
   .tile-caption
+    @media #{$mobile-query}
+      display: none
     @include box-sizzle
     @include transition(opacity $border-transition)
     font-family: "Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif
