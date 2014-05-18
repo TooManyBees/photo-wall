@@ -110,6 +110,9 @@
     -webkit-transform-origin: none;
     position: relative;
     top: 50%;
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
     float: left;
     padding-right: 25%; }
   #lightbox-image img {
