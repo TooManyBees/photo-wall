@@ -107,7 +107,9 @@
     -moz-transform-origin: none;
     -webkit-transform-origin: none;
     position: relative;
-    top: 50%; }
+    top: 50%;
+    color: #4040c5;
+    font-weight: bold; }
   #lightbox-image .lightbox-caption {
     transform: translateY(-50%);
     -o-transform: translateY(-50%);
@@ -125,7 +127,9 @@
     -moz-box-sizing: border-box;
     -webkit-box-sizing: border-box;
     float: left;
-    padding-right: 25%; }
+    width: 100%;
+    padding-right: 25%;
+    line-height: 130%; }
   #lightbox-image img {
     display: block;
     margin: auto;
