@@ -23,8 +23,8 @@ $lb-padding: 20px
   height: 100%
   .click-to-close
     position: absolute
-    top: $lb-padding
-    left: $lb-padding
+    top: 0
+    left: 0
     z-index: 1
     font-size: 80%
     @include box-sizzle
@@ -43,6 +43,8 @@ $lb-padding: 20px
 #lightbox-image
   position: relative
   display: inline-block
+  left: 50%
+  @include transform(translateX(-50%))
   .clickthrough
     width: 100%
     height: 100%
