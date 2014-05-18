@@ -31,15 +31,21 @@ $lb-padding: 20px
     top: 0
     left: 0
   p
-    @include vcenter
     text-align: center
-  .lightbox-origin
+  .gift-icon
     float: right
     width: 25%
-    // background: url(basket.png) center/contain no-repeat
+    height: 150%
+    position: absolute
+    right: 0
+    bottom: 5%
+    background: url(gift4.svg) center/contain no-repeat
+  .lightbox-origin
+    @include vcenter
   .lightbox-caption
+    @include vcenter
     float: left
-    width: 65%
+    padding-right: 25%
   img
     display: block
     margin: auto
@@ -47,13 +53,14 @@ $lb-padding: 20px
     max-height: 100%
   .lightbox-text
     @include box-sizzle
-    background-color: rgba(0,0,0,0.4)
+    background-color: rgba(0,0,0,0.75)
     width: 100%
-    height: 10%
+    height: 15%
     font-size: 20px
     @media #{$mobile-query}
       font-size: 16px
     color: #eee
+    border: 2px dashed #FFA200
     padding: 5px
     position: absolute
     bottom: 0
