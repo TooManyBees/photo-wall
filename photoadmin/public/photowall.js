@@ -78,6 +78,7 @@
   var populateColumns = function($ss, tiles, templateSrc) {
     var template = PW.templates[templateSrc];
     var columns = [];
+    preprocessLineBreaks(tiles);
     if (template) {
       var i;
       for (i = 0; i < tiles.length; i++) {
@@ -105,7 +106,7 @@
 
   var populateGrid = function($ss, tiles, templateSrc) {
     if (templateSrc) {
-      var processed = preprocess(tiles);
+      var processed = preprocessSizes(tiles);
       $ss.addClass('ready'); // Removes the spinner animation
 
       // To keep layout intact, arranges large and small images appropriately based
@@ -119,11 +120,23 @@
     }
   }
 
+  // Converts '\n' into '<br>'
+  var preprocessLineBreaks = function(tiles) {
+    var i = 0;
+    for (i; i < tiles.length; i++) {
+      var el = tiles[i];
+      if (el.caption)
+        el.caption = el.caption.split("\n").join("<br>");
+      if (el.credit)
+        el.credit = el.credit.split("\n").join("<br>");
+    }
+  }
+
   /*
    * Takes an array of objects, returns an object of two arrays:
    *   one for large images, another for small images, both sorted by importance
    */
-  var preprocess = function(tiles) {
+  var preprocessSizes = function(tiles) {
     var important_tiles = new Array();
     var filler_tiles = new Array();
 

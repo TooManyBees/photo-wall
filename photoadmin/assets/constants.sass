@@ -43,3 +43,8 @@ $color5: #D55EFF
   -ms-transform-origin: $o
   -moz-transform-origin: $o
   -webkit-transform-origin: $o
+
+@mixin vcenter
+  @include transform(translateY(-50%))
+  position: relative
+  top: 50%
