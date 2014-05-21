@@ -101,9 +101,11 @@
     top: 0;
     left: 0; }
   #lightbox-image p {
-    text-align: center; }
+    text-align: center;
+    margin: 0;
+    padding: 0;
+    line-height: 130%; }
   #lightbox-image .gift-icon {
-    float: right;
     width: 25%;
     height: 150%;
     position: absolute;
@@ -124,7 +126,8 @@
     position: relative;
     top: 50%;
     color: #4040c5;
-    font-weight: bold; }
+    font-weight: bold;
+    font-size: 120%; }
   #lightbox-image .lightbox-caption {
     transform: translateY(-50%);
     -o-transform: translateY(-50%);
@@ -141,10 +144,8 @@
     box-sizing: border-box;
     -moz-box-sizing: border-box;
     -webkit-box-sizing: border-box;
-    float: left;
     width: 100%;
-    padding-right: 25%;
-    line-height: 130%; }
+    padding-right: 25%; }
   #lightbox-image img {
     display: block;
     margin: auto;
@@ -157,7 +158,7 @@
     background-color: rgba(0, 0, 0, 0.75);
     width: 100%;
     height: 15%;
-    font-size: 20px;
+    font-size: 150%;
     color: #eeeeee;
     border: 2px dashed #ffa200;
     padding: 5px;
@@ -165,7 +166,7 @@
     bottom: 0; }
     @media only screen and (min-device-width: 320px) and (max-device-width: 480px) {
       #lightbox-image .lightbox-text {
-        font-size: 16px; } }
+        font-size: 80%; } }
   #lightbox-image small {
     font-size: 80%; }
 
@@ -201,10 +202,32 @@
     position: relative; }
     .photowall-container .photo-column .tile {
       margin-bottom: 0; }
+  .photowall-container .frame {
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    border: 0 solid #2d7061;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0; }
+    @media only screen and (min-device-width: 481px) {
+      .photowall-container .frame {
+        opacity: 0;
+        transition: opacity 0.3s ease-in-out, border-width 0.3s ease-in-out;
+        -o-transition: opacity 0.3s ease-in-out, border-width 0.3s ease-in-out;
+        -moz-transition: opacity 0.3s ease-in-out, border-width 0.3s ease-in-out;
+        -webkit-transition: opacity 0.3s ease-in-out, border-width 0.3s ease-in-out; } }
+    @media only screen and (min-device-width: 320px) and (max-device-width: 480px) {
+      .photowall-container .frame {
+        border-width: 0 0 8px 0; } }
   .photowall-container .tile {
     position: relative;
     float: none;
-    margin-bottom: 10px; }
+    box-sizing: content-box;
+    -moz-box-sizing: content-box;
+    -webkit-box-sizing: content-box; }
     .photowall-container .tile img {
       display: block;
       max-width: 100%;
@@ -220,7 +243,10 @@
       left: 0; }
     @media only screen and (min-device-width: 481px) {
       .photowall-container .tile:hover .tile-caption {
-        opacity: 1; } }
+        opacity: 1; }
+      .photowall-container .tile:hover .frame {
+        opacity: 1;
+        border-width: 15px; } }
   .photowall-container .tile-caption {
     box-sizing: border-box;
     -moz-box-sizing: border-box;
