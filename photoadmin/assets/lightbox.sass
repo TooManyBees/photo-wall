@@ -58,8 +58,10 @@ $lb-padding: 20px
     left: 0
   p
     text-align: center
+    margin: 0
+    padding: 0
+    line-height: 130%
   .gift-icon
-    float: right
     width: 25%
     height: 150%
     position: absolute
@@ -70,13 +72,12 @@ $lb-padding: 20px
     @include vcenter
     color: #4040C5
     font-weight: bold
+    font-size: 120%
   .lightbox-caption
     @include vcenter
     @include box-sizzle
-    float: left
     width: 100%
     padding-right: 25%
-    line-height: 130%
   img
     display: block
     margin: auto
@@ -87,9 +88,9 @@ $lb-padding: 20px
     background-color: rgba(0,0,0,0.75)
     width: 100%
     height: 15%
-    font-size: 20px
+    font-size: 150%
     @media #{$mobile-query}
-      font-size: 16px
+      font-size: 80%
     color: #eee
     border: 2px dashed #FFA200
     padding: 5px
