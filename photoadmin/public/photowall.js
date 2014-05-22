@@ -18,7 +18,7 @@
         }
       });
     } else {
-      console.log("Using cached template "+tileTemplateSrc);
+      console.log("Using cached template "+templateSrc);
       if (callback) callback();
     }
   }
