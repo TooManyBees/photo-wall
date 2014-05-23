@@ -179,7 +179,7 @@
   box-sizing: border-box;
   -moz-box-sizing: border-box;
   -webkit-box-sizing: border-box;
-  margin: auto; }
+  margin: 0 auto 50px auto; }
   .photowall-container .spinner {
     height: 128px;
     width: 128px;
@@ -208,7 +208,7 @@
     box-sizing: border-box;
     -moz-box-sizing: border-box;
     -webkit-box-sizing: border-box;
-    border: 0 solid #2d7061;
+    border: 0 solid #92a09d;
     width: 100%;
     height: 100%;
     position: absolute;
@@ -247,7 +247,7 @@
       .photowall-container .tile:hover .tile-caption {
         opacity: 1; }
       .photowall-container .tile:hover .frame {
-        opacity: 1;
+        opacity: 0.8;
         border-width: 15px; } }
   .photowall-container .tile-caption {
     display: block;
@@ -260,25 +260,15 @@
     -moz-transition: opacity 0.3s ease-in-out;
     -webkit-transition: opacity 0.3s ease-in-out;
     font-family: "Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif;
-    padding: 5px 10px;
+    padding: 20% 10% 10% 10%;
     opacity: 0;
-    position: relative;
-    top: 50%;
-    transform: translateY(-50%);
-    -o-transform: translateY(-50%);
-    -ms-transform: translateY(-50%);
-    -moz-transform: translateY(-50%);
-    -webkit-transform: translateY(-50%);
-    transform-origin: 50% 50% 0;
-    -o-transform-origin: 50% 50% 0;
-    -ms-transform-origin: 50% 50% 0;
-    -moz-transform-origin: 50% 50% 0;
-    -webkit-transform-origin: 50% 50% 0;
-    color: white;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    color: #4040c5;
     font-size: 14px;
     text-align: center;
-    width: 100%;
-    background-color: rgba(0, 0, 0, 0.4); }
+    background: url(gift4.svg) center/contain no-repeat; }
     @media only screen and (min-device-width: 320px) and (max-device-width: 480px) {
       .photowall-container .tile-caption {
         display: none; } }
